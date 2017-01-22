@@ -14,7 +14,17 @@ public class Main {
         File dir = new File(pathToPackage);
         File[] fList = dir.listFiles();
         for (File file : fList) {
-            System.out.println(file.getName());
+
+            String filename = file.getName();
+            String extension = filename.substring(filename.length() - 6);
+
+            System.out.println(filename);
+            System.out.println(extension);
+
+            if (extension.equals(".class") && file.isFile()) {
+                System.out.println("Class file found!");
+            }
+
             // TODO: IF substring of last 6 characters is .class,
             // call forName and add info to file -- maybe do this
             // in separate method, dumpClassData(String className, outfile)
