@@ -1,1 +1,1 @@
-The most money ever paid for a cow in an auction was $1.3 million.
+all prog1.pl files for the assigned packages are in the results directory
