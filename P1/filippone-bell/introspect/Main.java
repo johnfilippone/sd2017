@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+
 public class Main { 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -37,20 +38,19 @@ public class Main {
         int classID = 0;
         int memberID = 0;
         for (File file : fList) {
-            if (file.getName().substring(file.getName().lastIndexOf('.')+1).equals("class")) {
+            if (file.getName().substring(file.getName().lastIndexOf('.')+1).equals("class") && !file.getName().contains("$")) {
                 
                 // get class
                 Class<?> c = Class.forName(packageName + "." + file.getName().substring(0,file.getName().lastIndexOf('.')));
                 output += String.format("bcClass(c%d,'%s','%s').\n", classID, c.getName(), c.getSuperclass().getSimpleName());
-                
                 
                 memberID = 0;
                 // get constructors
                 Constructor<?>[] constructors = c.getDeclaredConstructors();
                 for (Constructor<?> constructor : constructors) {
                     if (Modifier.isPublic(constructor.getModifiers())) {
-                        String signiture = getSigniture(constructor.getParameterTypes());
-                        output += String.format("bcMember(m%d,c%d,true,'%s','%s').\n", memberID, classID, c.getName(), c.getSimpleName() + signiture);
+                        String signature = getSigniture(constructor.getParameterTypes());
+                        output += String.format("bcMember(m%d,c%d,true,'%s','%s').\n", memberID, classID, c.getName(), c.getSimpleName() + signature);
                         memberID += 1;
                     }
                 }
@@ -68,8 +68,8 @@ public class Main {
                 Method[] methods = c.getDeclaredMethods();
                 for (Method method : methods) {
                     if (Modifier.isPublic(method.getModifiers())) {
-                        String signiture = getSigniture(method.getParameterTypes());
-                        output += String.format("bcMember(m%d,c%d,%s,'%s','%s').\n", memberID, classID, Modifier.isStatic(method.getModifiers()), method.getReturnType().getSimpleName(), method.getName() + signiture);
+                        String signature = getSigniture(method.getParameterTypes());
+                        output += String.format("bcMember(m%d,c%d,%s,'%s','%s').\n", memberID, classID, Modifier.isStatic(method.getModifiers()), method.getReturnType().getSimpleName(), method.getName() + signature);
                         memberID += 1;
                     }
                 }
