@@ -28,13 +28,14 @@ public class Main {
 
     public static String getTables(String packageName, String pathToPackage) throws ClassNotFoundException {
         
+        // stub code for prolog files to set up tables
         String output = "dbase(prog1,[bcClass,bcMember]).\n\ntable(bcClass,[cid,\"name\",\"superName\"]).\ntable(bcMember,[mid,cid,static,\"type\",\"sig\"]).\n\n";
 
         // find all class files in package
         File dir = new File(pathToPackage);
         File[] fList = dir.listFiles();
 
-
+        // fill out the rest of the prolog file
         int classID = 0;
         int memberID = 0;
         for (File file : fList) {

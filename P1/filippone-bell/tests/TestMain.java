@@ -1,65 +1,48 @@
 import org.junit.Test;
 import RegTest.Utility;
-import static org.junit.Assert.assertEquals;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import introspect.Main;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.lang.StringBuilder;
 
 public class TestMain {
     
+    static String[] eliminate = {"\\(m\\d+,","\\(c\\d+,"};
+
     @Test
-    public void testReflectionTest() throws IOException, ClassNotFoundException {
-        //String correct = new Scanner(new File("validation-files/p1package-correct.txt")).useDelimiter("\\Z").next();
-        //assertEquals(getSortedFile(correct), getSortedFile(Main.getTables("p1package", "p1package")));
+    public void testReflectP1package() throws IOException, ClassNotFoundException {
         String[] args = {"p1package", "tests/p1package"};
         Main.main(args);
-        Utility.validate("results/p1package.prog1.pl","tests/validation-files/p1package-correct.txt", false);
+        Utility.validate("results/p1package.prog1.pl","tests/validation-files/p1package-correct.txt", true, eliminate);
     } 
-//    @Test
-//    public void testReflectSelf() throws FileNotFoundException, ClassNotFoundException {
-//        String correct = new Scanner(new File("validation-files/introspect-correct.txt")).useDelimiter("\\Z").next();
-//        assertEquals(getSortedFile(correct), getSortedFile(Main.getTables("introspect", "../introspect")));
-//    } 
-//    @Test
-//    public void testReflectGraff() throws FileNotFoundException, ClassNotFoundException {
-//        String correct = new Scanner(new File("validation-files/graff-correct.txt")).useDelimiter("\\Z").next();
-//        assertEquals(getSortedFile(correct), getSortedFile(Main.getTables("graff", "ClassesOdd/graff")));
-//    } 
-//    @Test
-//    public void testReflectNotepad() throws FileNotFoundException, ClassNotFoundException {
-//        String correct = new Scanner(new File("validation-files/Notepad-correct.txt")).useDelimiter("\\Z").next();
-//        assertEquals(getSortedFile(correct), getSortedFile(Main.getTables("Notepad", "ClassesOdd/Notepad")));
-//    } 
-//    @Test
-//    public void testReflectQuark() throws FileNotFoundException, ClassNotFoundException {
-//        String correct = new Scanner(new File("validation-files/quark-correct.txt")).useDelimiter("\\Z").next();
-//        assertEquals(getSortedFile(correct), getSortedFile(Main.getTables("quark", "ClassesOdd/quark")));
-//    } 
-//    @Test
-//    public void testReflectYparser() throws FileNotFoundException, ClassNotFoundException {
-//        String correct = new Scanner(new File("validation-files/yparser-correct.txt")).useDelimiter("\\Z").next();
-//        assertEquals(getSortedFile(correct), getSortedFile(Main.getTables("yparser", "ClassesOdd/yparser")));
-//    } 
+    @Test
+    public void testReflectIntrospect() throws IOException, ClassNotFoundException {
+        String[] args = {"introspect", "introspect"};
+        Main.main(args);
+        Utility.validate("results/introspect.prog1.pl","tests/validation-files/introspect-correct.txt", true, eliminate);
+    } 
+    @Test
+    public void testReflectGraff() throws IOException, ClassNotFoundException {
+        String[] args = {"graff", "tests/ClassesOdd/graff"};
+        Main.main(args);
+        Utility.validate("results/graff.prog1.pl","tests/validation-files/graff-correct.txt", true, eliminate);
+    } 
+    @Test
+    public void testReflectNotepad() throws IOException, ClassNotFoundException {
+        String[] args = {"Notepad", "tests/ClassesOdd/Notepad"};
+        Main.main(args);
+        Utility.validate("results/Notepad.prog1.pl","tests/validation-files/Notepad-correct.txt", true, eliminate);
+    } 
+    @Test
+    public void testReflectQuark() throws IOException, ClassNotFoundException {
+        String[] args = {"quark", "tests/ClassesOdd/quark"};
+        Main.main(args);
+        Utility.validate("results/quark.prog1.pl","tests/validation-files/quark-correct.txt", true, eliminate);
+    } 
+    @Test
+    public void testReflectYparser() throws IOException, ClassNotFoundException {
+        String[] args = {"yparser", "tests/ClassesOdd/yparser"};
+        Main.main(args);
+        Utility.validate("results/yparser.prog1.pl","tests/validation-files/yparser-correct.txt", true, eliminate);
+    } 
     
-    private static String getSortedFile(String unsorted) {
-        ArrayList<String> lines = new ArrayList<String>();
-        Scanner scan = new Scanner(unsorted);
-        while (scan.hasNextLine()){
-            lines.add(scan.nextLine());
-        }
-        Collections.sort(lines);
-        StringBuilder correct = new StringBuilder();
-        for (String line : lines) {
-            correct.append(line + "\n");
-        }
-        System.out.println("************************");
-        System.out.println(correct.toString());
-        return correct.toString();
-    } 
 }

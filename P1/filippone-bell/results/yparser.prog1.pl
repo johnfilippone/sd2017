@@ -5,8 +5,8 @@ table(bcMember,[mid,cid,static,"type","sig"]).
 
 bcClass(c0,'yparser.Main','Object').
 bcMember(m0,c0,true,'yparser.Main','Main)').
-bcMember(m1,c0,true,'String[]','checkNameStructure(String)').
-bcMember(m2,c0,true,'void','printArray(String,String[])').
+bcMember(m1,c0,true,'void','printArray(String,String[])').
+bcMember(m2,c0,true,'String[]','checkNameStructure(String)').
 bcMember(m3,c0,true,'void','main(String[])').
 bcMember(m4,c0,true,'void','err(String)').
 bcClass(c1,'yparser.connection','Object').
@@ -27,5 +27,5 @@ bcMember(m2,c2,false,'String','id').
 bcMember(m3,c2,false,'String','name').
 bcMember(m4,c2,false,'String','fields').
 bcMember(m5,c2,false,'String','methods').
-bcMember(m6,c2,true,'void','dump)').
-bcMember(m7,c2,true,'String','toId(String)').
+bcMember(m6,c2,true,'String','toId(String)').
+bcMember(m7,c2,true,'void','dump)').
