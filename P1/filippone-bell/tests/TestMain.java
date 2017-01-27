@@ -6,7 +6,7 @@ import introspect.Main;
 
 public class TestMain {
     
-    static String[] eliminate = {"\\(m\\d+,","\\(c\\d+,"};
+    static String[] eliminate = {"m\\d+,","c\\d+,"};
 
     @Test
     public void testReflectP1package() throws IOException, ClassNotFoundException {
