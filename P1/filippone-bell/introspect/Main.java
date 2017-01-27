@@ -49,7 +49,6 @@ public class Main {
                 Class<?> c = Class.forName(packageName + "." + file.getName().substring(0,file.getName().lastIndexOf('.')));
                 output.append(String.format("bcClass(c%d,'%s','%s').\n", classID, c.getName(), c.getSuperclass().getSimpleName()));
                 
-                memberID = 0;
                 // get constructors
                 Constructor<?>[] constructors = c.getDeclaredConstructors();
                 for (Constructor<?> constructor : constructors) {
