@@ -30,7 +30,6 @@ public class Main {
         
         // stub code for prolog files to set up tables
         StringBuilder output = new StringBuilder();
-        // append the basic info
         output.append("dbase(prog1,[bcClass,bcMember]).\n\n");
         output.append("table(bcClass,[cid,\"name\",\"superName\"]).\n");
         output.append("table(bcMember,[mid,cid,static,\"type\",\"sig\"]).\n\n");
@@ -53,8 +52,8 @@ public class Main {
                 Constructor<?>[] constructors = c.getDeclaredConstructors();
                 for (Constructor<?> constructor : constructors) {
                     if (Modifier.isPublic(constructor.getModifiers())) {
-                        String signature = getSignature(constructor.getParameterTypes());
-                        output.append(String.format("bcMember(m%d,c%d,true,'%s','%s').\n", memberID, classID, c.getName(), c.getSimpleName() + signature));
+                        String signature = c.getSimpleName() + getSignature(constructor.getParameterTypes());
+                        output.append(String.format("bcMember(m%d,c%d,true,'%s','%s').\n", memberID, classID, c.getName(), signature));
                         memberID += 1;
                     }
                 }
@@ -64,7 +63,8 @@ public class Main {
                 for (Field field : fields) {
                     if (Modifier.isPublic(field.getModifiers())) {
                         boolean isStatic = Modifier.isStatic(field.getModifiers());
-                        output.append(String.format("bcMember(m%d,c%d,%s,'%s','%s').\n", memberID, classID, isStatic, field.getType().getSimpleName(), field.getName()));
+                        String fieldType = field.getType().getSimpleName();
+                        output.append(String.format("bcMember(m%d,c%d,%s,'%s','%s').\n", memberID, classID, isStatic, fieldType, field.getName()));
                         memberID += 1;
                     }
                 }
@@ -73,9 +73,10 @@ public class Main {
                 Method[] methods = c.getDeclaredMethods();
                 for (Method method : methods) {
                     if (Modifier.isPublic(method.getModifiers())) {
-                        String signature = getSignature(method.getParameterTypes());
                         boolean isStatic = Modifier.isStatic(method.getModifiers());
-                        output.append(String.format("bcMember(m%d,c%d,%s,'%s','%s').\n", memberID, classID, isStatic, method.getReturnType().getSimpleName(), method.getName() + signature));
+                        String returnType = method.getReturnType().getSimpleName();
+                        String signature = method.getName() + getSignature(method.getParameterTypes());
+                        output.append(String.format("bcMember(m%d,c%d,%s,'%s','%s').\n", memberID, classID, isStatic, returnType, signature));
                         memberID += 1;
                     }
                 }
@@ -91,7 +92,8 @@ public class Main {
         StringBuilder signatureBuilder = new StringBuilder();
         signatureBuilder.append("(");
         for (Class<?> param : parameters) {
-             signatureBuilder.append(param.getSimpleName());
+             String name = param.getCanonicalName().contains("java.lang") ? param.getSimpleName() : param.getCanonicalName();
+             signatureBuilder.append(name);
              signatureBuilder.append(",");
         }
         String signature = signatureBuilder.toString();
