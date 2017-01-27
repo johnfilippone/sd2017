@@ -44,5 +44,11 @@ public class TestMain {
         Main.main(args);
         Utility.validate("results/yparser.prog1.pl","tests/validation-files/yparser-correct.txt", true, eliminate);
     } 
+    @Test
+    public void testPathEndsWithSlash() throws IOException, ClassNotFoundException {
+        String[] args = {"p1package", "tests/p1package/"};
+        Main.main(args);
+        Utility.validate("results/p1package.prog1.pl","tests/validation-files/p1package-correct.txt", true, eliminate);
+    } 
     
 }

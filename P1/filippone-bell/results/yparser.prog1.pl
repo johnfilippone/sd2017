@@ -5,10 +5,10 @@ table(bcMember,[mid,cid,static,"type","sig"]).
 
 bcClass(c0,'yparser.Main','Object').
 bcMember(m0,c0,true,'yparser.Main','Main)').
-bcMember(m1,c0,true,'String[]','checkNameStructure(String)').
-bcMember(m2,c0,true,'void','printArray(String,String[])').
-bcMember(m3,c0,true,'void','main(String[])').
-bcMember(m4,c0,true,'void','err(String)').
+bcMember(m1,c0,true,'void','main(String[])').
+bcMember(m2,c0,true,'void','err(String)').
+bcMember(m3,c0,true,'String[]','checkNameStructure(String)').
+bcMember(m4,c0,true,'void','printArray(String,String[])').
 bcClass(c1,'yparser.connection','Object').
 bcMember(m5,c1,true,'yparser.connection','connection(String,String,String,String,String,String)').
 bcMember(m6,c1,true,'String','quote').
@@ -21,8 +21,8 @@ bcMember(m12,c1,false,'String','role2').
 bcMember(m13,c1,false,'String','end2').
 bcMember(m14,c1,true,'void','dump)').
 bcClass(c2,'yparser.klass','Object').
-bcMember(m15,c2,true,'yparser.klass','klass(String,String,String)').
-bcMember(m16,c2,true,'yparser.klass','klass(String[])').
+bcMember(m15,c2,true,'yparser.klass','klass(String[])').
+bcMember(m16,c2,true,'yparser.klass','klass(String,String,String)').
 bcMember(m17,c2,false,'String','id').
 bcMember(m18,c2,false,'String','name').
 bcMember(m19,c2,false,'String','fields').
