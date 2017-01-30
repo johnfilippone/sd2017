@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Demo Programs on How to Read and Write MDELite6 Databases</title></head>
+<body>
+<h1 style="text-align: center;"><span style="font-family: Helvetica,Arial,sans-serif;">Demo
+Programs on Reading and Writing MDELite6 Databases</span></h1>
+<span style="font-family: Helvetica,Arial,sans-serif;"><br>
+Start with these imports, not all of which are needed for each program
+given below. &nbsp;The imports are the union required to run all
+demo programs.<br>
+</span><span style="font-family: Helvetica,Arial,sans-serif;"></span>
+<pre style="margin-left: 40px;">import java.io.File;<br>import java.util.List;<br>import java.util.stream.Collectors;<br>import java.util.stream.Stream;<br>import PrologDB.*;</pre>
+<span style="font-family: Helvetica,Arial,sans-serif;">
+</span><span style="font-family: Helvetica,Arial,sans-serif;"></span>
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Program
+1: Printing the Contents of a Database Schema</h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">This
+program takes an ooschema declaration and flattens it into a schema
+declaration. &nbsp;The distinction between ooschema files and
+schema fiiles, as explained in class, is that attributes of supertables
+are propagated to each of its subtables, recursively. &nbsp;Next,
+the code prints out the contents of the database schema, getting one
+table at a time, and printing the schema of the table.
+&nbsp;Printing subtable declarations of the database conclude the
+program.<br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void printSchema() throws Exception {<br>        System.out.format("START print Schema\n\n");<br>        File sFile = new File("TestData/Schema/starTrek.ooschema.pl");<br>        DBSchema s = DBSchema.readSchema(sFile, System.err);<br>        s.flatten();<br><br>        // easy way<br>        s.print(System.out);<br><br>        // more detailed way<br>        System.out.format("\n=========\n\n");<br>        System.out.format("database %s has \n", s.getName());<br>        for (TableSchema t : s.getTableSchemas()) {<br>            System.out.format("   table %10s with columns ", t.getName());<br>            for (Column c : t.getColumns()) {<br>                String quote = c.isQuoted() ? "\'" : "";<br>                System.out.format("%s%s%s ", quote, c.getName(), quote);<br>            }<br>            System.out.format("\n");<br>        }<br>        System.out.format("\n");<br>        for (SubTableSchema st : s.getSubTableSchemas()) {<br>            TableSchema supr = st.getSuper();<br>            System.out.format("   table %10s has subtables ", supr.getName());<br>            for (TableSchema chld : st.getSubTableSchemas()) {<br>                System.out.format("%s ", chld.getName());<br>            }<br>            System.out.format("\n");<br>        }<br>        System.out.format("\n\nEND print Schema\n");<br>    }<br> </pre><span style="font-family: Helvetica,Arial,sans-serif;">
+</span>
+<h2><span style="font-family: Helvetica,Arial,sans-serif;">Program
+2 : Constructing Schemas Programmatically</span></h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">This
+program creates a starTrek ooschema programmatically and prints it out
+using standard utilities.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    DBSchema schemaBuild() throws Exception {<br>        DBSchema trekSchema = new DBSchema("starTrek");<br><br>        //  create tables for ooschema<br>        TableSchema crewman = new TableSchema("crewman");<br>        crewman.addColumns(<br>                new Column("cid", false), // false means non-quoted<br>                new Column("fname", false),<br>                new Column("lname", false));<br>        <br>        TableSchema commander = new TableSchema("commander");<br>        commander.addColumn(new Column("rank", false));<br><br>        TableSchema lieutenant = new TableSchema("lieutenant");<br>        lieutenant.addColumn(new Column("specialty", false));<br><br>        trekSchema.addTableSchema(crewman);<br>        trekSchema.addTableSchema(commander);<br>        trekSchema.addTableSchema(lieutenant);<br><br>        //  now createe the lone subtable declaration, and add to schema<br>        SubTableSchema sts = new SubTableSchema(crewman);<br>        sts.addSubTableSchema(commander);<br>        sts.addSubTableSchema(lieutenant);<br>        trekSchema.addSubTableSchema(sts);<br><br>        // now print the schema declaration<br>        return trekSchema;<br>    }<br> </pre>
+
+<span style="font-family: Helvetica,Arial,sans-serif;"></span>
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Program
+3: Programmatically Reading a Database</h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">This
+program reads a database given its file, prints the database using
+available utilities and also the hard way by extracting out its
+individual tables and printing its tuples.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void DBread() throws Exception {<br>        System.out.format("\n\n START database read \n\n");<br>        File dbfile = new File("TestData/DB/enterprise.starTrek.pl");<br>        DB db = DB.readDataBase(dbfile, System.err);<br>        <br>        // easy way to print<br>        db.print(System.out);<br><br>        // more detailed way<br>        System.out.format("\n\n ===== \n\n");<br>        System.out.format("database %s contains:\n", db.getName());<br><br>        for (Table t : db.getTables()) {<br>            System.out.format("Table %s\n", t.getName());<br>            for (Tuple tup : t.tuples()) {<br>                tup.print(System.out);<br>            }<br>            System.out.format("\n");<br>        }<br>        System.out.format("\n\n END database read \n\n");<br>    }<br> </pre>
+
+<span style="font-family: Helvetica,Arial,sans-serif;"></span>
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Program
+4: Programmatically Creating a Database</h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">The
+following program creates the startrek database, which has 3 tuples,
+one tuple per table. &nbsp;An ooschema for the database is created
+and then converted into a true schema (via the flatten operation).
+&nbsp;At this point, a database instance of the schema can be
+created, one table and one tuple at a time.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void DBBuild() throws Exception {<br>        System.out.format("\n\n\n START build enterprise database\n\n");<br>        DBSchema trekSchema = schemaBuild();<br>        trekSchema.flatten();<br>        DB enterprise = new DB("enterprise", trekSchema);<br><br>        // create spock tuple<br>        Table crewman = enterprise.getTableEH("crewman");<br>        Tuple spock = new Tuple(crewman);<br>        spock.addColumnValuesEH("c1", "mr", "spock");<br>        crewman.add(spock);<br><br>        //  create sulu tuple<br>        Table lieutenant = enterprise.getTableEH("lieutenant");<br>        Tuple sulu = new Tuple(lieutenant);<br>        sulu.addColumnValuesEH("c3", "hikaru", "sulo", "navigation");<br>        lieutenant.add(sulu);<br><br>        //  create kirk tupld<br>        Table commander = enterprise.getTableEH("commander");<br>        Tuple kirk = new Tuple(commander);<br>        kirk.addColumnValuesEH("c2", "james", "kirk", "captain");<br>        commander.add(kirk);<br><br>        //  now print database<br>        enterprise.print(System.out);<br>        System.out.format("\n\n END build enterprise database \n\n");<br>    }<br> </pre>
+
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Program
+5: Programmatically Reading a Table</h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">This
+program reads a dog-owner database, which has a table of dogs.
+&nbsp;Using Java Streams, the stream of all aussie tuples ('aussie'
+means Australian Shepherd). &nbsp;This stream is then
+printed. &nbsp;A similar stream is reconstituted (remember: once
+you use a stream, it's finished) and then filtered further, and printed.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void TableRetrieve() {<br>        System.out.format("BEGIN Table Retrieval\n\n");<br>        DB db = DB.readDataBase("TestData/DB/dogOwner.do.pl");<br>        Table dog = db.getTable("dog");<br><br>        // query 1: retrieve all aussies<br>        dog.stream().filter(t -> t.is("breed", "aussie")).forEach(t -> t.print(System.out));<br>        System.out.println();<br><br>        // query 1': retrieve all aussies -- version 2<br>        dog.filter(t -> t.is("breed", "aussie")).print(System.out);<br><br>        // query 2: retrieve all aussies that are blacktri's<br>        Stream<Tuple> aussies = dog.stream().filter(t -> t.is("breed", "aussie"));<br>        Stream<Tuple> cuteAussies = aussies.filter(t -> t.is("color", "blacktri"));<br>        cuteAussies.forEach(t -> t.print(System.out));<br>        System.out.println();<br><br>        // query 2: another version, this time using TupleLists<br>        dog.filter(t -> t.is("breed", "aussie") && t.is("color", "blacktri"))<br>                .print(System.out);<br>        System.out.format("END Table Retrieval");<br>    }<br> </pre>
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Program
+6: Programmatically Reading Tuples of a Table and its Subtables</h2>
+<span style="font-family: Helvetica,Arial,sans-serif;">This
+program reads the tuples of a table and all of its subtables, using the
+toTupleList() method. &nbsp;If you want to retrieve tuples of only
+that table (and not its subtables), you use the getLocalTuples()
+method. &nbsp;A couple queries are illustrated. &nbsp; </span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void InheritanceRetrieve() {<br>        System.out.format("BEGIN DBTable Retrieval\n\n");<br>        DB db = DB.readDataBase("TestData/DB/pets.petdb.pl");<br>        Table pet = db.getTableEH("pet");<br><br>        // query 1: retrieve all pets<br>        pet.stream().forEach(t -> t.print(System.out));<br><br>        // query 2: all pets whose name begins with "l" -- first way<br>        System.out.println("\nlist of all pets whose names start with 'l'");<br>        pet.stream().filter(t -> t.get("name").startsWith("l")).forEach(t -> t.print(System.out));<br><br>        // query 2': all pets whose name begins with "l" -- second way<br>        System.out.println("\nversion 2");<br>        Predicate<Tuple> p = t -> t.get("name").startsWith("l");<br>        pet.stream().filter(p).forEach(t -> t.print(System.out));<br><br>        // query 2'': all pets whose name begins with "l" -- third way<br>        System.out.println("\nversion 3");<br>        Predicate<Tuple> p1 = t -> t.get("name").startsWith("l");<br>        pet.filter(p1).project("name").print(System.out);<br><br>        System.out.format("END DBTable Retrieval\n\n");<br>    }<br> </pre>
+
+<h2 style="font-family: Helvetica,Arial,sans-serif;">Program 7: Talking Cross Products of Schemas</h2><span style="font-family: Helvetica,Arial,sans-serif;">Table
+joins take cross products of schemas. &nbsp;Occasionally you might need
+to do this yourself. &nbsp;The following program illustrates how cross
+products of schemas are taken and printed.</span><br><span style="font-family: Helvetica,Arial,sans-serif;"> </span><pre style="margin-left: 40px;">    public void crossSchema() {<br>        DB db = DB.readDataBase("TestData/DB/dogOwner.do.pl");<br><br>        // Step 1: cross the dog and owner schemas<br>        TableSchema dogSchema = db.getTableSchema("dog");<br>        dogSchema.print(System.out);<br>        TableSchema ownerSchema = db.getTableSchema("owner");<br>        ownerSchema.print(System.out);<br>        TableSchema dXoSchema = dogSchema.crossProduct(ownerSchema);<br>        dXoSchema.print(System.out);<br><br>        // Step 2: get the tables to cross<br>        Table dog = db.getTable("dog");<br>        Table when = db.getTable("when");<br>        Table owner = db.getTable("owner");<br><br>        // Step 3: take cross product of schemas<br>        when.schema.print(System.out);<br>        TableSchema dogXwhen = dog.schema.crossProduct(when.schema);<br>        dogXwhen.print(System.out);<br>        TableSchema dogXwhenXowner = dogXwhen.crossProduct(owner.schema);<br>        dogXwhenXowner.print(System.out);<br>    }<br> </pre><h2 style="font-family: Helvetica,Arial,sans-serif;">Program 8: Table Joins</h2><span style="font-family: Helvetica,Arial,sans-serif;">This
+program reads a dog-owner database, finds the dog, when, and owner
+tables, joins the dog table with the when table over dog.did = when.did
+join predicate (i.e., the did columns of both tuples must have the same
+value) to produce a new table dogXwhen. &nbsp;Note: the attributes of
+the joined relation are renamed. &nbsp;What used to be attribute T in
+the dog table is now renamed dog.T. &nbsp;Same for all other
+attributes, so that one can always distinguish attributes with similar
+names. Continuing, this table is printed, and then it is joined with
+the owner table over predicate when.oid = owner.oid, and then the table
+is printed out.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void TableJoins() {<br>        System.out.format("BEGIN cross schema tests \n\n");<br>        DB db = DB.readDataBase("TestData/DB/dogOwner.do.pl");<br><br>        // Step 1: get the tables to cross<br>        Table dog = db.getTable("dog");<br>        Table when = db.getTable("when");<br>        Table owner = db.getTable("owner");<br><br>        // Step 2: join tables<br>        Table dogXwhen = Table.join(dog, "did", when, "did");<br>        dogXwhen.print(System.out);<br>        Table dogXwhenXowner = Table.join(dogXwhen, "when.oid", owner, "oid");<br>        dogXwhenXowner.print(System.out);<br>    }<br> </pre><h2 style="font-family: Helvetica,Arial,sans-serif;">Program 8: Self Joins</h2><span style="font-family: Helvetica,Arial,sans-serif;">Self-joins
+(joining a table with itself) has always been an obstacle in database
+development. &nbsp;Here is a program that joins the dog table with
+itself over dog identifiers (did). &nbsp;The key to self-joins is that
+a copy of a table for each self-join must be made. &nbsp;If a dog table
+is to be joined with itself, the dog table is really joined with a
+copy. &nbsp;If a dog table is to be joined with itself, followed by
+itself, the dog table and two distinct copies of the dog table must be
+joined. &nbsp;Now, this particular example, of joining a dog table with
+itself isn't particularly useful,<br>but when you have a table that
+encodes (parent, child) relationships, joining such tables allows you
+to relate parents to grandchildren, and so on.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void selfJoin() {<br>        System.out.format("BEGIN cross schema tests \n\n");<br>        DB db = DB.readDataBase("TestData/DB/dogOwner.do.pl");<br><br>        // Step 1: get the tables to cross<br>        Table dog = db.getTable("dog");<br>        Table dog2 = dog.copyForSelfJoins("dog2");<br><br>        // Step 2: join tables<br>        Table dogXdog2 = Table.join(dog, "did", dog2, "did");<br>        dogXdog2.print(System.out);<br>    }<br> </pre><h2 style="font-family: Helvetica,Arial,sans-serif;">Program 9: &nbsp;Checking Uniqueness Constraints on a Table</h2><span style="font-family: Helvetica,Arial,sans-serif;">Checking
+that the name field of a table has unique values for all tuples is a
+typical constraint. &nbsp;Java Streams are stateless, so one has to
+create an operation that updates a stateful object which also will do
+the work of error checking. &nbsp;MDELite6 uses the following scheme.
+&nbsp;An ErrorReport object maintains a list of errors that have been
+accumulated across any number of constraints. &nbsp;When stateful
+computations are needed, like remembering the name values of previous
+tuples seen -- to check whether a name value has been seen before, one
+needs another object that does the checking and then reports errors, as
+it encounters them to an ErrorReport object. &nbsp;This program
+illustrates this process. &nbsp;A database is read, and a particular
+table (dog) is found. &nbsp;An error reporter is created, along with a
+"unique" object that looks at, in this case, the "name" field of each
+tuple and performs a test to see if this name has been seen before.
+&nbsp;If it has, an error is reported to the ErrorReport object, and
+the message includes another attribute of the tuple, namely the
+atttribute of its identifier ("did") so that the offending tuple can be
+tracked down later. When an ErrorReport object is printed (via
+printReport()), if there are errors, a RuntimeException is thrown,
+terminating the program.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    void Unique() {<br>        DB db = DB.readDataBase("TestData/DB/dogOwner.do.pl");<br>        Table dog = db.getTable("dog");<br>        ErrorReport er = new ErrorReport();<br>        Unique u = new Unique("did", "name", er);<br>        dog.stream().forEach(t -> u.add(t));<br>        try {<br>            er.printReport(System.out);<br>        } catch (Exception e) {<br>        }<br>    }<br> </pre><h2 style="font-family: Helvetica,Arial,sans-serif;">Program 10: &nbsp;Filtering Tuples from Tables</h2><span style="font-family: Helvetica,Arial,sans-serif;">This
+program illustrates several ways in which you can filter tuples from
+tables. &nbsp; The first way uses standard for loops with an
+if-statement. &nbsp;The second way creates a stream of tuples that are
+filtered and printed. &nbsp;The third way creates a TupleList of a
+relation, filters the tuplelist and prints the list. &nbsp;You'll
+notice that the stream and tuplelist versions are very similar.
+&nbsp;They should be: the only difference between the two is that
+stream implementations process one tuple at a time. &nbsp;TupleList
+implementations process one TupleList at a time.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    public void filter() {<br>        try {<br>            File dbfile = new File("TestData/DB/enterprise.starTrek.pl");<br>            DB db = DB.readDataBase(dbfile, System.err);<br><br>            System.out.println("first way");<br>            Table crew = db.getTableEH("crewman");<br>            crew.schema.print(System.out);<br>            for (Tuple t : crew.tuples()) {<br>                if (t.get("fname").startsWith("h")) {<br>                    t.print(System.out);<br>                }<br>            }<br><br>            System.out.println("\n\nsecond way");<br>            crew.schema.print(System.out);<br>            crew.stream()<br>                    .filter(t -> t.get("fname").startsWith("h"))<br>                    .forEach(t -> t.print(System.out));<br><br>            System.out.println("\n\nthird way");<br>            Predicate<Tuple> p = t -> t.get("fname").startsWith("h");<br>            crew.filter(p).print(System.out);<br>        } catch (Exception e) {<br>            System.out.println(e.getMessage());<br>        }<br>    }<br> <br></pre><h2 style="font-family: Helvetica,Arial,sans-serif;">Program 11: &nbsp;Conform Tests</h2><span style="font-family: Helvetica,Arial,sans-serif;">This
+program illustrates an example from class. &nbsp;A Contract is owned by
+precisely one Person or one Company, but never both. &nbsp;The value of
+a Contract held by a Company must exceed 500 (dollars); the value of a
+Contract held by a Person must not be greater than 100 (dollars).
+&nbsp;Note the use of a ErrorReport object that collects all
+conformance failures.</span><span style="font-family: Helvetica,Arial,sans-serif;"><br></span><span style="font-family: Helvetica,Arial,sans-serif;"></span><pre style="margin-left: 40px;">    public void conform() {<br>        DB db = DB.readDataBase("TestData/DB/ex.con.pl");<br><br>        Table contract = db.getTableEH("contract");<br><br>        ErrorReport er = new ErrorReport();<br><br>        // Botn Constraint<br>        contract.stream()<br>                .filter(t -> ((t.isNull("pid") && t.isNull("cid"))<br>                        || (!t.isNull("pid") && !t.isNull("cid"))))<br>                .forEach(t -> er.add("Both constraint violated " + t.get("kid")));<br><br>        // Company Constraint<br>        contract.stream()<br>                .filter(t -> (!t.isNull("cid") && t.getInt("value") < 500))<br>                .forEach(t -> er.add("company constraint violated " + t.get("kid")));<br><br>        // Person Constraint<br>        contract.stream()<br>                .filter(t -> !t.isNull("pid") && t.getInt("value") > 100)<br>                .forEach(t -> er.add("person constraint violated " + t.get("kid")));<br><br>        try {<br>            er.printReport(System.out);<br>        } catch (Exception e) {<br>        }<br>    }<br> <br></pre><h2 style="font-family: Helvetica,Arial,sans-serif;">Program 12: &nbsp;Reading and Writing Individual Tables</h2><span style="font-family: Helvetica,Arial,sans-serif;">MDELite6
+allows you to read and write inidividual tables, either in the standard
+Prolog format or as a CSV (comma separated value) file. &nbsp;The name
+of the file (whether it ends or not in ".csv") determines whether the
+file is to be read/written as a CSV file..<br></span><pre style="margin-left: 40px;">    public void csvfile() {<br>        Table csv = Table.readTable("TestData/CSV/MixinPass6.csv");<br>        csv.writeTable("NormalProlog.pl");<br>        csv.writeTable("AsCSVFile.csv");<br>    }<br></pre><br>
+</body></html>
+

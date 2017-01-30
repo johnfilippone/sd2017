@@ -1,0 +1,87 @@
+## translates yuml.pl database to .yuml
+##
+##
+#set($debug=false)
+#set($MARKER="//----")
+${MARKER}${OutputFileName}
+##
+### generate classes
+##
+#if ($debug)
+//classes
+#end
+#foreach($c in $yumlClassS)
+    #set($n=$c.name)
+    #set($fields=$c.fields )
+    #set($methods=$c.methods)
+    #set($members=$fields+$methods)
+    #if ($members=="")
+##
+## this is an optimization -- display classes if they 
+## do NOT appear in any association
+        #set($print = true)
+        #foreach($a in $yumlAssociationS)
+            #if ($c.name==$a.name1)
+                #set($print=false)
+            #end
+            #if ($c.name==$a.name2)
+                #set($print=false)
+            #end
+        #end
+        #if ($print==true)
+[$n]
+        #end
+        #else
+[$n|$fields|$methods]
+    #end
+#end
+## generate interfaces
+##
+#if ($debug)
+// interfaces
+#end
+#foreach($i in $yumlInterfaceS)
+##--debug $i
+    #set($iname=$i.name)
+    #set($methods=$i.methods)
+    #if ($methods=="")
+[<<interface>> $iname]
+    #else
+[<<interface>> $iname||$methods]
+    #end
+#end
+##
+## generate associations, compositions, and aggregations
+##
+#if ($debug)
+// associations, compositions, and aggregations
+#end
+#foreach($a in $yumlAssociationS)
+##-- debug $a
+    #set($arrow1=$a.end1)
+    #set($arrow2=$a.end2)
+    #set($cid1name=$a.name1)
+    #set($cid2name=$a.name2)
+    #set($role1=$a.role1)
+    #set($role2=$a.role2)
+## now compute dashed lines.  A dashed line is used iff
+## cid1name is of a class and cid2name is of an interface or vice versa
+    #set($isInterface1=false)
+    #set($isInterface2=false)
+    #foreach($i in $yumlInterfaceS)
+        #if ($i.name.equals($a.name1))
+            #set($isInterface1=true)
+            #set($cid1name= "<<interface>>;"+$cid1name)
+        #end
+        #if ($i.name.equals($a.name2))
+            #set($isInterface2=true)
+            #set($cid2name= "<<interface>>;"+$cid2name)
+        #end
+    #end
+    #set($dashed=($isInterface2 != $isInterface1))
+    #if ($dashed)
+[$cid1name]${arrow1}${role1}-.-${role2}${arrow2}[$cid2name]
+    #else
+[$cid1name]${arrow1}${role1}-${role2}${arrow2}[$cid2name]
+    #end
+#end
