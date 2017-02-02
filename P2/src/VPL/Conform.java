@@ -10,6 +10,7 @@ import PrologDB.ErrorReport;
 import PrologDB.Table;
 import PrologDB.Tuple;
 import java.util.function.Predicate;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,14 +37,18 @@ public class Conform {
             // read database and get each table
             ErrorReport er = new ErrorReport();
 
-            // initialize the vpl database
+            // initialize the vpl database and tables
             vpl = DB.readDataBase(args[0]);
-            vpl.print(System.out);
+            violetClass = vpl.getTable("violetClass");
+            violetInterface = vpl.getTable("violetInterface");
+            violetAssociation = vpl.getTable("violetAssociation");
+            violetMiddleLabels = vpl.getTable("violetMiddleLabels");
             
             /** following are rules/constraints to check on vpl database **/
             /** each rule (constraint) has its own static error method below **/
             
             // MiddleLabel Rule: each MiddleLable tuple generates an error
+            violetMiddleLabels.stream().forEach(t->er.add(middleLabel(t)));
           
             // Unique Names Rule: Classes and Interfaces have unique names constraint
             
