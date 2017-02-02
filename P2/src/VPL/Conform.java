@@ -51,6 +51,20 @@ public class Conform {
             violetMiddleLabels.stream().forEach(t->er.add(middleLabel(t)));
           
             // Unique Names Rule: Classes and Interfaces have unique names constraint
+            violetClass.stream().filter(t1-> 
+                    violetClass.stream().filter(t2-> 
+                        t2.is("name",t1.get("name"))).count() > 1)
+                    .forEach(t->er.add(ciShareName("classes", t)));
+
+            violetInterface.stream().filter(t1-> 
+                    violetClass.stream().filter(t2-> 
+                        t2.is("name",t1.get("name"))).count() > 1)
+                    .forEach(t->er.add(ciShareName("class and interface", t)));
+            
+            violetInterface.stream().filter(t1-> 
+                    violetInterface.stream().filter(t2-> 
+                        t2.is("name",t1.get("name"))).count() > 1)
+                    .forEach(t->er.add(ciShareName("interfaces", t)));
             
             //  Null Names Rule: classes and interfaces cannot have null names
             violetClass.stream().filter(t->t.get("name").equals(""))
