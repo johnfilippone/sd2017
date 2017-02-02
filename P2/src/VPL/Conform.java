@@ -27,7 +27,7 @@ public class Conform {
      * @param args -- single path to vpl database which is to be tested for conformance
      */
     public static void main(String... args) {
-        if (args.length != 1 && !args[0].endsWith(".vpl.pl")) {
+        if (args.length != 1 || !args[0].endsWith(".vpl.pl")) {
             System.out.format("Usage: %s <file.vpl.pl>\n", Conform.class.getName());
             System.out.format("       <file.vpl.pl> will be checked for constraint violations\n");
             return;
@@ -36,6 +36,10 @@ public class Conform {
             // read database and get each table
             ErrorReport er = new ErrorReport();
 
+            // initialize the vpl database
+            vpl = DB.readDataBase(args[0]);
+            vpl.print(System.out);
+            
             /** following are rules/constraints to check on vpl database **/
             /** each rule (constraint) has its own static error method below **/
             
