@@ -28,13 +28,13 @@ public class ConformTest {
         Conform.main("abc abc");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
     }
-    /*
     @Test 
     public void testMiddleLabel() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("tests/test-dependancies/vpl/middleLabel.vpl.pl");
+        Conform.main("test-dependancies/vpl/middleLabel.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/testMiddleLabel.txt",false);
     }
+    /*
 
     //don's tests
     @Test

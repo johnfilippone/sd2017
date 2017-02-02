@@ -2,8 +2,8 @@
 dbase(vpl,[violetMiddleLabels,violetAssociation,violetInterface,violetClass]).
 
 table(violetClass,[id,"name","fields","methods",x,y]).
-violetClass(classnode0,'','','',528,366).
-violetClass(classnode1,'','','',896,370).
+violetClass(classnode0,'Class A','','',528,366).
+violetClass(classnode1,'Class B','','',896,370).
 
 table(violetInterface,[id,"name","methods",x,y]).
 

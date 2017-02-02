@@ -1,3 +1,3 @@
-association ( - ) has middle label Middle labels are bad
+association (Class B - Class A) has middle label Middle labels are bad
 
 1 errors found
