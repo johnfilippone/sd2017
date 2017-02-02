@@ -17,13 +17,17 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
     }
     @Test 
-    public void testBadFileName2() {
+    public void testBadArgs() {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("abc.vpl.pl abc");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
     }
     /*
-    @Test void testmiddleLabel() {
+    @Test 
+    public void testMiddleLabel() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("tests/test-dependancies/vpl/middleLabel.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/testMiddleLabel.txt",false);
     }
 
     //don's tests
