@@ -10,6 +10,22 @@ public class ConformTest {
     public ConformTest() {
     }
 
+    @Test 
+    public void testBadFileName() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("abc");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
+    }
+    @Test 
+    public void testBadFileName2() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("abc.vpl.pl abc");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
+    }
+    /*
+    @Test void testmiddleLabel() {
+    }
+
     //don's tests
     @Test
     public void CarRental() {
@@ -47,4 +63,5 @@ public class ConformTest {
         Conform.main("test-dependancies/validation-files/straight.vpl.pl");
         RegTest.Utility.validate("out.txt","Correct/straight.txt",false);
     }
+    */
 }
