@@ -84,6 +84,11 @@ public class Conform {
             // Diamonds Rule: if a diamond has a cardinality, it must be 0..1
             
             // Triangle Rule: no Triangle association can have anything other than '' for its other arrow 
+            violetAssociation.stream().filter(t->!t.get("arrow1").equals("") && t.get("arrow2").equals("TRIANGLE"))
+                    .forEach(t->er.add(arrow(t)));
+          
+            violetAssociation.stream().filter(t->!t.get("arrow2").equals("") && t.get("arrow1").equals("TRIANGLE"))
+                    .forEach(t->er.add(arrow(t)));
 
             //  Non-Empty Rule: inheritance associations cannot have non-empty roles
 
