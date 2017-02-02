@@ -1,0 +1,3 @@
+class with id=unconnected0 has null name
+
+1 errors found
