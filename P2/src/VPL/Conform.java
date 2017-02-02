@@ -34,7 +34,6 @@ public class Conform {
             return;
         }
         try {
-            // read database and get each table
             ErrorReport er = new ErrorReport();
 
             // initialize the vpl database and tables
@@ -44,8 +43,8 @@ public class Conform {
             violetAssociation = vpl.getTable("violetAssociation");
             violetMiddleLabels = vpl.getTable("violetMiddleLabels");
             
-            /** following are rules/constraints to check on vpl database **/
-            /** each rule (constraint) has its own static error method below **/
+            // following are rules/constraints to check on vpl database
+            // each rule (constraint) has its own static error method below
             
             // MiddleLabel Rule: each MiddleLable tuple generates an error
             violetMiddleLabels.stream().forEach(t->er.add(middleLabel(t)));
@@ -93,6 +92,9 @@ public class Conform {
             // Interface cannot implement Class Rule: implements is drawn from class to interface
 
             // Self Inheritance Rule: no class or interface can inherit from itself
+            violetAssociation.stream().filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->!t.get("cid1").equals(t.get("cid2")))
+                    .forEach(t->er.add(selfInherit(t)));
 
             // Dotted Association Rule: non-inheritance association cannot be dotted
             
