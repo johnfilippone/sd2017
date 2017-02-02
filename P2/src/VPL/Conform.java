@@ -53,7 +53,12 @@ public class Conform {
             // Unique Names Rule: Classes and Interfaces have unique names constraint
             
             //  Null Names Rule: classes and interfaces cannot have null names
+            violetClass.stream().filter(t->t.get("name").equals(""))
+                    .forEach(t->er.add(nullName("class", t)));
             
+            violetInterface.stream().filter(t->t.get("name").equals(""))
+                    .forEach(t->er.add(nullName("interface", t)));
+
             // Black Diamond Rule: if a black diamond has a cardinality, it must be 1
             
             // Diamonds Rule: if a diamond has a cardinality, it must be 0..1
