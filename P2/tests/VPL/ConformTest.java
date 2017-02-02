@@ -18,43 +18,43 @@ public class ConformTest {
 
     @Test
     public void CarRental() {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("tests/VPL/out.txt");
         Conform.main("TestData/CarRental.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/CarRental.txt",false);
+        RegTest.Utility.validate("tests/VPL/out.txt","Correct/CarRental.txt",false);
     }
     
     @Test
     public void Comp() {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("tests/VPL/out.txt");
         Conform.main("TestData/Comp.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/Comp.txt",false);
+        RegTest.Utility.validate("tests/VPL/out.txt","Correct/Comp.txt",false);
     }
     
     @Test
     public void DecayProduct() {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("tests/VPL/out.txt");
         Conform.main("TestData/DecayProduct.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/DecayProduct.txt",false);
+        RegTest.Utility.validate("tests/VPL/out.txt","Correct/DecayProduct.txt",false);
     }
     
     @Test
     public void diagram1() {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("tests/VPL/out.txt");
         Conform.main("TestData/diagram1.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/diagram1.txt",false);
+        RegTest.Utility.validate("tests/VPL/out.txt","Correct/diagram1.txt",false);
     }
     
     @Test
     public void squirrel() {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("tests/VPL/out.txt");
         Conform.main("TestData/squirrel.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/squirrel.txt",false);
+        RegTest.Utility.validate("tests/VPL/out.txt","Correct/squirrel.txt",false);
     }
  
     @Test
     public void straight() {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("tests/VPL/out.txt");
         Conform.main("TestData/straight.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/straight.txt",false);
+        RegTest.Utility.validate("tests/VPL/out.txt","Correct/straight.txt",false);
     }
 }
