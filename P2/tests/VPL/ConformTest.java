@@ -11,7 +11,7 @@ public class ConformTest {
     }
 
     @Test 
-    public void testBadFileName() {
+    public void testBadFilename() {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("abc");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
@@ -20,6 +20,12 @@ public class ConformTest {
     public void testBadArgs() {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("abc.vpl.pl abc");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
+    }
+    @Test 
+    public void testBadFilenameAndBadArgs() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("abc abc");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
     }
     /*
