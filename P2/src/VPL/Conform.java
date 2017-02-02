@@ -74,6 +74,13 @@ public class Conform {
                     .forEach(t->er.add(nullName("interface", t)));
 
             // Black Diamond Rule: if a black diamond has a cardinality, it must be 1
+            violetAssociation.stream().filter(t->t.get("arrow1").equals("BLACK_DIAMOND"))
+                    .filter(t->!t.get("role1").equals("1") || t.get("role1").equals(""))
+                    .forEach(t->er.add(blackDiamond(t)));
+
+            violetAssociation.stream().filter(t->t.get("arrow2").equals("BLACK_DIAMOND"))
+                    .filter(t->!t.get("role2").equals("1") || t.get("role2").equals(""))
+                    .forEach(t->er.add(blackDiamond(t)));
             
             // Diamonds Rule: if a diamond has a cardinality, it must be 0..1
             
