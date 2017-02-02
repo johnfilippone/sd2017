@@ -10,7 +10,7 @@ public class ConformTest {
     public ConformTest() {
     }
 
-    // test user input
+    /* test user input */
     @Test 
     public void testBadFilename() {
         RegTest.Utility.redirectStdOut("out.txt");
@@ -30,7 +30,7 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/usage.txt",false);
     }
     
-    // test constraint checks
+    /* basic constraint test */
     @Test 
     public void testMiddleLabelRule() {
         RegTest.Utility.redirectStdOut("out.txt");
