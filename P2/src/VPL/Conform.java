@@ -56,12 +56,10 @@ public class Conform {
                     .filter(t1->violetClass.stream()
                     .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
                     .forEach(t->er.add(ciShareName("multiple classes", t)));
-
             violetInterface.stream()
                     .filter(t1->violetClass.stream()
                     .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
                     .forEach(t->er.add(ciShareName("classes and interfaces", t)));
-            
             violetInterface.stream()
                     .filter(t1->violetInterface.stream()  
                     .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
@@ -72,7 +70,6 @@ public class Conform {
             violetClass.stream()
                     .filter(t->t.get("name").equals(""))
                     .forEach(t->er.add(nullName("class", t)));
-            
             violetInterface.stream()
                     .filter(t->t.get("name").equals(""))
                     .forEach(t->er.add(nullName("interface", t)));
@@ -83,7 +80,6 @@ public class Conform {
                     .filter(t->t.get("arrow1").equals("BLACK_DIAMOND"))
                     .filter(t->!t.get("role1").equals("1") || t.get("role1").equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
-
             violetAssociation.stream()
                     .filter(t->t.get("arrow2").equals("BLACK_DIAMOND"))
                     .filter(t->!t.get("role2").equals("1") || t.get("role2").equals(""))
@@ -96,7 +92,6 @@ public class Conform {
             violetAssociation.stream()
                     .filter(t->!t.get("arrow1").equals("") && t.get("arrow2").equals("TRIANGLE"))
                     .forEach(t->er.add(arrow(t)));
-          
             violetAssociation.stream()  
                     .filter(t->!t.get("arrow2").equals("") && t.get("arrow1").equals("TRIANGLE"))
                     .forEach(t->er.add(arrow(t)));
