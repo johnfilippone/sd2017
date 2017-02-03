@@ -26,6 +26,7 @@ echo "diagram1.vpl.pl ========================================"
 java VPL.Conform /tests/test-dependencies/vpl/diagram1.vpl.pl
 
 echo "Running tests..."
+cd tests
 java org.junit.runner.JUnitCore VPL.ConformTest
 
-echo"Done."
+echo "Done."
