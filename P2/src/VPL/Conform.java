@@ -10,7 +10,8 @@ import PrologDB.ErrorReport;
 import PrologDB.Table;
 import PrologDB.Tuple;
 import java.util.function.Predicate;
-import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  *
@@ -226,4 +227,41 @@ public class Conform {
         // I'm not checking this but you might...
         return n;
     }
+
+    private static String getCardinality(String role) {
+        String[] split = role.split("\\s+");
+        if (split.length > 1) {
+            return split[0];
+        } else {
+            String numberOnly = "\\d+";
+            String numDotNum = "\\d+..\\d+";
+            String numDotStar = "\\d+..*";
+            String star = "*";
+
+            Pattern p = Pattern.compile(numberOnly);
+            Matcher m = p.matcher(split[0]);
+            if (m.matches()) {
+                return split[0];
+            }
+
+            p = Pattern.compile(numDotNum);
+            m = p.matcher(split[0]);
+            if (m.matches()) {
+                return split[0];
+            }
+            
+            p = Pattern.compile(numDotStar);
+            m = p.matcher(split[0]);
+            if (m.matches()) {
+                return split[0];
+            }
+
+            if (split[0].equals(star)) {
+                return split[0];
+            }
+
+            return "";
+        }
+    }
+
 }
