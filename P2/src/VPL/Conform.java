@@ -126,7 +126,7 @@ public class Conform {
                     .filter(t->t.get("type1").equals("classnode"))
                     .filter(t->t.get("type2").equals("classnode"))
                     .filter(t->!t.get("lineStyle").equals(""))
-                    .forEach(t->er.add(noDottedAssoc(t)));
+                    .forEach(t->er.add(dotted(t)));
 
             // Implements Constraint1: implementation relationships must be dotted
             violetAssociation.stream()
