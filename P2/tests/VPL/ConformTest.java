@@ -43,6 +43,7 @@ public class ConformTest {
         Conform.main("test-dependancies/vpl/classesWithSameName.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/classesWithSameName.txt",false);
     }
+    /*
     @Test 
     public void testNullNamesRule() {
         RegTest.Utility.redirectStdOut("out.txt");
@@ -99,7 +100,6 @@ public class ConformTest {
     }
 
 
-    /*
     //don's tests
     @Test
     public void CarRental() {

@@ -1,0 +1,4 @@
+multiple interfaces share the same name: A
+multiple interfaces share the same name: A
+
+2 errors found

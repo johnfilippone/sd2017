@@ -1,0 +1,4 @@
+multiple classes share the same name: A
+multiple classes share the same name: A
+
+2 errors found
