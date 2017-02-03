@@ -104,6 +104,10 @@ public class Conform {
                     .forEach(t->er.add(noRoles(t)));
 
             // Solid Association Constraint: non-implements, non-extends association must be solid
+            violetAssociation.stream()
+                    .filter(t->!t.get("arrow1").equals("TRIANGLE") && !t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->t.get("lineStyle").equals("DOTTED"))
+                    .forEach(t->er.add(noDottedAssoc(t)));
 
             // Extends Constraint: extends relationships must be solid
 
