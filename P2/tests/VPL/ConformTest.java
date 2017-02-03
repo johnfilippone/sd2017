@@ -120,7 +120,7 @@ public class ConformTest {
     @Test
     public void testDottedExtends() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/dottedExtends.vp.pl");
+        Conform.main("test-dependencies/vpl/dottedExtends.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/dottedExtends.txt",false);
     }
     @Test
