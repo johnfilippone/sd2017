@@ -51,7 +51,6 @@ public class Conform {
             // MiddleLabel Rule: each MiddleLable tuple generates an error
             violetMiddleLabels.stream().forEach(t->er.add(middleLabel(t)));
 
-
             // Unique Names Constraint: Classes and Interfaces have unique names constraint
             violetClass.stream()
                     .filter(t1->violetClass.stream()
@@ -65,7 +64,6 @@ public class Conform {
                     .filter(t1->violetInterface.stream()  
                     .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
                     .forEach(t->er.add(ciShareName("multiple interfaces", t)));
-            
 
             //  Null Names Constraint: classes and interfaces cannot have null names
             violetClass.stream()
@@ -74,7 +72,6 @@ public class Conform {
             violetInterface.stream()
                     .filter(t->t.get("name").equals(""))
                     .forEach(t->er.add(nullName("interface", t)));
-
 
             // Black Diamond Constraint: if a black diamond has a cardinality, it must be 1
             violetAssociation.stream()
@@ -86,17 +83,17 @@ public class Conform {
                     .filter(t->!t.get("role2").equals("1") || t.get("role2").equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
             
-
             // Diamond Constraint: if a diamond has a cardinality, it must be 0..1
 
             // Triangle Constraint: no Triangle association can have anything other than '' for its other arrow 
             violetAssociation.stream()
-                    .filter(t->!t.get("arrow1").equals("") && t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->t.get("arrow1").equals("TRIANGLE"))
+                    .filter(t->!t.get("arrow2").equals("")
                     .forEach(t->er.add(arrow(t)));
             violetAssociation.stream()  
-                    .filter(t->!t.get("arrow2").equals("") && t.get("arrow1").equals("TRIANGLE"))
+                    .filter(t->t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->!t.get("arrow1").equals("") 
                     .forEach(t->er.add(arrow(t)));
-
 
             // No Labels In Inheritance Constraint: inheritance associations cannot have non-empty roles
             violetAssociation.stream()
@@ -106,11 +103,18 @@ public class Conform {
 
             // Solid Association Constraint: non-implements, non-extends association must be solid
             violetAssociation.stream()
-                    .filter(t->!t.get("arrow1").equals("TRIANGLE") && !t.get("arrow2").equals("TRIANGLE"))
-                    .filter(t->t.get("lineStyle").equals("DOTTED"))
+                    .filter(t->!t.get("arrow1").equals("TRIANGLE")
+                    .filter(t->!t.get("arrow2").equals("TRIANGLE"))
+                    .filter(!t->t.get("lineStyle").equals(""))
                     .forEach(t->er.add(noDottedAssoc(t)));
 
             // Extends Constraint: extends relationships must be solid
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->t.get("type1").equals("classnode"))
+                    .filter(t->t.get("type2").equals("classnode"))
+                    .filter(!t->t.get("lineStyle").equals(""))
+                    .forEach(t->er.add(noDottedAssoc(t)));
 
             // Implements Constraint1: implementation relationships must be dotted
             violetAssociation.stream()
@@ -119,20 +123,17 @@ public class Conform {
 
             // Implements Constraint2: only classes can implement interfaces
             violetAssociation.stream()
+                    .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
                     .filter(t->t.get("lineStyle").equals("DOTTED")
-                    && t.get("type1").equals("interfacenode")
-                    && t.get("type2").equals("interfacenode"))
+                    .filter(t->t.get("type1").equals("interfacenode"))
+                    .filter(t->t.get("type2").equals("interfacenode"))
                     .forEach(t->er.add(impls(t)));
 
             // Self Inheritance Rule: no class or interface can inherit from itself
             violetAssociation.stream()
                     .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
-                    .filter(t->!t.get("cid1").equals(t.get("cid2")))
+                    .filter(t->t.get("cid1").equals(t.get("cid2")))
                     .forEach(t->er.add(selfInherit(t)));
-
-
-            
-
           
 
 
