@@ -1,0 +1,3 @@
+inheritance paired with non-null end (A - B)
+
+1 errors found

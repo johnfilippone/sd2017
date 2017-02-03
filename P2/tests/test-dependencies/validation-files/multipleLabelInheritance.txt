@@ -1,0 +1,3 @@
+inheritance (A - B) should have no roles
+
+1 errors found

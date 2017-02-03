@@ -1,0 +1,3 @@
+association (A - B) cannot be dotted
+
+1 errors found
