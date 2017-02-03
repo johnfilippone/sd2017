@@ -49,69 +49,103 @@ public class ConformTest {
         Conform.main("test-dependencies/vpl/interfacesWithSameName.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/interfacesWithSameName.txt",false);
     }
-    /*
-    @Test 
     public void testClassWithSameNameAsInterface() {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("test-dependencies/vpl/classWithSameNameAsInterface.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/classWithSameNameAsInterface.txt",false);
     }
-    @Test 
-    public void testNullNamesRule() {
+    @Test
+    public void testNullNameClass() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/nullNamesRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/nullNamesRule.txt",false);
+        Conform.main("test-dependencies/vpl/nullNameClass.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/nullNameClass.txt",false);
     }
-    @Test 
-    public void testBlackDiamondRule() {
+    @Test
+    public void testNullNameInterface() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/blackDiamondRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/blackDiamondRule.txt",false);
+        Conform.main("test-dependencies/vpl/nullNameInterface.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/nullNameInterface.txt",false);
     }
-    @Test 
-    public void testDiamondsRule() {
+    @Test
+    public void testBlackDiamondBadCardinality() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/diamondsRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/diamondsRule.txt",false);
+        Conform.main("test-dependencies/vpl/blackDiamondBadCardinality.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/blackDiamondBadCardinality.txt",false);
     }
-    @Test 
-    public void testTriangleRule() {
+    @Test
+    public void testBlackDiamondValid() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/triangleRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/triangleRule.txt",false);
+        Conform.main("test-dependencies/vpl/blackDiamondValid.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/blackDiamondValid.txt",false);
     }
-    @Test 
-    public void testNonEmptyRule() {
+    @Test
+    public void testDiamondBadCardinality() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/nonEmptyRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/nonEmptyRule.txt",false);
+        Conform.main("test-dependencies/vpl/diamondBadCardinality.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/diamondBadCardinality.txt",false);
     }
-    @Test 
-    public void testDottenInheritanceRule() {
+    @Test
+    public void testDiamondValid() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/dottedInheritanceRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/dottedInheritanceRule.txt",false);
+        Conform.main("test-dependencies/vpl/diamondValid.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/diamondValid.txt",false);
     }
-    @Test 
-    public void testInterfaceCannotImplementClassRule() {
+    @Test
+    public void testTriangleWithV() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/interfaceCannotImplementClassRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/interfaceCannotImplementClassRule.txt",false);
+        Conform.main("test-dependencies/vpl/triangleWithV.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/triangleWithV.txt",false);
     }
-    @Test 
-    public void testSelfInheritanceRule() {
+    @Test
+    public void testTriangleWithTriangle() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/selfInheritanceRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/selfInheritanceRule.txt",false);
+        Conform.main("test-dependencies/vpl/triangleWithTriangle.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/triangleWtihTriangle.txt",false);
     }
-    @Test 
-    public void testDottedAssociationRule() {
+    @Test
+    public void testOneLabelInInheritance() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/dottedAssociationRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/dottedAssociationRule.txt",false);
+        Conform.main("test-dependencies/vpl/oneLabelInInheritance.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/oneLabelInInheritance.txt",false);
+    }
+    @Test
+    public void testMultipleLabelInInheritance() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependencies/vpl/multipleLabelInInheritance.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/multipleLabelInInheritance.txt",false);
+    }
+    @Test
+    public void testDottedAssociation() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependencies/vpl/dottedAssociation.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/dottedAssociation.txt",false);
+    }
+    @Test
+    public void testDottedExtends() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependencies/vpl/dottedExtends.vp.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/dottedExtends.txt",false);
+    }
+    @Test
+    public void testNonDottedImplements() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependencies/vpl/nonDottedImplements.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/nonDottedImplements.txt",false);
+    }
+    @Test
+    public void testInterfaceImplementsInterface() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependencies/vpl/interfaceImplementsInterface.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/interfaceImplementsInterface.txt",false);
+    }
+    @Test
+    public void testSelfInheritance() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependencies/vpl/selfInheritance.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/selfInheritance.txt",false);
     }
 
-
+    /*
     //don's tests
     @Test
     public void CarRental() {
@@ -148,7 +182,9 @@ public class ConformTest {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("test-dependencies/validation-files/straight.vpl.pl");
         RegTest.Utility.validate("out.txt","Correct/straight.txt",false);
-    }*/
+    }
+    */
+
     @Test
     public void PrettyBad() {
         RegTest.Utility.redirectStdOut("out.txt");
