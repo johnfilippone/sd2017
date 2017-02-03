@@ -38,10 +38,10 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/middleLabelRule.txt",false);
     }
     @Test 
-    public void testUniqueNamesRule() {
+    public void testClassesWithSameName() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependancies/vpl/uniqueNamesRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/uniqueNamesRule.txt",false);
+        Conform.main("test-dependancies/vpl/classesWithSameName.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/classesWithSameName.txt",false);
     }
     @Test 
     public void testNullNamesRule() {

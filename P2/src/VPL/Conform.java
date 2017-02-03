@@ -231,38 +231,35 @@ public class Conform {
 
     private static String getCardinality(String role) {
         String[] split = role.split("\\s+");
-        if (split.length > 1) {
-            return split[0];
-        } else {
-            String numberOnly = "\\d+";
-            String numDotNum = "\\d+..\\d+";
-            String numDotStar = "\\d+..*";
-            String star = "*";
+        
+        // Make the assumption that if the role has a cardinality and a label
+        // then the cardinality is given first
+        if (split.length > 1) return split[0];
 
-            Pattern p = Pattern.compile(numberOnly);
-            Matcher m = p.matcher(split[0]);
-            if (m.matches()) {
-                return split[0];
-            }
+        Pattern p;
+        Matcher m;
+        
+        //is any integer
+        p = Pattern.compile("\\d+");
+        m = p.matcher(split[0]);
+        if (m.matches()) return split[0];
 
-            p = Pattern.compile(numDotNum);
-            m = p.matcher(split[0]);
-            if (m.matches()) {
-                return split[0];
-            }
-            
-            p = Pattern.compile(numDotStar);
-            m = p.matcher(split[0]);
-            if (m.matches()) {
-                return split[0];
-            }
+        //is int..int
+        p = Pattern.compile("\\d+..\\d+");
+        m = p.matcher(split[0]);
+        if (m.matches()) return split[0];
 
-            if (split[0].equals(star)) {
-                return split[0];
-            }
+        //is int..*
+        p = Pattern.compile("\\d+..*");
+        m = p.matcher(split[0]);
+        if (m.matches()) return split[0];
 
-            return "";
-        }
+        //is *
+        if (split[0].equals("*")) return split[0];
+
+
+        //null cardinality
+        return "";
     }
 
 }
