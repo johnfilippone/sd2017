@@ -56,10 +56,12 @@ public class Conform {
 
 
             // Inheritance Constraint: no Triangle association can have anything other than '' for its other arrow 
-            violetAssociation.stream().filter(t->!t.get("arrow1").equals("") && t.get("arrow2").equals("TRIANGLE"))
+            violetAssociation.stream().filter(t->!t.get("arrow1").equals("") 
+                    && t.get("arrow2").equals("TRIANGLE"))
                     .forEach(t->er.add(arrow(t)));
           
-            violetAssociation.stream().filter(t->!t.get("arrow2").equals("") && t.get("arrow1").equals("TRIANGLE"))
+            violetAssociation.stream().filter(t->!t.get("arrow2").equals("") 
+                    && t.get("arrow1").equals("TRIANGLE"))
                     .forEach(t->er.add(arrow(t)));
 
 
@@ -67,21 +69,26 @@ public class Conform {
 
             // Dotted Constraint: dotted lines exist only between classes and interfaces
 
+            violetAssociation.stream().filter(t->
+                    t.get("lineStyle").equals("DOTTED")
+                    && !t.get("type1").equals(t.get("type2")))
+                    .forEach(t->er.add(dotted(t)));
+
             // Unique Names Constraint: Classes and Interfaces have unique names constraint
             violetClass.stream().filter(t1-> 
                     violetClass.stream().filter(t2-> 
                         t2.is("name",t1.get("name"))).count() > 1)
-                    .forEach(t->er.add(ciShareName("classes", t)));
+                    .forEach(t->er.add(ciShareName("multiple classes", t)));
 
             violetInterface.stream().filter(t1-> 
                     violetClass.stream().filter(t2-> 
                         t2.is("name",t1.get("name"))).count() > 1)
-                    .forEach(t->er.add(ciShareName("class and interface", t)));
+                    .forEach(t->er.add(ciShareName("classes and interfaces", t)));
             
             violetInterface.stream().filter(t1-> 
                     violetInterface.stream().filter(t2-> 
                         t2.is("name",t1.get("name"))).count() > 1)
-                    .forEach(t->er.add(ciShareName("interfaces", t)));
+                    .forEach(t->er.add(ciShareName("multiple interfaces", t)));
             
 
             // Self Inheritance Rule: no class or interface can inherit from itself
@@ -117,6 +124,7 @@ public class Conform {
     }
 
     /****  error messages ***/
+    /** parameter variant has 1 of 3 values "multiple classes" or "multiple interfaces"  or "classes and interfaces **/
     private static String ciShareName(String variant, Tuple t) {
         String e  = variant + " share the same name: " + t.get("name");
         return e;
