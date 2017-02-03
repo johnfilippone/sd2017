@@ -15,6 +15,8 @@ CLASSPATH+=$PWD/tests/:
 export CLASSPATH
 echo "classpath set!"
 
+./compile.sh
+
 echo "running VPL.conform on various .vpl.pl files..."
 echo "CarRental.vpl.pl ======================================="
 java VPL.Conform tests/test-dependencies/vpl/CarRental.vpl.pl

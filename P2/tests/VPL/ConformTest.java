@@ -49,13 +49,13 @@ public class ConformTest {
         Conform.main("test-dependencies/vpl/interfacesWithSameName.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/interfacesWithSameName.txt",false);
     }
+    /*
     @Test 
     public void testClassWithSameNameAsInterface() {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("test-dependencies/vpl/classWithSameNameAsInterface.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/classWithSameNameAsInterface.txt",false);
     }
-    /*
     @Test 
     public void testNullNamesRule() {
         RegTest.Utility.redirectStdOut("out.txt");
@@ -148,18 +148,18 @@ public class ConformTest {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("test-dependencies/validation-files/straight.vpl.pl");
         RegTest.Utility.validate("out.txt","Correct/straight.txt",false);
-    }
+    }*/
     @Test
     public void PrettyBad() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("TestData/PrettyBad.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/PrettyBad.txt",true);
+        Conform.main("test-dependencies/vpl/PrettyBad.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/PrettyBad.txt",false);
     }
     @Test
     public void bogus() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("TestData/bogus.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/bogus.txt",false);
+        Conform.main("test-dependencies/vpl/bogus.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/bogus.txt",false);
     }
-    */
+
 }
