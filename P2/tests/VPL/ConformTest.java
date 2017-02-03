@@ -43,7 +43,19 @@ public class ConformTest {
         Conform.main("test-dependancies/vpl/classesWithSameName.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependancies/validation-files/classesWithSameName.txt",false);
     }
+    @Test 
+    public void testInterfacesWithSameName() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependancies/vpl/interfacesWithSameName.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/interfacesWithSameName.txt",false);
+    }
     /*
+    @Test 
+    public void testClassWithSameNameAsInterface() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("test-dependancies/vpl/classWithSameNameAsInterface.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependancies/validation-files/classWithSameNameAsInterface.txt",false);
+    }
     @Test 
     public void testNullNamesRule() {
         RegTest.Utility.redirectStdOut("out.txt");
