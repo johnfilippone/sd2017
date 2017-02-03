@@ -32,10 +32,10 @@ public class ConformTest {
     
     /* basic constraint test */
     @Test 
-    public void testMiddleLabelRule() {
+    public void testMiddleLabel() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/middleLabelRule.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/middleLabelRule.txt",false);
+        Conform.main("test-dependencies/vpl/middleLabel.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/middleLabel.txt",false);
     }
     @Test 
     public void testClassesWithSameName() {

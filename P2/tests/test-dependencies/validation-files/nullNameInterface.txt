@@ -1,0 +1,3 @@
+interface with id=interfacenode0 has null name
+
+1 errors found
