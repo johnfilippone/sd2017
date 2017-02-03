@@ -52,53 +52,59 @@ public class Conform {
 
 
             // Unique Names Constraint: Classes and Interfaces have unique names constraint
-            violetClass.stream().filter(t1-> 
-                    violetClass.stream().filter(t2-> 
-                        t2.is("name",t1.get("name"))).count() > 1)
+            violetClass.stream()
+                    .filter(t1->violetClass.stream()
+                    .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
                     .forEach(t->er.add(ciShareName("multiple classes", t)));
 
-            violetInterface.stream().filter(t1-> 
-                    violetClass.stream().filter(t2-> 
-                        t2.is("name",t1.get("name"))).count() > 1)
+            violetInterface.stream()
+                    .filter(t1->violetClass.stream()
+                    .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
                     .forEach(t->er.add(ciShareName("classes and interfaces", t)));
             
-            violetInterface.stream().filter(t1-> 
-                    violetInterface.stream().filter(t2-> 
-                        t2.is("name",t1.get("name"))).count() > 1)
+            violetInterface.stream()
+                    .filter(t1->violetInterface.stream()  
+                    .filter(t2->t2.is("name",t1.get("name"))).count() > 1)
                     .forEach(t->er.add(ciShareName("multiple interfaces", t)));
             
 
             //  Null Names Constraint: classes and interfaces cannot have null names
-            violetClass.stream().filter(t->t.get("name").equals(""))
+            violetClass.stream()
+                    .filter(t->t.get("name").equals(""))
                     .forEach(t->er.add(nullName("class", t)));
             
-            violetInterface.stream().filter(t->t.get("name").equals(""))
+            violetInterface.stream()
+                    .filter(t->t.get("name").equals(""))
                     .forEach(t->er.add(nullName("interface", t)));
 
 
             // Black Diamond Constraint: if a black diamond has a cardinality, it must be 1
-            violetAssociation.stream().filter(t->t.get("arrow1").equals("BLACK_DIAMOND"))
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow1").equals("BLACK_DIAMOND"))
                     .filter(t->!t.get("role1").equals("1") || t.get("role1").equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
 
-            violetAssociation.stream().filter(t->t.get("arrow2").equals("BLACK_DIAMOND"))
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow2").equals("BLACK_DIAMOND"))
                     .filter(t->!t.get("role2").equals("1") || t.get("role2").equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
             
+
             // Diamond Constraint: if a diamond has a cardinality, it must be 0..1
 
             // Triangle Constraint: no Triangle association can have anything other than '' for its other arrow 
-            violetAssociation.stream().filter(t->!t.get("arrow1").equals("") 
-                    && t.get("arrow2").equals("TRIANGLE"))
+            violetAssociation.stream()
+                    .filter(t->!t.get("arrow1").equals("") && t.get("arrow2").equals("TRIANGLE"))
                     .forEach(t->er.add(arrow(t)));
           
-            violetAssociation.stream().filter(t->!t.get("arrow2").equals("") 
-                    && t.get("arrow1").equals("TRIANGLE"))
+            violetAssociation.stream()  
+                    .filter(t->!t.get("arrow2").equals("") && t.get("arrow1").equals("TRIANGLE"))
                     .forEach(t->er.add(arrow(t)));
 
 
             // No Labels In Inheritance Constraint: inheritance associations cannot have non-empty roles
-            violetAssociation.stream().filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
                     .filter(t->!t.get("role1").equals("") || !t.get("role2").equals(""))
                     .forEach(t->er.add(noRoles(t)));
 
@@ -107,15 +113,15 @@ public class Conform {
             // Extends Constraint: extends relationships must be solid
 
             // Implements Constraint1: implementation relationships must be dotted
-            violetAssociation.stream().filter(t->
-                    t.get("lineStyle").equals("")
-                    && !t.get("type1").equals(t.get("type2")))
+            violetAssociation.stream()
+                    .filter(t->t.get("lineStyle").equals("") && !t.get("type1").equals(t.get("type2")))
                     .forEach(t->er.add(dotted(t)));
 
             // Implements Constraint2: only classes can implement interfaces
 
             // Self Inheritance Rule: no class or interface can inherit from itself
-            violetAssociation.stream().filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
                     .filter(t->!t.get("cid1").equals(t.get("cid2")))
                     .forEach(t->er.add(selfInherit(t)));
 
