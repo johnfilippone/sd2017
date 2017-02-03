@@ -1,0 +1,4 @@
+association (C - E) cannot be dotted
+B cannot inherit from itself
+
+2 errors found

@@ -1,0 +1,7 @@
+multiple interfaces share the same name: Don
+multiple interfaces share the same name: Don
+black diamond on association (CarRentalCompany - customer) does not have cardinality 1
+black diamond on association (CarRentalCompany - customer) does not have cardinality 1
+diamond on association (contract - receipt) does not have cardinality 0..1
+
+5 errors found

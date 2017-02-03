@@ -145,46 +145,43 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/selfInheritance.txt",false);
     }
 
-    /*
-    //don's tests
+    // Don's tests
     @Test
     public void CarRental() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/validation-files/CarRental.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/CarRental.txt",false);
+        Conform.main("test-dependencies/vpl/CarRental.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/CarRental.txt",false);
     }
     @Test
     public void Comp() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/validation-files/Comp.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/Comp.txt",false);
+        Conform.main("test-dependencies/vpl/Comp.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/Comp.txt",false);
     }
     @Test
     public void DecayProduct() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/validation-files/DecayProduct.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/DecayProduct.txt",false);
+        Conform.main("test-dependencies/vpl/DecayProduct.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/DecayProduct.txt",false);
     }
     @Test
     public void diagram1() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/validation-files/diagram1.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/diagram1.txt",false);
+        Conform.main("test-dependencies/vpl/diagram1.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/diagram1.txt",false);
     }
     @Test
     public void squirrel() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/validation-files/squirrel.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/squirrel.txt",false);
+        Conform.main("test-dependencies/vpl/squirrel.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/squirrel.txt",false);
     }
     @Test
     public void straight() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/validation-files/straight.vpl.pl");
-        RegTest.Utility.validate("out.txt","Correct/straight.txt",false);
+        Conform.main("test-dependencies/vpl/straight.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/straight.txt",false);
     }
-    */
-
     @Test
     public void PrettyBad() {
         RegTest.Utility.redirectStdOut("out.txt");

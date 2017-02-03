@@ -1,0 +1,8 @@
+association (DecayChannel - DecayProduct) has middle label list
+association (Family - ParticleType) has middle label map
+association (Yappi - Family) has middle label map
+association (Yappi - ParticleType) has middle label pdgidName
+association (ParticleType - Data) has middle label map
+association (ParticleType - DecayGroup) has middle label map
+
+6 errors found
