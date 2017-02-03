@@ -76,11 +76,11 @@ public class Conform {
             // Black Diamond Constraint: if a black diamond has a cardinality, it must be 1
             violetAssociation.stream()
                     .filter(t->t.get("arrow1").equals("BLACK_DIAMOND"))
-                    .filter(t->!t.get("role1").equals("1") || t.get("role1").equals(""))
+                    .filter(t->!getCardinality(t.get("role1")).equals("1") || getCardinality(t.get("role1")).equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
             violetAssociation.stream()
                     .filter(t->t.get("arrow2").equals("BLACK_DIAMOND"))
-                    .filter(t->!t.get("role2").equals("1") || t.get("role2").equals(""))
+                    .filter(t->!getCardinality(t.get("role2")).equals("1") || getCardinality(t.get("role2")).equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
             
             // Diamond Constraint: if a diamond has a cardinality, it must be 0..1
@@ -88,11 +88,11 @@ public class Conform {
             // Triangle Constraint: no Triangle association can have anything other than '' for its other arrow 
             violetAssociation.stream()
                     .filter(t->t.get("arrow1").equals("TRIANGLE"))
-                    .filter(t->!t.get("arrow2").equals("")
+                    .filter(t->!t.get("arrow2").equals(""))
                     .forEach(t->er.add(arrow(t)));
             violetAssociation.stream()  
                     .filter(t->t.get("arrow2").equals("TRIANGLE"))
-                    .filter(t->!t.get("arrow1").equals("") 
+                    .filter(t->!t.get("arrow1").equals(""))
                     .forEach(t->er.add(arrow(t)));
 
             // No Labels In Inheritance Constraint: inheritance associations cannot have non-empty roles
@@ -103,9 +103,9 @@ public class Conform {
 
             // Solid Association Constraint: non-implements, non-extends association must be solid
             violetAssociation.stream()
-                    .filter(t->!t.get("arrow1").equals("TRIANGLE")
+                    .filter(t->!t.get("arrow1").equals("TRIANGLE"))
                     .filter(t->!t.get("arrow2").equals("TRIANGLE"))
-                    .filter(!t->t.get("lineStyle").equals(""))
+                    .filter(t->!t.get("lineStyle").equals(""))
                     .forEach(t->er.add(noDottedAssoc(t)));
 
             // Extends Constraint: extends relationships must be solid
@@ -113,7 +113,7 @@ public class Conform {
                     .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
                     .filter(t->t.get("type1").equals("classnode"))
                     .filter(t->t.get("type2").equals("classnode"))
-                    .filter(!t->t.get("lineStyle").equals(""))
+                    .filter(t->!t.get("lineStyle").equals(""))
                     .forEach(t->er.add(noDottedAssoc(t)));
 
             // Implements Constraint1: implementation relationships must be dotted
@@ -124,7 +124,7 @@ public class Conform {
             // Implements Constraint2: only classes can implement interfaces
             violetAssociation.stream()
                     .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
-                    .filter(t->t.get("lineStyle").equals("DOTTED")
+                    .filter(t->t.get("lineStyle").equals("DOTTED"))
                     .filter(t->t.get("type1").equals("interfacenode"))
                     .filter(t->t.get("type2").equals("interfacenode"))
                     .forEach(t->er.add(impls(t)));
