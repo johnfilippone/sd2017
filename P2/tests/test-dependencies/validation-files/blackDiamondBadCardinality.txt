@@ -1,0 +1,3 @@
+black diamond on association (A - B) does not have cardinality 1
+
+1 errors found

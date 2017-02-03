@@ -5,7 +5,7 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
     <void property="name">
      <void property="text">
-      <string>Class A</string>
+      <string>A</string>
      </void>
     </void>
    </object>
@@ -14,19 +14,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>528.0</double>
+      <double>610.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>366.0</double>
+      <double>476.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>528.0</double>
-     <double>366.0</double>
+     <double>610.0</double>
+     <double>476.0</double>
     </void>
    </object>
   </void>
@@ -34,7 +34,7 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
     <void property="name">
      <void property="text">
-      <string>Class B</string>
+      <string>B</string>
      </void>
     </void>
    </object>
@@ -43,19 +43,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>896.0</double>
+      <double>901.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>370.0</double>
+      <double>478.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>896.0</double>
-     <double>370.0</double>
+     <double>901.0</double>
+     <double>478.0</double>
     </void>
    </object>
   </void>
@@ -65,14 +65,14 @@
      <object class="com.horstmann.violet.BentStyle" field="HVH"/>
     </void>
     <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+     <object class="com.horstmann.violet.ArrowHead" field="BLACK_DIAMOND"/>
     </void>
-    <void property="middleLabel">
-     <string>Middle labels are bad</string>
+    <void property="endLabel">
+     <string>1</string>
     </void>
    </object>
-   <object idref="ClassNode1"/>
    <object idref="ClassNode0"/>
+   <object idref="ClassNode1"/>
   </void>
  </object>
 </java>

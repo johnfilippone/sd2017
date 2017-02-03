@@ -14,19 +14,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>669.0</double>
+      <double>610.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>343.0</double>
+      <double>476.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>669.0</double>
-     <double>343.0</double>
+     <double>610.0</double>
+     <double>476.0</double>
     </void>
    </object>
   </void>
@@ -43,19 +43,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>914.0</double>
+      <double>901.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>343.0</double>
+      <double>478.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>914.0</double>
-     <double>343.0</double>
+     <double>901.0</double>
+     <double>478.0</double>
     </void>
    </object>
   </void>
@@ -65,14 +65,14 @@
      <object class="com.horstmann.violet.BentStyle" field="HVH"/>
     </void>
     <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
+     <object class="com.horstmann.violet.ArrowHead" field="BLACK_DIAMOND"/>
     </void>
     <void property="endLabel">
-     <string>*</string>
+     <string>0..1</string>
     </void>
    </object>
-   <object idref="ClassNode1"/>
    <object idref="ClassNode0"/>
+   <object idref="ClassNode1"/>
   </void>
  </object>
 </java>
