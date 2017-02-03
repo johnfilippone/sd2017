@@ -97,7 +97,7 @@ public class ConformTest {
     public void testTriangleWithTriangle() {
         RegTest.Utility.redirectStdOut("out.txt");
         Conform.main("test-dependencies/vpl/triangleWithTriangle.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/triangleWtihTriangle.txt",false);
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/triangleWithTriangle.txt",false);
     }
     @Test
     public void testOneLabelInInheritance() {
