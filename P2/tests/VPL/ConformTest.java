@@ -2,9 +2,6 @@ package VPL;
 
 import org.junit.Test;
 
-/**
- *
- */
 public class ConformTest {
     
     public ConformTest() {
@@ -30,7 +27,7 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/usage.txt",false);
     }
     
-    /* basic constraint test */
+    /* constraint tests */
     @Test 
     public void testMiddleLabel() {
         RegTest.Utility.redirectStdOut("out.txt");
@@ -145,7 +142,7 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/selfInheritance.txt",false);
     }
 
-    // Don's tests
+    /* Don's tests */
     @Test
     public void CarRental() {
         RegTest.Utility.redirectStdOut("out.txt");
@@ -182,6 +179,8 @@ public class ConformTest {
         Conform.main("test-dependencies/vpl/straight.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/straight.txt",false);
     }
+
+    /* more tests */
     @Test
     public void PrettyBad() {
         RegTest.Utility.redirectStdOut("out.txt");
