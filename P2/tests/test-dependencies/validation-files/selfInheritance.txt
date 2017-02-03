@@ -1,0 +1,3 @@
+A cannot inherit from itself
+
+1 errors found
