@@ -76,14 +76,26 @@ public class Conform {
             // Black Diamond Constraint: if a black diamond has a cardinality, it must be 1
             violetAssociation.stream()
                     .filter(t->t.get("arrow1").equals("BLACK_DIAMOND"))
-                    .filter(t->!getCardinality(t.get("role1")).equals("1") || getCardinality(t.get("role1")).equals(""))
+                    .filter(t->!getCardinality(t.get("role1")).equals("1"))
+                    .filter(t->!getCardinality(t.get("role1")).equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
             violetAssociation.stream()
                     .filter(t->t.get("arrow2").equals("BLACK_DIAMOND"))
-                    .filter(t->!getCardinality(t.get("role2")).equals("1") || getCardinality(t.get("role2")).equals(""))
+                    .filter(t->!getCardinality(t.get("role2")).equals("1"))
+                    .filter(t->!getCardinality(t.get("role2")).equals(""))
                     .forEach(t->er.add(blackDiamond(t)));
             
             // Diamond Constraint: if a diamond has a cardinality, it must be 0..1
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow1").equals("DIAMOND"))
+                    .filter(t->!getCardinality(t.get("role1")).equals("0..1"))
+                    .filter(t->!getCardinality(t.get("role1")).equals(""))
+                    .forEach(t->er.add(diamond(t)));
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow2").equals("DIAMOND"))
+                    .filter(t->!getCardinality(t.get("role2")).equals("0..1"))
+                    .filter(t->!getCardinality(t.get("role2")).equals(""))
+                    .forEach(t->er.add(diamond(t)));
 
             // Triangle Constraint: no Triangle association can have anything other than '' for its other arrow 
             violetAssociation.stream()
