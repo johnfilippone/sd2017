@@ -179,8 +179,6 @@ public class ConformTest {
         Conform.main("test-dependencies/vpl/straight.vpl.pl");
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/straight.txt",false);
     }
-
-    /* more tests */
     @Test
     public void PrettyBad() {
         RegTest.Utility.redirectStdOut("out.txt");
