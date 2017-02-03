@@ -65,7 +65,10 @@ public class Conform {
                     .forEach(t->er.add(arrow(t)));
 
 
-            //  No Labels In Inheritance Constraint: inheritance associations cannot have non-empty roles
+            // No Labels In Inheritance Constraint: inheritance associations cannot have non-empty roles
+            violetAssociation.stream().filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->!t.get("role1").equals("") || !t.get("role2").equals(""))
+                    .forEach(t->er.add(noRoles(t)));
 
             // Dotted Constraint: dotted lines exist only between classes and interfaces
 
