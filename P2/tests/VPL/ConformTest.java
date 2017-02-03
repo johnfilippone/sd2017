@@ -149,5 +149,17 @@ public class ConformTest {
         Conform.main("test-dependencies/validation-files/straight.vpl.pl");
         RegTest.Utility.validate("out.txt","Correct/straight.txt",false);
     }
+    @Test
+    public void PrettyBad() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("TestData/PrettyBad.vpl.pl");
+        RegTest.Utility.validate("out.txt","Correct/PrettyBad.txt",true);
+    }
+    @Test
+    public void bogus() {
+        RegTest.Utility.redirectStdOut("out.txt");
+        Conform.main("TestData/bogus.vpl.pl");
+        RegTest.Utility.validate("out.txt","Correct/bogus.txt",false);
+    }
     */
 }

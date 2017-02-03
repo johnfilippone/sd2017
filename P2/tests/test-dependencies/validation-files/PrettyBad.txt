@@ -1,0 +1,7 @@
+multiple classes share the same name: C
+class with id=unconnected0 has null name
+inheritance (A - C) should have no roles
+association (C - B) cannot be dotted
+dotted inheritance cannot connect A to C
+
+5 errors found
