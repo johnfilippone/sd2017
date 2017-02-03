@@ -147,7 +147,14 @@ public class Conform {
         }
     }
 
-    /****  error messages ***/
+    /*  error messages */
+
+    private static String middleLabel(Tuple t) {
+        String e = String.format("association (%s - %s) has middle label %s",
+                convert(t.get("cid1")), convert(t.get("cid2")), t.get("label"));
+        return e;
+    }
+
     /** parameter variant has 1 of 3 values "multiple classes" or "multiple interfaces"  or "classes and interfaces **/
     private static String ciShareName(String variant, Tuple t) {
         String e  = variant + " share the same name: " + t.get("name");
@@ -157,47 +164,6 @@ public class Conform {
     /** parameter variant has 1 of 2 values "class" or "interface" **/
     private static String nullName(String variant, Tuple t) {
         String e = variant + " with id=" + t.get("id") + " has null name";
-        return e;
-    }
-    private static String middleLabel(Tuple t) {
-        String e = String.format("association (%s - %s) has middle label %s",
-                convert(t.get("cid1")), convert(t.get("cid2")), t.get("label"));
-        return e;
-    }
-
-    private static String arrow(Tuple t) {
-        String e = String.format("inheritance paired with non-null end (%s - %s)", convert(t.get("cid1")), convert(t.get("cid2")));
-        return e;
-    }
-
-    private static String dotted(Tuple t) {
-        String e;
-        e = String.format("dotted inheritance cannot connect %s to %s", convert(t.get("cid1")), convert(t.get("cid2")));
-        return e;
-    }
-
-    private static String noRoles(Tuple t) {
-        String e = String.format("inheritance (%s - %s) should have no roles", convert(t.get("cid1")), convert(t.get("cid2")));
-        return e;
-    }
-
-    private static String selfInherit(Tuple t) {
-        String e = String.format("%s cannot inherit from itself", convert(t.get("cid1")));
-        return e;
-    }
-
-    private static String noDottedAssoc(Tuple t) {
-        String e = String.format("association (%s - %s) cannot be dotted", convert(t.get("cid1")), convert(t.get("cid2")));
-        return e;
-    }
-
-    private static String impls(Tuple t) {
-        String e;
-        if (t.is("type1", "classnode")) {
-            e = String.format("interface %s cannot implement class %s", t.get("cid2"), t.get("cid1"));
-        } else {
-            e = String.format("interface %s cannot implement class %s", t.get("cid1"), t.get("cid2"));
-        }
         return e;
     }
 
@@ -213,9 +179,46 @@ public class Conform {
         return e;
     }
     
-    /** utilities needed for precise error reporting **/
+    private static String arrow(Tuple t) {
+        String e = String.format("inheritance paired with non-null end (%s - %s)", convert(t.get("cid1")), convert(t.get("cid2")));
+        return e;
+    }
 
-    /** I give one below: converts a class or interface
+    private static String noRoles(Tuple t) {
+        String e = String.format("inheritance (%s - %s) should have no roles", convert(t.get("cid1")), convert(t.get("cid2")));
+        return e;
+    }
+
+    private static String noDottedAssoc(Tuple t) {
+        String e = String.format("association (%s - %s) cannot be dotted", convert(t.get("cid1")), convert(t.get("cid2")));
+        return e;
+    }
+
+    private static String dotted(Tuple t) {
+        String e;
+        e = String.format("dotted inheritance cannot connect %s to %s", convert(t.get("cid1")), convert(t.get("cid2")));
+        return e;
+    }
+
+    private static String impls(Tuple t) {
+        String e;
+        if (t.is("type1", "classnode")) {
+            e = String.format("interface %s cannot implement class %s", t.get("cid2"), t.get("cid1"));
+        } else {
+            e = String.format("interface %s cannot implement class %s", t.get("cid1"), t.get("cid2"));
+        }
+        return e;
+    }
+
+    private static String selfInherit(Tuple t) {
+        String e = String.format("%s cannot inherit from itself", convert(t.get("cid1")));
+        return e;
+    }
+
+
+    /* utilities needed for precise error reporting */
+
+    /* I give one below: converts a class or interface
      * id into the name of a class or interface
      * @param id -- string id of a class or interface
      * @return name of the corresponding class or interface
