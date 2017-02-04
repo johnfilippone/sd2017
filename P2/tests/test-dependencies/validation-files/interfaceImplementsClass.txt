@@ -1,0 +1,3 @@
+interface interfacenode0 cannot implement class classnode0
+
+1 errors found

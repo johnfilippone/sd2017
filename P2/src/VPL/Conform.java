@@ -135,10 +135,16 @@ public class Conform {
 
             // Implements Constraint2: only classes can implement interfaces
             violetAssociation.stream()
-                    .filter(t->t.get("arrow1").equals("TRIANGLE") || t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->t.get("arrow1").equals("TRIANGLE"))
                     .filter(t->t.get("lineStyle").equals("DOTTED"))
-                    .filter(t->t.get("type1").equals("interfacenode"))
+                    .filter(t->t.get("type1").equals("classnode"))
                     .filter(t->t.get("type2").equals("interfacenode"))
+                    .forEach(t->er.add(impls(t)));
+            violetAssociation.stream()
+                    .filter(t->t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->t.get("lineStyle").equals("DOTTED"))
+                    .filter(t->t.get("type2").equals("classnode"))
+                    .filter(t->t.get("type1").equals("interfacenode"))
                     .forEach(t->er.add(impls(t)));
 
             // Self Inheritance Rule: no class or interface can inherit from itself

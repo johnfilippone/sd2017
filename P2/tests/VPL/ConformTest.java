@@ -130,10 +130,10 @@ public class ConformTest {
         RegTest.Utility.validate("out.txt","test-dependencies/validation-files/nonDottedImplements.txt",false);
     }
     @Test
-    public void testInterfaceImplementsInterface() {
+    public void testInterfaceImplementsClass() {
         RegTest.Utility.redirectStdOut("out.txt");
-        Conform.main("test-dependencies/vpl/interfaceImplementsInterface.vpl.pl");
-        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/interfaceImplementsInterface.txt",false);
+        Conform.main("test-dependencies/vpl/interfaceImplementsClass.vpl.pl");
+        RegTest.Utility.validate("out.txt","test-dependencies/validation-files/interfaceImplementsClass.txt",false);
     }
     @Test
     public void testSelfInheritance() {
