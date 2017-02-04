@@ -121,16 +121,16 @@ public class Conform {
 
             // Implements Constraint1: implementation relationships must be dotted
             violetAssociation.stream()
-                    .filter(t->t.get("lineStyle").equals("")
-                    .filter(t.get("type1").equals("classnode"))
-                    .filter(t.get("type2").equals("interfacenode"))
-                    .filter(t.get("arrow2").equals("TRIANGLE"))
+                    .filter(t->t.get("lineStyle").equals(""))
+                    .filter(t->t.get("type1").equals("classnode"))
+                    .filter(t->t.get("type2").equals("interfacenode"))
+                    .filter(t->t.get("arrow2").equals("TRIANGLE"))
                     .forEach(t->er.add(mustBeDotted(t)));
             violetAssociation.stream()
-                    .filter(t->t.get("lineStyle").equals("")
-                    .filter(t.get("type2").equals("classnode"))
-                    .filter(t.get("type1").equals("interfacenode"))
-                    .filter(t.get("arrow1").equals("TRIANGLE"))
+                    .filter(t->t.get("lineStyle").equals(""))
+                    .filter(t->t.get("type2").equals("classnode"))
+                    .filter(t->t.get("type1").equals("interfacenode"))
+                    .filter(t->t.get("arrow1").equals("TRIANGLE"))
                     .forEach(t->er.add(mustBeDotted(t)));
 
             // Implements Constraint2: only classes can implement interfaces
