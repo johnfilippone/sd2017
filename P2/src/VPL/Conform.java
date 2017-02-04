@@ -121,8 +121,17 @@ public class Conform {
 
             // Implements Constraint1: implementation relationships must be dotted
             violetAssociation.stream()
-                    .filter(t->t.get("lineStyle").equals("") && !t.get("type1").equals(t.get("type2")))
-                    .forEach(t->er.add(dotted(t)));
+                    .filter(t->t.get("lineStyle").equals("")
+                    .filter(t.get("type1").equals("classnode"))
+                    .filter(t.get("type2").equals("interfacenode"))
+                    .filter(t.get("arrow2").equals("TRIANGLE"))
+                    .forEach(t->er.add(mustBeDotted(t)));
+            violetAssociation.stream()
+                    .filter(t->t.get("lineStyle").equals("")
+                    .filter(t.get("type2").equals("classnode"))
+                    .filter(t.get("type1").equals("interfacenode"))
+                    .filter(t.get("arrow1").equals("TRIANGLE"))
+                    .forEach(t->er.add(mustBeDotted(t)));
 
             // Implements Constraint2: only classes can implement interfaces
             violetAssociation.stream()
@@ -197,6 +206,12 @@ public class Conform {
     private static String dotted(Tuple t) {
         String e;
         e = String.format("dotted inheritance cannot connect %s to %s", convert(t.get("cid1")), convert(t.get("cid2")));
+        return e;
+    }
+
+    private static String mustBeDotted(Tuple t) {
+        String e;
+        e = String.format("implementation relationship between %s and %s must be dotted", convert(t.get("cid1")), convert(t.get("cid2")));
         return e;
     }
 
