@@ -1,0 +1,3 @@
+dotted inheritance cannot connect A to B
+
+1 errors found
