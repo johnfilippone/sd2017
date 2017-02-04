@@ -125,13 +125,13 @@ public class Conform {
                     .filter(t->t.get("type1").equals("classnode"))
                     .filter(t->t.get("type2").equals("interfacenode"))
                     .filter(t->t.get("arrow2").equals("TRIANGLE"))
-                    .forEach(t->er.add(mustBeDotted(t)));
+                    .forEach(t->er.add(dotted(t)));
             violetAssociation.stream()
                     .filter(t->t.get("lineStyle").equals(""))
                     .filter(t->t.get("type2").equals("classnode"))
                     .filter(t->t.get("type1").equals("interfacenode"))
                     .filter(t->t.get("arrow1").equals("TRIANGLE"))
-                    .forEach(t->er.add(mustBeDotted(t)));
+                    .forEach(t->er.add(dotted(t)));
 
             // Implements Constraint2: only classes can implement interfaces
             violetAssociation.stream()
@@ -241,10 +241,14 @@ public class Conform {
 
     private static String convert(String id) {
         Predicate<Tuple> idtest = r -> r.is("id", id);
-        String n = violetClass.getFirst(idtest).get("name");
-        if (n == null) {
-            n = violetInterface.getFirst(idtest).get("name");
+        // We had to fix this, if wasn't found in classes,
+        // name would be called on null and would throw
+        // an error which got suppressed. Took a while
+        Tuple match = violetClass.getFirst(idtest);
+        if (match == null) {
+            match = violetInterface.getFirst(idtest);
         }
+        String n = match.get("name");
         // should not be null... which also would be an error
         // I'm not checking this but you might...
         return n;
