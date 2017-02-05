@@ -215,12 +215,6 @@ public class Conform {
         return e;
     }
 
-    private static String mustBeDotted(Tuple t) {
-        String e;
-        e = String.format("implementation relationship between %s and %s must be dotted", convert(t.get("cid1")), convert(t.get("cid2")));
-        return e;
-    }
-
     private static String impls(Tuple t) {
         String e;
         if (t.is("type1", "classnode")) {
@@ -261,6 +255,20 @@ public class Conform {
     }
 
     private static String getCardinality(String role) {
+        /* inputs: role
+         * output: cardinality
+         * 
+         * a role can take one of three forms
+         *      cardinality
+         *      label
+         *      cardinality label
+         * 
+         * this function parses any role of these forms and
+         * returns the cardinality as a string
+         *
+         * if the role has no cardinality, an empty string 
+         * is returned
+        */
         String[] split = role.split("\\s+");
         
         // Make the assumption that if the role has a cardinality and a label
