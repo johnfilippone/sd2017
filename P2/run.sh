@@ -20,8 +20,6 @@ echo "classpath set!"
 echo "running VPL.conform on various .vpl.pl files..."
 echo "CarRental.vpl.pl ======================================="
 java VPL.Conform tests/test-dependencies/vpl/CarRental.vpl.pl
-echo "Comp.vpl.pl ============================================"
-java VPL.Conform tests/test-dependencies/vpl/Comp.vpl.pl
 echo "DecayProduct.vpl.pl ===================================="
 java VPL.Conform tests/test-dependencies/vpl/DecayProduct.vpl.pl
 echo "diagram1.vpl.pl ========================================"
