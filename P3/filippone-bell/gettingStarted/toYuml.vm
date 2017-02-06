@@ -1,0 +1,11 @@
+#set($MARKER="//----")
+${MARKER}${OutputFileName}
+
+#foreach($class in $bcClassS)
+   class ${class.name} extends ${class.super};
+#end 
+
+
+#foreach($m in $bcMemberS)
+   ${m.typeName}${m.arrQual} ${m.signature};
+#end

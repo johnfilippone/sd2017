@@ -1,0 +1,196 @@
+##Velocity Template for generating Violet XML from Violet.pl
+##
+##
+#set($MARKER="//----")
+${MARKER}${OutputFileName}
+##
+## Keep track of the number of points
+#set( $numPoints = 0 )
+##
+<?xml version="1.0" encoding="UTF-8"?>
+##
+## Output header info
+##
+##
+<java version="1.7.0_10" class="java.beans.XMLDecoder">
+ <object class="com.horstmann.violet.ClassDiagramGraph">
+##
+##
+## Output interfaces first
+##
+##
+#foreach( $face in $violetInterfaceS )
+  <void method="addNode">
+  #if( $face.methods == "" && $face.name == "")
+    #set( $quickCloseObject = "/" )
+  #else
+    #set( $quickCloseObject = "" )
+  #end 
+  #set( $face.id = $face.id ) 
+   <object class="com.horstmann.violet.InterfaceNode" id="${face.id}"${quickCloseObject}>
+  #if( $face.methods != "" )
+    #set( $meth = $face.methods.replace(";", "
+"))
+    <void property="methods">
+     <void property="text">
+      <string>${meth}</string>
+     </void>
+    </void>
+  #end
+  #if( $face.name != "" )
+    <void property="name">
+     <void property="text">
+      <string>«interface» 
+${face.name}</string>
+     </void>
+    </void>
+  #end
+  #if ( $quickCloseObject == "" )
+   </object>
+  #end
+  #set( $quickCloseObject = "" )   
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double${numPoints}">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double${numPoints}"/>
+      <double>${face.x}</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double${numPoints}"/>
+      <double>${face.y}</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>${face.x}</double>
+     <double>${face.y}</double>
+    </void>
+   </object>
+  </void>
+  #set( $numPoints = $numPoints + 1 ) 
+#end
+##
+##
+## Next output classes
+##
+##
+#foreach( $sc in $violetClassS )
+  <void method="addNode">
+  #if( $sc.methods == "" && $sc.name == "")
+    #set( $quickCloseObject = "/" )
+  #else
+    #set( $quickCloseObject = "" )
+  #end 
+  #set( $sc.id = $sc.id ) 
+   <object class="com.horstmann.violet.ClassNode" id="${sc.id}"${quickCloseObject}>
+  #if( $sc.fields != "" )
+    #set( $flds = $sc.fields.replace(";", "
+"))
+    <void property="attributes">
+     <void property="text">
+      <string>${flds}</string>
+     </void>
+    </void>
+  #end
+  #if( $sc.methods != "" )
+    #set( $mth = $sc.methods.replace(";", "
+"))
+    <void property="methods">
+     <void property="text">
+      <string>${mth}</string>
+     </void>
+    </void>
+  #end
+  #if( $sc.name != "" )
+    #set( $sc.name = $sc.name )
+    <void property="name">
+     <void property="text">
+      <string>${sc.name}</string>
+     </void>
+    </void>
+  #end
+  #if ( $quickCloseObject == "" )
+   </object>
+  #end
+  #set( $quickCloseObject = "" )
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double${numPoints}">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double${numPoints}"/>
+      <double>${sc.x}</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double${numPoints}"/>
+      <double>${sc.y}</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>${sc.x}</double>
+     <double>${sc.y}</double>
+    </void>
+   </object>
+  </void>
+  #set( $numPoints = $numPoints + 1 )
+#end	
+##
+##
+## Output associations/edges
+##
+##
+#foreach( $a in $violetAssociationS)
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+##No BentStyle for plain associations
+##TRIANGLE should be VHV
+#if(( $a.arrow1 == "TRIANGLE") || ( $a.arrow2 == "TRIANGLE" )) 
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+    </void>
+#end
+#if( $a.arrow2 != "" ) 
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="${a.arrow2}"/>
+    </void>
+#end
+#if( $a.role2 != "" )
+    <void property="endLabel">
+     <string>${a.role2.replace(";",",")}</string>
+    </void>
+#end 
+#if( $a.lineStyle != "" )
+   #if( $a.lineStyle.startsWith("H") || $a.lineStyle.startsWith("V"))
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="${a.lineStyle}"/>
+    </void>
+   #else
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="${a.lineStyle}"/>
+    </void>
+   #end
+#end
+#if( $a.arrow1 != "" ) 
+    <void property="startArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="${a.arrow1}"/>
+    </void>
+#end
+#if( $a.role1 != "" ) 
+    <void property="startLabel">
+     <string>${a.role1.replace(";",",")}</string>
+    </void>
+#end   
+#set( $cid1 = $a.cid1.toLowerCase() ) 
+#set( $cid2 = $a.cid2.toLowerCase() )    
+   </object>
+   <object idref="${cid1}"/>
+   <object idref="${cid2}"/>
+  </void>
+#end
+ </object>
+</java>
