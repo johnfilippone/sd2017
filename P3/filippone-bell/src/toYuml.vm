@@ -1,6 +1,5 @@
 #set($MARKER="//----")
 ${MARKER}${OutputFileName}
-
 #foreach($class in $violetClassS)
   #set($fields="")
   #set($methods="")
@@ -12,8 +11,32 @@ ${MARKER}${OutputFileName}
   #end
 [${class.name}${fields}${methods}]
 #end 
-
 #foreach($assoc in $violetAssociationS)
-[${class1}][${class2}]
+  #foreach($class in $violetClassS)
+    #if(${class.id} == ${assoc.cid1})
+      #set($class1=${class.name})
+    #end
+    #if(${class.id} == ${assoc.cid2})
+      #set($class2=${class.name})
+    #end
+  #end
+  #set($arrow1=${assoc.arrow1})
+  #set($arrow2=${assoc.arrow2})
+  #set($arrow1=$arrow1.replace("V","<"))
+  #set($arrow2=$arrow2.replace("V","<"))
+  #set($arrow1=$arrow1.replace("TRIANGLE","^"))
+  #set($arrow2=$arrow2.replace("TRIANGLE","^"))
+  #set($arrow1=$arrow1.replace("DIAMOND","<>"))
+  #set($arrow2=$arrow2.replace("DIAMOND","<>"))
+  #set($arrow1=$arrow1.replace("BLACK_DIAMOND","++"))
+  #set($arrow2=$arrow2.replace("BLACK_DIAMOND","++"))
+  #set($role1=${assoc.role1})
+  #set($role2=${assoc.role2})
+  #if(${assoc.lineStyle}=="")
+    #set($line="-")
+  #end
+  #if(${assoc.lineStyle}=="DOTTED")
+    #set($line="-.-")
+  #end
+[${class1}]${arrow1}${role1}${line}${role2}${arrow2}[${class2}]
 #end
-
