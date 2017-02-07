@@ -9,6 +9,9 @@ ${MARKER}${OutputFileName}
   #if(${class.methods} != "")
     #set($methods="|${class.methods}")
   #end
+  #set($fields=$fields.replace("?",""))
+  #set($methods=$methods.replace("[]","#"))
+  #set($methods=$methods.replace(","," "))
 [${class.name}${fields}${methods}]
 #end 
 #foreach($assoc in $violetAssociationS)
