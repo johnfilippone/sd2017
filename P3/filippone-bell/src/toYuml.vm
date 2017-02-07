@@ -1,34 +1,19 @@
 #set($MARKER="//----")
 ${MARKER}${OutputFileName}
 
-#foreach($class in $bcClassS)
-  #foreach($m in $bcMemberS)
-    #if((${m.field} == true) && (${m.cid} == ${class.id})) 
-      #set($fields="|")
-    #end
-    #if((${m.field} == false) && (${m.cid} == ${class.id})) 
-      #set($methods="|")
-    #end
+#foreach($class in $violetClassS)
+  #set($fields="")
+  #set($methods="")
+  #if(${class.fields} != "")
+    #set($fields="|${class.fields}")
   #end
-  #foreach($m in $bcMemberS)
-    #set($className=${class.name})
-    #if((${m.field} == true) && (${m.cid} == ${class.id})) 
-      #if(${m.static} == true)
-        #set($fields="${fields}_")
-      #end
-      #set($fields="${fields}${m.signature};")
-    #end
-    #if((${m.field} == false) && (${m.cid} == ${class.id})) 
-      #if(${m.static} == true)
-        #set($methods="${methods}_")
-      #end
-      #set($methods="${methods}${m.signature};")
-    #end
+  #if(${class.methods} != "")
+    #set($methods="|${class.methods}")
   #end
-#set($methods=$methods.replace(","," "))
-#set($methods=$methods.replace("[]","#"))
-[${className}${fields}${methods}]
+[${class.name}${fields}${methods}]
 #end 
 
-
+#foreach($assoc in $violetAssociationS)
+[${class1}][${class2}]
+#end
 
