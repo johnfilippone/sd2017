@@ -2,10 +2,33 @@
 ${MARKER}${OutputFileName}
 
 #foreach($class in $bcClassS)
-   class ${class.name} extends ${class.super};
+  #foreach($m in $bcMemberS)
+    #if((${m.field} == true) && (${m.cid} == ${class.id})) 
+      #set($fields="|")
+    #end
+    #if((${m.field} == false) && (${m.cid} == ${class.id})) 
+      #set($methods="|")
+    #end
+  #end
+  #foreach($m in $bcMemberS)
+    #set($className=${class.name})
+    #if((${m.field} == true) && (${m.cid} == ${class.id})) 
+      #if(${m.static} == true)
+        #set($fields="${fields}_")
+      #end
+      #set($fields="${fields}${m.signature};")
+    #end
+    #if((${m.field} == false) && (${m.cid} == ${class.id})) 
+      #if(${m.static} == true)
+        #set($methods="${methods}_")
+      #end
+      #set($methods="${methods}${m.signature};")
+    #end
+  #end
+#set($methods=$methods.replace(","," "))
+#set($methods=$methods.replace("[]","#"))
+[${className}${fields}${methods}]
 #end 
 
 
-#foreach($m in $bcMemberS)
-   ${m.typeName}${m.arrQual} ${m.signature};
-#end
+
