@@ -8,6 +8,8 @@ ${MARKER}${OutputFileName}
   #end
   #if(${class.methods} != "")
     #set($methods="|${class.methods}")
+    #set($methods="$methods.replace("[]","#")")
+    #set($methods="$methods.replace(","," ")")
   #end
 [${class.name}${fields}${methods}]
 #end 
