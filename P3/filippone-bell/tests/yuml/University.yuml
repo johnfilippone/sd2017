@@ -1,0 +1,8 @@
+[university|name]
+[campus|location]
+[city|name]
+[building|name]
+[university]1 belongsTo-* has[campus]
+[campus]1 isOn-* has[building]
+[university]* hasCampOf-* hasCampIn[city]
+[city]* siteOf-1 isIn[campus]

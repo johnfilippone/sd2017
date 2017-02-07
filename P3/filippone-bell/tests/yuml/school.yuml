@@ -1,0 +1,5 @@
+[class]
+[student]
+[grade|score]
+[grade]*-1 <[class]
+[grade]*-1<[student]
