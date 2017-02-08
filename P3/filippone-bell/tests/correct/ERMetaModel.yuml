@@ -1,0 +1,5 @@
+[Attribute|name;key]
+[Entity|name]
+[Relationship|name]
+[Attribute]* hasAttr-1 belongsTo[Entity]
+[Entity]2..* participant-* participates[Relationship]
