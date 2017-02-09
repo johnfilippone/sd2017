@@ -9,37 +9,52 @@ ${MARKER}${OutputFileName}
   #if(${class.methods} != "")
     #set($methods="|${class.methods}")
   #end
-  #set($fields=$fields.replace("?",""))
-  #set($methods=$methods.replace("[]","#"))
-  #set($methods=$methods.replace(","," "))
-[${class.name}${fields}${methods}]
+  #set($yumlclass="[${class.name}${fields}${methods}]")
+  #set($yumlclass=$yumlclass.replace("?",""))
+  #set($yumlclass=$yumlclass.replace("[]","#"))
+  #set($yumlclass=$yumlclass.replace(","," "))
+${yumlclass}
 #end 
+#foreach($interface in $violetInterfaceS)
+  #set($methods="")
+  #if(${interface.methods} != "")
+    #set($methods="|${interface.methods}")
+  #end
+  #set($yumlinterface="[Interface;${interface.name}${methods}]")
+  #set($yumlinterface=$yumlinterface.replace("?",""))
+  #set($yumlinterface=$yumlinterface.replace("[]","#"))
+  #set($yumlinterface=$yumlinterface.replace(","," "))
+${yumlinterface}
+#end
 #foreach($assoc in $violetAssociationS)
   #foreach($class in $violetClassS)
     #if(${class.id} == ${assoc.cid1})
-      #set($class1=${class.name})
+      #set($box1=${class.name})
     #end
     #if(${class.id} == ${assoc.cid2})
-      #set($class2=${class.name})
+      #set($box2=${class.name})
+    #end
+  #end
+  #foreach($interface in $violetInterfaceS)
+    #if(${interface.id} == ${assoc.cid1})
+      #set($box1="Interface;${interface.name}")
+    #end
+    #if(${interface.id} == ${assoc.cid2})
+      #set($box2="Interface;${interface.name}")
     #end
   #end
   #set($arrow1=${assoc.arrow1})
   #set($arrow2=${assoc.arrow2})
-  #set($arrow1=$arrow1.replace("V","<"))
-  #set($arrow2=$arrow2.replace("V","<"))
-  #set($arrow1=$arrow1.replace("TRIANGLE","^"))
-  #set($arrow2=$arrow2.replace("TRIANGLE","^"))
-  #set($arrow1=$arrow1.replace("DIAMOND","<>"))
-  #set($arrow2=$arrow2.replace("DIAMOND","<>"))
-  #set($arrow1=$arrow1.replace("BLACK_DIAMOND","++"))
-  #set($arrow2=$arrow2.replace("BLACK_DIAMOND","++"))
   #set($role1=${assoc.role1})
   #set($role2=${assoc.role2})
-  #if(${assoc.lineStyle}=="")
-    #set($line="-")
-  #end
+  #set($line="-")
   #if(${assoc.lineStyle}=="DOTTED")
     #set($line="-.-")
   #end
-[${class1}]${arrow1}${role1}${line}${role2}${arrow2}[${class2}]
+  #set($yumlassoc="[${box1}]${arrow1}${role1}${line}${role2}${arrow2}[${box2}]")
+  #set($yumlassoc=$yumlassoc.replace("V","<"))
+  #set($yumlassoc=$yumlassoc.replace("TRIANGLE","^"))
+  #set($yumlassoc=$yumlassoc.replace("DIAMOND","<>"))
+  #set($yumlassoc=$yumlassoc.replace("BLACK_DIAMOND","++"))
+${yumlassoc}
 #end
