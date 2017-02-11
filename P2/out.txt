@@ -1,2 +1,0 @@
-Usage: VPL.Conform <file.vpl.pl>
-       <file.vpl.pl> will be checked for constraint violations
