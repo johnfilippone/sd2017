@@ -5,3 +5,5 @@ P2/filippone-bell/out.txt
 P3/filippone-bell/out.txt
 P3/filippone-bell/toYuml.vm.vm
 P3/filippone-bell/tests/toYuml.vm.vm
+*.swp
+*.swo
