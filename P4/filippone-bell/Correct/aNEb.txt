@@ -1,0 +1,33 @@
+
+table(and,[name,"input1","input2","output"]).
+and(a1,'i1->a1','i2->a1','a1->o').
+and(a2,'i1->a2','i2->a2','a2->o').
+
+table(or,[name,"input1","input2","output"]).
+or(o1,'i1->o1','i2->o1','o1->o').
+
+table(not,[name,"input","output"]).
+not(n1,'i1->n1','n1->o').
+not(n2,'i1->n2','n2->o').
+
+table(wire,["from","to"]).
+wire('a->o','i1->n1').
+wire('n1->o','i1->a1').
+wire('b->o','i2->a1').
+wire('a->o','i1->a2').
+wire('b->o','i1->n2').
+wire('n2->o','i2->a2').
+wire('a1->o','i1->o1').
+wire('a2->o','i2->o1').
+wire('o1->o','i1->r').
+
+table(inputPort,[name,"outputPin"]).
+inputPort(a,'a->o').
+inputPort(b,'b->o').
+
+table(outputPort,[name,"inputPin"]).
+outputPort(r,'i1->r').
+
+Model is correct: true
+
+Evaluation of circuit is Correct!
