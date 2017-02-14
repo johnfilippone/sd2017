@@ -10,7 +10,7 @@ public class InputPort extends Gate implements Printable {
 
     public InputPort(String name) {
         super(name);
-        // TO DO
+        o = new OutputPin();
     }
     
     public OutputPin getOutput() {
