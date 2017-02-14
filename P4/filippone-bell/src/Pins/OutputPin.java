@@ -14,7 +14,7 @@ public class OutputPin {
     public OutputPin(String name, Gate parent) {
         this.name = name;
         outputOf = parent;
-        wiresFrom = new AbstractList<Wire>();
+        wiresFrom = new ArrayList<Wire>();
     }
     
     public void addWire(Wire w) {
