@@ -36,17 +36,7 @@ public class Not extends Gate implements Printable {
     }
     
     public void print() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("not(");
-        sb.append(name);
-        sb.append(",\"");
-        sb.append(i1.name);
-        sb.append("\",\"");
-        sb.append(o.name);
-        sb.append("\").");
-
-        System.out.println(sb.toString());
+        System.out.printf("not(%s,'%s','%s').\n", name, i1, o);
     }
     
     @Feature(Feature.eval)   /* for logic diagram evaluation */
