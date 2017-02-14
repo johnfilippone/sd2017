@@ -14,9 +14,9 @@ public class Not extends Gate implements Printable {
         inputs.put("i1",i1);
         o = new OutputPin("o",this);
         outputs.put("o", o);
-        if (Feature.tables) {
-            table.add(this);
-        }
+        //if (Feature.tables) {
+            //table.add(this);
+        //}
     }
     
     @Feature(Feature.tables) 
