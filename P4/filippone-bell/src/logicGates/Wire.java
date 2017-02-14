@@ -9,7 +9,8 @@ public class Wire implements Printable {
     public OutputPin o;
     
     public Wire( OutputPin o, InputPin i ) {
-        // TO DO
+        this.o = o;
+        this.i = i;
     }
     
     public Wire( InputPort o, Gate i, String name) {
