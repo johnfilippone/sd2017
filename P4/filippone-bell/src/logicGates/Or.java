@@ -10,11 +10,11 @@ public class Or extends Gate implements Printable {
 
     public Or(String name) {
         super(name);
-        i1 = new InputPin("i1",this);
+        i1 = new InputPin("i1", this);
         i2 = new InputPin("i2", this);
-        inputs.put("i1",i1);
-        inputs.put("i2",i2);
-        o = new OutputPin("o",this);
+        inputs.put("i1", i1);
+        inputs.put("i2", i2);
+        o = new OutputPin("o", this);
         outputs.put("o", o);
         if (Feature.tables) {
             table.add(this);

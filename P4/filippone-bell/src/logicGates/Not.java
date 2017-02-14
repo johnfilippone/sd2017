@@ -10,8 +10,13 @@ public class Not extends Gate implements Printable {
 
     public Not(String name) {
         super(name);
-        i1 = new InputPin(name, this);
-        o = new OutputPin(name, this);
+        i1 = new InputPin("i1",this);
+        inputs.put("i1",i1);
+        o = new OutputPin("o",this);
+        outputs.put("o", o);
+        if (Feature.tables) {
+            table.add(this);
+        }
     }
     
     @Feature(Feature.tables) 
