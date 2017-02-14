@@ -29,11 +29,11 @@ public abstract class Gate {
     @Feature(Feature.tables)
 
     public static void resetDB() {
-        // TO DO
+        // TODO
     }
 
     public static void printDB() {
-        // TO DO
+        // TODO
     }
 
     public static <G extends Printable> void printTable(LinkedList<G> t) {

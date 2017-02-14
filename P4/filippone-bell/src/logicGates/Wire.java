@@ -35,12 +35,11 @@ public class Wire implements Printable {
     static LinkedList<Wire> table;
     
     public static void resetTable() {
-        // TO DO
+        table = new LinkedList<Wire>();
     }
     
     public static LinkedList<Wire> getTable() { 
-        // TO DO
-        return null;
+        return table;
     }
     
     public void printTableHeader() {
@@ -48,7 +47,7 @@ public class Wire implements Printable {
     }
     
     public void print() {
-        // TO DO
+        System.out.printf("wire('%s','%s').\n", i, o);
     }
     
     @Feature(Feature.constraints)

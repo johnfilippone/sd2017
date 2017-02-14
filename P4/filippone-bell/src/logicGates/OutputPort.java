@@ -21,12 +21,11 @@ public class OutputPort extends Gate implements Printable {
     static LinkedList<OutputPort> table;
     
     public static void resetTable() {
-        // TO DO
+        table = new LinkedList<OutputPort>();
     }
     
     public static LinkedList<OutputPort> getTable() { 
-        // TO DO
-        return null;
+        return table;
     }
     
     public void printTableHeader() {
@@ -34,7 +33,7 @@ public class OutputPort extends Gate implements Printable {
     }
     
     public void print() {
-        // TO DO
+        System.out.printf("outputPort(%s,'%s').\n", name, i1);
     }
     
     @Feature(Feature.eval)
