@@ -35,7 +35,7 @@ public class InputPort extends Gate implements Printable {
     }
     
     public void print() {
-        System.out.printf("and(%s,'%s').\n", name, o);
+        System.out.printf("inputPort(%s,'%s').\n", name, o);
     }
     
     @Feature(Feature.eval)   /* for evaluation */
