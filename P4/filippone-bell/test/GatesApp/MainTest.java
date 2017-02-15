@@ -52,13 +52,22 @@ public class MainTest {
         new Wire(or2, or3, "i2");
         new Wire(and1, r);
         new Wire(or3, t);
+        
+        RegTest.Utility.validate("output.txt", "Correct/H2Base.txt", false);
 
         if (Feature.tables) {
             Gate.printDB();
+            RegTest.Utility.validate("output.txt", "Correct/H2BT.txt", false);
         }
 
         if (Feature.constraints) {
-            System.out.println("\nModel is correct: " + Gate.verify());
+             boolean result = Gate.verify();
+            System.out.println("\nModel is correct: " + result);
+            if (!result) {
+                assert(false);
+                return;
+            }
+            RegTest.Utility.validate("output.txt", "Correct/H2BTC.txt", false);
         }
 
         if (Feature.eval) {
@@ -81,7 +90,7 @@ public class MainTest {
             if (noErrors) {
                 System.out.println("\nEvaluation of circuit is Correct!");
             }
-            
+        
             RegTest.Utility.validate("output.txt", "Correct/h2Example.txt", false);
         }
 
@@ -121,16 +130,22 @@ public class MainTest {
         new Wire(a1,o1,"i1");
         new Wire(a2,o1,"i2");
         new Wire(o1,r);
-                
+        
+         RegTest.Utility.validate("output.txt", "Correct/aEQBase.txt", false);
+         
         if (Feature.tables) {
             Gate.printDB();
+            RegTest.Utility.validate("output.txt", "Correct/aEQBT.txt", false);
         }
         
         if (Feature.constraints) {
             boolean result = Gate.verify();
             System.out.println("\nModel is correct: " + result);
-            if (!result)
+            if (!result) {
+                assert(false);
                 return;
+            }
+            RegTest.Utility.validate("output.txt", "Correct/aEQBTC.txt", false);
         }
         
         if (Feature.eval) {
@@ -144,8 +159,8 @@ public class MainTest {
             } else {
                 System.out.println("\nEvaluation of circuit is Correct!");
             }
+            RegTest.Utility.validate("output.txt", "Correct/aEQb.txt", false);
         }
-        RegTest.Utility.validate("output.txt", "Correct/aEQb.txt", false);
     }
 
     @Test
@@ -182,16 +197,22 @@ public class MainTest {
         new Wire(a1,o1,"i1");
         new Wire(a2,o1,"i2");
         new Wire(o1,r);
+        
+        RegTest.Utility.validate("output.txt", "Correct/aNEBase.txt", false);
                 
         if (Feature.tables) {
             Gate.printDB();
+            RegTest.Utility.validate("output.txt", "Correct/aNEBT.txt", false);
         }
         
         if (Feature.constraints) {
             boolean result = Gate.verify();
             System.out.println("\nModel is correct: " + result);
-            if (!result)
+            if (!result) {
+                assert(false);
                 return;
+            }
+            RegTest.Utility.validate("output.txt", "Correct/aNEBTC.txt", false);
         }
         
         if (Feature.eval) {
@@ -206,8 +227,7 @@ public class MainTest {
             } else {
                 System.out.println("\nEvaluation of circuit is Correct!");
             }
+            RegTest.Utility.validate("output.txt", "Correct/aNEb.txt", false);
         }
-        
-        RegTest.Utility.validate("output.txt", "Correct/aNEb.txt", false);
     }
 }
