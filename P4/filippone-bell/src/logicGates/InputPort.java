@@ -6,21 +6,22 @@ import GatesApp.*;
 import java.util.*;
 
 public class InputPort extends Gate implements Printable {
+
     OutputPin o;
 
     public InputPort(String name) {
         super(name);
         o = new OutputPin("o", this);
+        table.add(this);
     }
     
     public OutputPin getOutput() {
-        // TO DO
-        return null;
+        return o;
     }
     
     @Feature(Feature.tables) 
-    
-    static LinkedList<InputPort> table;
+
+    static LinkedList<InputPort> table = new LinkedList<InputPort>();
     
     public static void resetTable() {
         table = new LinkedList<InputPort>();

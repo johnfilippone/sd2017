@@ -23,7 +23,7 @@ public class Or extends Gate implements Printable {
     
     @Feature(Feature.tables) 
     
-    static LinkedList<Or> table;
+    static LinkedList<Or> table = new LinkedList<Or>();
     
     public static void resetTable() {
         table = new LinkedList<>();

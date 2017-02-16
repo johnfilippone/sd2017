@@ -23,7 +23,7 @@ public class And extends Gate implements Printable {
     
     @Feature(Feature.tables) 
     
-    static LinkedList<And> table;
+    static LinkedList<And> table = new LinkedList<And>();
     
     public static void resetTable() {
         table = new LinkedList<And>();

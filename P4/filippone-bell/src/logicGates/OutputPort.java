@@ -18,7 +18,7 @@ public class OutputPort extends Gate implements Printable {
     
     @Feature(Feature.tables) 
     
-    static LinkedList<OutputPort> table;
+    static LinkedList<OutputPort> table = new LinkedList<OutputPort>();
     
     public static void resetTable() {
         table = new LinkedList<OutputPort>();

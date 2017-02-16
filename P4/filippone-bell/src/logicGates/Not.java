@@ -21,7 +21,7 @@ public class Not extends Gate implements Printable {
     
     @Feature(Feature.tables) 
     
-    static LinkedList<Not> table;
+    static LinkedList<Not> table = new LinkedList<Not>();
     
     public static void resetTable() {
         table = new LinkedList<Not>();
