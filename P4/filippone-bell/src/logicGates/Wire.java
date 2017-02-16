@@ -32,7 +32,7 @@ public class Wire implements Printable {
     
     @Feature(Feature.tables)
     
-    static LinkedList<Wire> table;
+    static LinkedList<Wire> table = new LinkedList<Wire>();
     
     public static void resetTable() {
         table = new LinkedList<Wire>();
