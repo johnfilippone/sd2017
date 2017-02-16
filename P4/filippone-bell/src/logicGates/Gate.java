@@ -43,6 +43,7 @@ public abstract class Gate {
         printTable(Or.getTable());
         printTable(InputPort.getTable());
         printTable(OutputPort.getTable());
+        printTable(Wire.getTable());
     }
 
     public static <G extends Printable> void printTable(LinkedList<G> t) {
