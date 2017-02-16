@@ -34,14 +34,15 @@ public abstract class Gate {
         Or.resetTable();
         InputPort.resetTable();
         OutputPort.resetTable();
+        Wire.resetTable();
     }
 
     public static void printDB() {
-        printTable(And.table);
-        printTable(Not.table);
-        printTable(Or.table);
-        printTable(InputPort.table);
-        printTable(OutputPort.table);
+        printTable(And.getTable());
+        printTable(Not.getTable());
+        printTable(Or.getTable());
+        printTable(InputPort.getTable());
+        printTable(OutputPort.getTable());
     }
 
     public static <G extends Printable> void printTable(LinkedList<G> t) {
