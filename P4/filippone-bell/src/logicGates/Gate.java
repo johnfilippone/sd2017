@@ -29,11 +29,19 @@ public abstract class Gate {
     @Feature(Feature.tables)
 
     public static void resetDB() {
-        // TODO
+        And.resetTable();
+        Not.resetTable();
+        Or.resetTable();
+        InputPort.resetTable();
+        OutputPort.resetTable();
     }
 
     public static void printDB() {
-        // TODO
+        printTable(And.table);
+        printTable(Not.table);
+        printTable(Or.table);
+        printTable(InputPort.table);
+        printTable(OutputPort.table);
     }
 
     public static <G extends Printable> void printTable(LinkedList<G> t) {
