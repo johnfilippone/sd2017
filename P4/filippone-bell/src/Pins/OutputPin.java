@@ -42,6 +42,6 @@ public class OutputPin {
     @Feature(Feature.eval)
     
     public Value getValue() {
-        return gateOf.getValue();
+        return outputOf.getValue();
     }
 }

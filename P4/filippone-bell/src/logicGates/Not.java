@@ -44,10 +44,10 @@ public class Not extends Gate implements Printable {
     public Value getValue() {
         Value v1 = i1.getValue();
   
-        if (v1 == Value.True)
-            return Value.False;
-        else if (v1 == Value.False)
-            return Value.True;
+        if (v1 == Value.TRUE)
+            return Value.FALSE;
+        else if (v1 == Value.FALSE)
+            return Value.TRUE;
         return Value.UNKNOWN;
     }
     
