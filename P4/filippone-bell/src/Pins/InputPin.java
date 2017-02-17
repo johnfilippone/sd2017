@@ -41,6 +41,6 @@ public class InputPin {
     @Feature(Feature.eval)    /*  this is for circuit execution */
     
     public Value getValue() {
-        return Value.UNKNOWN;
+        return wireFrom.getValue();
     }
 }

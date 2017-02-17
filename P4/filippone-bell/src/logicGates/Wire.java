@@ -69,7 +69,6 @@ public class Wire implements Printable {
     @Feature(Feature.eval)
     
     public Value getValue() {
-        // TO DO
-        return Value.UNKNOWN;
+        return o.getValue();
     }
 }
