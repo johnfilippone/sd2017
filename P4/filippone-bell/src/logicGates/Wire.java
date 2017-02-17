@@ -11,6 +11,8 @@ public class Wire implements Printable {
     public Wire( OutputPin o, InputPin i ) {
         this.o = o;
         this.i = i;
+        i.addWire(this);
+        o.addWire(this);
         if (Feature.tables) {
             table.add(this);
         }
@@ -56,8 +58,7 @@ public class Wire implements Printable {
     @Feature(Feature.constraints)
     
     public boolean isUsed() {
-        // TO DO
-        return false;
+        return o != null && i != null;
     }
     
     public static boolean verify() {
