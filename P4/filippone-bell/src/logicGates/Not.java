@@ -42,7 +42,12 @@ public class Not extends Gate implements Printable {
     @Feature(Feature.eval)   /* for logic diagram evaluation */
     
     public Value getValue() {
-        // TO DO
+        Value v1 = i1.getValue();
+  
+        if (v1 == Value.TRUE)
+            return Value.FALSE;
+        else if (v1 == Value.FALSE)
+            return Value.TRUE;
         return Value.UNKNOWN;
     }
     

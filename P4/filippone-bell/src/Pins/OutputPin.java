@@ -32,20 +32,16 @@ public class OutputPin {
     @Feature(Feature.constraints)
     
     public boolean isUsed() {
-        boolean wiresOk = false;
-        for (Wire wire : wiresFrom) {
-            if (wire.i != null) {
-                wiresOk = true;
-                break;
-            }
+        boolean valid = false;
+        for (Wire wire : wiresFrom){
+            valid = valid || (wire.isUsed() && wire.i.nameOfGate() != null);
         }
-        return outputOf != null && wiresOk;
+        return valid;
     }
     
     @Feature(Feature.eval)
     
     public Value getValue() {
-        // TO DO
-        return null;
+        return outputOf.getValue();
     }
 }

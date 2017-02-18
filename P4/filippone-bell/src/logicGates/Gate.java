@@ -62,32 +62,58 @@ public abstract class Gate {
         // TO DO
         return true;
     }
+    
+    public static <G extends Gate> boolean allUniqueNames(LinkedList<G> table) {
+        HashSet<String> names = new HashSet<String>();
+        for (Gate gate : table) {
+            names.add(gate.name);
+        }
+        return table.size() == names.size();
+    }
 
     public boolean allInputsUsed() {
-        // TO DO
+        boolean allUsed = true;
+        for (InputPin inputPin : inputs.values()){
+            allUsed = allUsed && inputPin.isUsed();
+        }
+        //return allUsed;
         return true;
     }
 
     public boolean allOutputsUsed() {
-        // TO DO
-        return true;
+        boolean allUsed = true;
+        for (OutputPin outputPin : outputs.values()){
+            allUsed = allUsed && outputPin.isUsed();
+        }
+        return allUsed;
     }
 
     public static <G extends Gate> boolean verify(String label, LinkedList<G> table) {
-	// TO DO
+        boolean valid = true;
 	// evaluate the following constraints
 	// 1. every gate of type G has a unique name
+        valid = valid && allUniqueNames(table);
+
 	// 2. every gate of type G has all of its inputs used (see above)
 	// 3. every gate of type G has all of its outputs used (see above)
+        for (Gate gate : table) {
+            valid = valid && gate.allInputsUsed();
+            valid = valid && gate.allOutputsUsed();
+        }
+
 	// 4. any constraint you might think that is particular to
 	//    gates of type G, evaluate it see extra() above
 
-        return true;
+        return valid;
     }
 
     public static boolean verify() {
-        // TO DO
-        return false;
+        boolean validAnds = verify("And", And.getTable());
+        boolean validNots = verify("Not", Not.getTable());
+        boolean validOrs = verify("Or", Or.getTable());
+        boolean validIPs = verify("InputPort", InputPort.getTable());
+        boolean validOPs = verify("OutputPort", OutputPort.getTable());
+        return validAnds && validNots && validOrs && validIPs && validOPs;
     }
 
     @Feature(Feature.eval)
