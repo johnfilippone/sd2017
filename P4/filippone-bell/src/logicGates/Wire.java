@@ -52,7 +52,7 @@ public class Wire implements Printable {
     }
     
     public void print() {
-        System.out.printf("wire('%s','%s').\n", i, o);
+        System.out.printf("wire('%s','%s').\n", o, i);
     }
     
     @Feature(Feature.constraints)

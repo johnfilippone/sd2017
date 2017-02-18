@@ -30,20 +30,20 @@ public abstract class Gate {
 
     public static void resetDB() {
         And.resetTable();
-        Not.resetTable();
         Or.resetTable();
+        Not.resetTable();
+        Wire.resetTable();
         InputPort.resetTable();
         OutputPort.resetTable();
-        Wire.resetTable();
     }
 
     public static void printDB() {
         printTable(And.getTable());
-        printTable(Not.getTable());
         printTable(Or.getTable());
+        printTable(Not.getTable());
+        printTable(Wire.getTable());
         printTable(InputPort.getTable());
         printTable(OutputPort.getTable());
-        printTable(Wire.getTable());
     }
 
     public static <G extends Printable> void printTable(LinkedList<G> t) {
