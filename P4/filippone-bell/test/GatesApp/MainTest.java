@@ -91,7 +91,7 @@ public class MainTest {
                 System.out.println("\nEvaluation of circuit is Correct!");
             }
         
-            RegTest.Utility.validate("output.txt", "Correct/h2Example.txt", false);
+            RegTest.Utility.validate("output.txt", "Correct/H2Example.txt", false);
         }
 
     }
