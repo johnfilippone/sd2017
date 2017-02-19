@@ -8,6 +8,7 @@ import logicGates.Or;
 import logicGates.OutputPort;
 import logicGates.Wire;
 import org.junit.Test;
+import org.junit.Assert;
 
 
 public class MainTest {
@@ -228,6 +229,83 @@ public class MainTest {
                 System.out.println("\nEvaluation of circuit is Correct!");
             }
             RegTest.Utility.validate("output.txt", "Correct/aNEb.txt", false);
+        }
+    }
+
+    @Test
+    public void duplicateAndName() {
+        // duplicate name, should fail verify
+
+        if (Feature.tables) {
+            Gate.resetDB();
+        }
+        
+        InputPort a = new InputPort("a");
+        InputPort b = new InputPort("b");
+        OutputPort r = new OutputPort("r");
+        
+        Not n1 = new Not("n1");
+        Not n2 = new Not("n2");
+        
+        And a1 = new And("a1");
+        And a2 = new And("a1"); // same name
+        
+        Or o1 = new Or("o1");
+        
+        new Wire(a,n1,"i1");
+        new Wire(n1,a1,"i1");
+        new Wire(b,a1,"i2");
+        
+        new Wire(a,a2,"i1");
+        new Wire(b,n2,"i1");
+        new Wire(n2,a2,"i2");
+        
+        new Wire(a1,o1,"i1");
+        new Wire(a2,o1,"i2");
+        new Wire(o1,r);
+
+        if (Feature.constraints) {
+            boolean result = Gate.verify();
+            Assert.assertFalse(result);
+        }
+    }
+
+    @Test
+    public void unusedOrTest() {
+        // fail verification from unused gate
+
+        if (Feature.tables) {
+            Gate.resetDB();
+        }
+        
+        InputPort a = new InputPort("a");
+        InputPort b = new InputPort("b");
+        OutputPort r = new OutputPort("r");
+        
+        Not n1 = new Not("n1");
+        Not n2 = new Not("n2");
+        
+        And a1 = new And("a1");
+        And a2 = new And("a1");
+        
+        Or o1 = new Or("o1");
+        Or o2 = new Or("o2"); // unused
+        
+        new Wire(a,n1,"i1");
+        new Wire(n1,a1,"i1");
+        new Wire(b,a1,"i2");
+        
+        new Wire(a,a2,"i1");
+        new Wire(b,n2,"i1");
+        new Wire(n2,a2,"i2");
+        
+        new Wire(a1,o1,"i1");
+        new Wire(a2,o1,"i2");
+        new Wire(o1,r);
+
+        if (Feature.constraints) {
+            boolean result = Gate.verify();
+            Assert.assertFalse(result);
         }
     }
 }
