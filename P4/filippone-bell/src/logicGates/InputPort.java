@@ -1,6 +1,7 @@
 package logicGates;
 
 import Errors.NoValueSet;
+import Errors.ValueAlreadySet;
 import Pins.*;
 import GatesApp.*;
 import java.util.*;
@@ -46,10 +47,12 @@ public class InputPort extends Gate implements Printable {
     Value value = Value.UNKNOWN;
         
     public void setValue(Value v) {
+        if (value != Value.UNKNOWN) { throw new ValueAlreadySet("Tried to set value when already set!"); }
         value = v;
     }
     
     public Value getValue() {
+        if (value == Value.UNKNOWN) { throw new NoValueSet("Tried to get value on a Value with no value set!"); }
         return value;
     }
 }

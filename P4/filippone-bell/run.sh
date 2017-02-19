@@ -11,6 +11,7 @@ javac src/GatesApp/*.java
 javac src/logicGates/*.java
 javac src/Pins/*.java
 javac src/Errors/*.java
+javac src/RegTest/*.java
 javac test/GatesApp/*.java
 
 echo ""
