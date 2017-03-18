@@ -48,9 +48,8 @@ public class FieldDetection extends RefactoringDetection {
 	 *      edu.uiuc.detectRefactorings.util.Node)
 	 */
 	@Override
-	public double computeLikeliness(Node node1, Node node12) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double accept(Node node1, Node node12, LikelinessVisitor visitor) {
+		return visitor.visit(node1, node12, this);
 	}
 
 	/*

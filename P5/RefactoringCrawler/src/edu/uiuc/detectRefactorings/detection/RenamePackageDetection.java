@@ -7,7 +7,6 @@ import java.util.List;
 import org._3pq.jgrapht.graph.AbstractBaseGraph;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -32,15 +31,8 @@ public class RenamePackageDetection extends PackageDetection {
 		super(graph1, graph2);
 	}
 
-	public double computeLikeliness(Node original, Node version) {
-		createCallerGraph(original, graph1, new NullProgressMonitor());
-		createCallerGraph(version, graph2, new NullProgressMonitor());
-		List incomingEdgesOriginal = filterNamedEdges(graph1
-				.incomingEdgesOf(original));
-		List incomingEdgesVersion = filterNamedEdges(graph2
-				.incomingEdgesOf(version));
-		return computeLikelinessIncomingEdges(incomingEdgesOriginal,
-				incomingEdgesVersion);
+	public double accept(Node original, Node version, LikelinessVisitor visitor) {
+		return visitor.visit(original, version, this);
 	}
 	
 	//TODO

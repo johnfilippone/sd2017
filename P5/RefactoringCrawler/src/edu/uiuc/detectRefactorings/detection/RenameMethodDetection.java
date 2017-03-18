@@ -40,10 +40,8 @@ public class RenameMethodDetection extends MethodDetection {
 		return candidatesWithSameParentClass;
 	}
 
-	public double computeLikeliness(Node original, Node version) {
-		// createCallGraph(original, version);
-		// return computeLikelinessConsideringEdges(original, version);
-		return analyzeIncomingEdges(original, version);
+	public double accept(Node original, Node version, LikelinessVisitor visitor) {
+		return visitor.visit(original, version, this);
 	}
 
 	@Override

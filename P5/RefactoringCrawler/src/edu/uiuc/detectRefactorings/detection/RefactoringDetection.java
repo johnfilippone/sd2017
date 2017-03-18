@@ -59,7 +59,7 @@ public abstract class RefactoringDetection {
 		this.graph2 = graph2;
 	}
 
-	public abstract double computeLikeliness(Node node1, Node node12);
+	public abstract double accept(Node node1, Node node12, LikelinessVisitor visitor);
 
 	/**
 	 * TEMPLATE METHOD Describes the algorithm for detecting any particular
@@ -365,7 +365,7 @@ public abstract class RefactoringDetection {
 					+ original.getFullyQualifiedName() + " "
 					+ version.getFullyQualifiedName());
 
-			double likeliness = computeLikeliness(original, version);
+			double likeliness = accept(original, version, LikelinessVisitor.singleton);
 			if (likeliness >= threshold) {
 				if (!refactoredNodes.contains(pair)) {
 					refactoredNodes.add(pair);

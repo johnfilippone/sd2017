@@ -41,17 +41,8 @@ public class ChangeMethodSignatureDetection extends MethodDetection {
 	 * make sure the call graphs are checked, since we do not want to detect
 	 * polymorphism as change method signature.
 	 */
-	public double computeLikeliness(Node original, Node version) {
-		// Need to find out if in V2 there is a node with the same signature
-		// as the original
-		if (isDeprecatedOrRemoved(new Node[] { original, version }))
-			return 1.0;
-		else {
-			double edgeGrade = analyzeIncomingEdges(original, version);
-			// This is when we have a method overload or deprecated. So when
-			// we can check deprecated methods we need to add it here
-			return edgeGrade;
-		}
+	public double accept(Node original, Node version, LikelinessVisitor visitor) {
+		return visitor.visit(original, version, this);
 	}
 
 	/**

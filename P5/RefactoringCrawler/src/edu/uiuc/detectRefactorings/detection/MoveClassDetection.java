@@ -25,16 +25,8 @@ public class MoveClassDetection extends ClassDetection {
 		super(graph, graph2);
 	}
 
-	public double computeLikeliness(Node nodeOriginal, Node nodeVersion) {
-		double edgeGrade;
-		createCallGraph(nodeOriginal, nodeVersion);
-		List incomingEdgesOriginal = filterNamedEdges(graph1
-				.incomingEdgesOf(nodeOriginal));
-		List incomingEdgesVersion = filterNamedEdges(graph2
-				.incomingEdgesOf(nodeVersion));
-		edgeGrade = computeLikelinessIncomingEdges(incomingEdgesOriginal,
-				incomingEdgesVersion);
-		return edgeGrade;
+	public double accept(Node nodeOriginal, Node nodeVersion, LikelinessVisitor visitor) {
+		return visitor.visit(nodeOriginal, nodeVersion, this);
 	}
 
 	public List pruneOriginalCandidates(List candidates) {

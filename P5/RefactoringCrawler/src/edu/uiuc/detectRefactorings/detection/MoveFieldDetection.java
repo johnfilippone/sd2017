@@ -20,8 +20,8 @@ public class MoveFieldDetection extends FieldDetection {
 		super(graph, graph2);
 	}
 
-	public double computeLikeliness(Node original, Node version) {
-		return analyzeIncomingEdges(original, version);
+	public double accept(Node original, Node version, LikelinessVisitor visitor) {
+		return visitor.visit(original, version, this);
 	}
 
 	public List pruneOriginalCandidates(List candidates) {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="edu.uiuc.detectRefactorings"
+   name="DetectRefactorings Plug-in"
+   version="1.0.0"
+   provider-name=""
+   class="edu.uiuc.detectRefactorings.DetectRefactoringsPlugin">
+
+   <runtime>
+      <library name="detectRefactorings.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.junit"/> 
+      <import plugin="org.eclipse.jdt.ui"/>
+   </requires>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Detect Refactorings"
+            id="edu.uiuc.detectRefactorings">
+      </category>
+      <view
+            name="RefactoringsView"
+            icon="icons/sample.gif"
+            category="edu.uiuc.detectRefactorings"
+            class="edu.uiuc.detectRefactorings.views.RefactoringsView"
+            id="edu.uiuc.detectRefactorings.views.RefactoringsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.ui.resourcePerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="edu.uiuc.detectRefactorings.views.RefactoringsView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="edu.uiuc.detectRefactorings.actionSet"
+            label="Detect Refactorings"
+            visible="true">
+         <menu
+               id="sampleMenu"
+               label="Refactoring Crawler">
+            <separator name="sampleGroup"/>
+         </menu>
+         <action
+               class="edu.uiuc.detectRefactorings.actions.DetectRefactoringsAction"
+               icon="icons/sample.gif"
+               id="edu.uiuc.detectRefactorings.actions.DetectRefactoringsAction"
+               label="Detect Refactorings"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               tooltip="RefactoringCrawler"/>
+      </actionSet>
+   </extension>
+
+</plugin>

@@ -33,27 +33,8 @@ public class PushDownMethodDetection extends MethodDetection {
 	 * @see edu.uiuc.detectRefactorings.detection.RefactoringDetection#computeLikeliness(edu.uiuc.detectRefactorings.util.Node,
 	 *      edu.uiuc.detectRefactorings.util.Node)
 	 */
-	public double computeLikeliness(Node original, Node version) {
-		boolean superClassGrade = false;
-		String parentClassOriginal = extractFullyQualifiedParentName(original);
-		String parentClassVersion = extractFullyQualifiedParentName(version);
-		parentClassOriginal = extractPotentialRename(parentClassOriginal);
-		Node parentClassOrig = graph2.findNamedNode(parentClassOriginal);
-		if (parentClassOrig == null)
-			return 0.0;
-		Node parentClassVer = graph2.findNamedNode(parentClassVersion);
-		// Now we should check if parentClassVer is a subclass of
-		// parentClassOrig
-		if (parentClassOriginal.indexOf("Priority") >= 0
-				|| parentClassOriginal.indexOf("Level") >= 0)
-			System.out.println("stop");
-		if (ClassDetection.isSuperClassOf(parentClassOrig, parentClassVer))
-			superClassGrade = true;
-		if (superClassGrade) {
-			double incomingEdgeGrade = analyzeIncomingEdges(original, version);
-			return (incomingEdgeGrade);
-		} else
-			return 0.0;
+	public double accept(Node original, Node version, LikelinessVisitor visitor) {
+		return visitor.visit(original, version, this);
 	}
 
 	/*

@@ -17,8 +17,8 @@ public class RenameClassDetection extends ClassDetection {
 		super(graph1, graph2);
 	}
 
-	public double computeLikeliness(Node nodeOriginal, Node nodeVersion) {
-		return doEdgeAnalysis(nodeOriginal, nodeVersion);
+	public double accept(Node nodeOriginal, Node nodeVersion, LikelinessVisitor visitor) {
+		return visitor.visit(nodeOriginal, nodeVersion, this);
 	}
 
 	/**

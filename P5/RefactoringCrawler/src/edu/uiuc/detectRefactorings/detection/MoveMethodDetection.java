@@ -42,18 +42,8 @@ public class MoveMethodDetection extends MethodDetection {
 		super(graph1, graph2);
 	}
 
-	public double computeLikeliness(Node original, Node version) {
-		double edgeGrade = 0.0;
-
-		double referenceGrade = 0.0;
-
-		if (isTargetARenameOfSourceClass(original, version))
-			return 0.0;
-
-		// FIXME: Potential problem when we subtract 0.01 from reference grade
-		referenceGrade = referencesRemoved(original, version);
-		edgeGrade = analyzeIncomingEdges(original, version);
-		return (edgeGrade + (referenceGrade - 0.01)) / 2.0;
+	public double accept(Node original, Node version, LikelinessVisitor visitor) {
+		return visitor.visit(original, version, this);
 	}
 
 	/**
