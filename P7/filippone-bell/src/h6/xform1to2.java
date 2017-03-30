@@ -31,10 +31,15 @@ public class xform1to2 {
           String placeName = t.get("inside");
           int count = tokenMap.get(placeName);
           tokenMap.put(placeName, (count==null) ? 1 : count + 1);
-        })
-        
+        });
 
-        place.stream().forEach(t->plc.add(t));
+        place.stream().forEach(t->{
+            Tuple newPlace = new Tuple(plc);
+            newPlace.set("pid", t.get("pid"));
+            newPlace.set("name", t.get("name"));
+            newPlace.set("nTokens", tokenMap.get(t.get("name")));
+            plc.add(newPlace);
+        });
 
         // translate tbox table -- same as before
         tbox.stream().forEach(t->tbx.add(t));
