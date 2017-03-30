@@ -1,3 +1,7 @@
+Jeff, this is temporary just because I'll forget how to do this stuff; anthing to not have to think
+We should scrap this once we have our run script and PDF
+
+
 to run unittests:
 java org.junit.runner.JUnitCore h6.oneTest
 
