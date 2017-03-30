@@ -5,7 +5,10 @@
  */
 package h6;
 
-import PrologDB.*;
+import PrologDB.DB;
+import PrologDB.DBSchema;
+import PrologDB.Table;
+import PrologDB.Tuple;
 import java.io.PrintStream;
 
 /**
@@ -32,8 +35,37 @@ public class xform2to3 {
         Table ark = db3.getTableEH("arc");
         
         // merge place and tbox into node
-        
+        place.stream().forEach(t->{
+          Tuple newNode = new Tuple(nod);
+          newNode.set("nid", t.get("pid"));
+          newNode.set("name", t.get("name"));
+          newNode.set("ntokens", t.get("ntokens"));
+          newNode.set("isPlace", true);
+          nod.add(newNode);
+        });
+        tbox.stream().forEach(t->{
+          Tuple newNode = new Tuple(nod);
+          newNode.set("nid", t.get("tid"));
+          newNode.set("name", t.get("name"));
+          newNode.set("ntokens", 0);
+          newNode.set("isPlace", false);
+          nod.add(newNode);
+        });
+
         // translate sol2.arc table to sol3.arc table (ark)
+        arc.stream().forEach(t->{
+          Tuple newArc = new Tuple(ark);
+          newArc.set("aid", t.get("aid"));
+          newArc.set("cap", t.get("cap"));
+          if (Boolean.parseBoolean(t.get("toTbox"))){
+            newArc.set("startsAt", t.get("pid"));
+            newArc.set("endsAt", t.get("tid"));
+          } else {
+            newArc.set("startsAt", t.get("tid"));
+            newArc.set("endsAt", t.get("pid"));
+          }
+          ark.add(newArc);
+        });
 
         db3.print(new PrintStream(args[1]));
     }

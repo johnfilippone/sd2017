@@ -16,14 +16,13 @@ public class oneTest {
     public oneTest() {
     }
 
+/*
     public void doit(String name)  throws Exception {
         xform1to2.main("Correct/"+name+".sol1.pl",name+".sol2.pl");
         RegTest.Utility.validate(name+".sol2.pl", "Correct/"+name+".sol2.pl", false);
         xform2to3.main("Correct/"+name+".sol2.pl",name+".sol3.pl");
         RegTest.Utility.validate(name+".sol3.pl", "Correct/"+name+".sol3.pl", false);
     }
-/*    
-// uncomment when part 2 is done
     @Test
     public void testone() throws Exception {
         doit("p1");
@@ -39,6 +38,7 @@ public class oneTest {
         doit("p3");
     }
 */
+
     @Test
     public void test1to2_p1() throws Exception {
         xform1to2.main("Correct/p1.sol1.pl", "results/p1.sol2.pl");
@@ -57,8 +57,6 @@ public class oneTest {
         RegTest.Utility.validate("results/p3.sol2.pl", "Correct/p3.sol2.pl", false);
     }
 
-/*    
-// uncomment when part 2 is done
     @Test
     public void test2to3_p1() throws Exception {
         xform2to3.main("Correct/p1.sol2.pl", "results/p1.sol3.pl");
@@ -73,8 +71,7 @@ public class oneTest {
 
     @Test
     public void test2to3_p3() throws Exception {
-        xform2to3.main("Correct/p3.sol3.pl", "results/p3.sol2.pl");
+        xform2to3.main("Correct/p3.sol2.pl", "results/p3.sol3.pl");
         RegTest.Utility.validate("results/p3.sol3.pl", "Correct/p3.sol3.pl", false);
     }
-*/
 }
