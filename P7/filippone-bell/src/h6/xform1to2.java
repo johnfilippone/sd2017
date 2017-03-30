@@ -1,6 +1,9 @@
 package h6;
 
-import PrologDB.*;
+import PrologDB.DB;
+import PrologDB.DBSchema;
+import PrologDB.Table;
+import PrologDB.Tuple;
 import java.io.PrintStream;
 import java.util.HashMap;
 
@@ -29,15 +32,20 @@ public class xform1to2 {
         HashMap<String, Integer> tokenMap = new HashMap<String, Integer>();
         token.stream().forEach(t->{
           String placeName = t.get("inside");
-          int count = tokenMap.get(placeName);
-          tokenMap.put(placeName, count + 1);
+          if (tokenMap.get(placeName) != null)
+            tokenMap.put(placeName, tokenMap.get(placeName) + 1);
+          else 
+            tokenMap.put(placeName, 1);
         });
 
         place.stream().forEach(t->{
             Tuple newPlace = new Tuple(plc);
             newPlace.set("pid", t.get("pid"));
             newPlace.set("name", t.get("name"));
-            newPlace.set("nTokens", tokenMap.get(t.get("name")));
+            if (tokenMap.get(t.get("name"))==null)
+              newPlace.set("ntokens", 0);
+            else
+              newPlace.set("ntokens", tokenMap.get(t.get("name")));
             plc.add(newPlace);
         });
 
