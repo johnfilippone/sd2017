@@ -2,7 +2,7 @@ package h6;
 
 import PrologDB.*;
 import java.io.PrintStream;
-
+import java.util.HashMap;
 
 public class xform1to2 {
     public static void main(String... args) throws Exception {
@@ -26,11 +26,11 @@ public class xform1to2 {
         Table ark = db2.getTableEH("arc");
         
         // translate place table -- first copy the unchanging stuff
-        HashMap<String, int> tokenMap = new HashMap<String, int>();
+        HashMap<String, Integer> tokenMap = new HashMap<String, Integer>();
         token.stream().forEach(t->{
           String placeName = t.get("inside");
           int count = tokenMap.get(placeName);
-          tokenMap.put(placeName, (count==null) ? 1 : count + 1);
+          tokenMap.put(placeName, count + 1);
         });
 
         place.stream().forEach(t->{
