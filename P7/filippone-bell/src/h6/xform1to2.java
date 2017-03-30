@@ -26,11 +26,22 @@ public class xform1to2 {
         Table ark = db2.getTableEH("arc");
         
         // translate place table -- first copy the unchanging stuff
+        HashMap<String, int> tokenMap = new HashMap<String, int>();
+        token.stream().forEach(t->{
+          String placeName = t.get("inside");
+          int count = tokenMap.get(placeName);
+          tokenMap.put(placeName, (count==null) ? 1 : count + 1);
+        })
+        
+
+        place.stream().forEach(t->plc.add(t));
 
         // translate tbox table -- same as before
+        tbox.stream().forEach(t->tbx.add(t));
         
         // translate arc table -- same as before
-       
+        arc.stream().forEach(t->ark.add(t));
+
         db2.print(new PrintStream(args[1]));
     }
   
