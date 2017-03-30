@@ -1,0 +1,6 @@
+to run unittests:
+java org.junit.runner.JUnitCore h6.oneTest
+
+to compile:
+javac src/h6/xform1to2.java
+javac tests/h6/oneTest.java
