@@ -42,10 +42,10 @@ public class xform1to2 {
             Tuple newPlace = new Tuple(plc);
             newPlace.set("pid", t.get("pid"));
             newPlace.set("name", t.get("name"));
-            if (tokenMap.get(t.get("name"))==null)
+            if (tokenMap.get(t.get("pid"))==null)
               newPlace.set("ntokens", 0);
             else
-              newPlace.set("ntokens", tokenMap.get(t.get("name")));
+              newPlace.set("ntokens", tokenMap.get(t.get("pid")));
             plc.add(newPlace);
         });
 
