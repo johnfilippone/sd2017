@@ -16,11 +16,10 @@ public class oneTest {
     public oneTest() {
     }
 
-/*
     public void doit(String name)  throws Exception {
-        xform1to2.main("Correct/"+name+".sol1.pl",name+".sol2.pl");
+        xform1to2.main("Correct/"+name+".sol1.pl","results/"+name+".sol2.pl");
         RegTest.Utility.validate(name+".sol2.pl", "Correct/"+name+".sol2.pl", false);
-        xform2to3.main("Correct/"+name+".sol2.pl",name+".sol3.pl");
+        xform2to3.main("Correct/"+name+".sol2.pl","results/"+name+".sol3.pl");
         RegTest.Utility.validate(name+".sol3.pl", "Correct/"+name+".sol3.pl", false);
     }
     @Test
@@ -37,7 +36,6 @@ public class oneTest {
     public void testthree() throws Exception {
         doit("p3");
     }
-*/
 
     @Test
     public void test1to2_p1() throws Exception {
