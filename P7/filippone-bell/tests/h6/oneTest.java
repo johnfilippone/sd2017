@@ -18,9 +18,9 @@ public class oneTest {
 
     public void doit(String name)  throws Exception {
         xform1to2.main("Correct/"+name+".sol1.pl","results/"+name+".sol2.pl");
-        RegTest.Utility.validate(name+".sol2.pl", "Correct/"+name+".sol2.pl", false);
+        RegTest.Utility.validate("results/"+name+".sol2.pl", "Correct/"+name+".sol2.pl", false);
         xform2to3.main("Correct/"+name+".sol2.pl","results/"+name+".sol3.pl");
-        RegTest.Utility.validate(name+".sol3.pl", "Correct/"+name+".sol3.pl", false);
+        RegTest.Utility.validate("results/"+name+".sol3.pl", "Correct/"+name+".sol3.pl", false);
     }
     @Test
     public void testone() throws Exception {
