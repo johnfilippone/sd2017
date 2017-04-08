@@ -3,9 +3,9 @@ package Framework;
 import javax.swing.JFrame;
 
 
-abstract public class Gui extends JFrame {
+public abstract class Gui extends JFrame {
     
-    Calc calc;
+    public Calc calc;
     /* Creates new form calcGui */
     public Gui(String name) {
         super(name);
@@ -44,13 +44,13 @@ abstract public class Gui extends JFrame {
     }//GEN-LAST:event_DivActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JButton Clear;
-    javax.swing.JButton Div;
-    javax.swing.JButton Enter;
-    javax.swing.JButton Minus;
-    javax.swing.JButton Plus;
-    javax.swing.JTextField Result;
-    javax.swing.JButton Times;
+    public javax.swing.JButton Clear;
+    public javax.swing.JButton Div;
+    public javax.swing.JButton Enter;
+    public javax.swing.JButton Minus;
+    public javax.swing.JButton Plus;
+    public javax.swing.JTextField Result;
+    public javax.swing.JButton Times;
     // End of variables declaration//GEN-END:variables
 
     public void display( ) {

@@ -3,11 +3,11 @@ package Framework;
 
 public abstract class Calc {
 
-  abstract void sub(String n);
-  abstract void mul(String n);
-  abstract void add(String n);
-  abstract void div(String n);
-  abstract String get();
-  abstract void set(String n);
-  abstract void clear();
+  public abstract void sub(String n);
+  public abstract void mul(String n);
+  public abstract void add(String n);
+  public abstract void div(String n);
+  public abstract String get();
+  public abstract void set(String n);
+  public abstract void clear();
 }
