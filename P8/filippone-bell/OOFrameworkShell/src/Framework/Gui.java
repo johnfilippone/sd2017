@@ -12,33 +12,33 @@ public abstract class Gui extends JFrame {
         initComponents();
     }
 
-    abstract void initComponents();
+    public abstract void initComponents();
 
-    void EnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterActionPerformed
+    public void EnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterActionPerformed
         calc.set(Result.getText());
     }//GEN-LAST:event_EnterActionPerformed
 
-    void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
+    public void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
         calc.clear();
         Result.setText("0");
     }//GEN-LAST:event_ClearActionPerformed
 
-    void PlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlusActionPerformed
+    public void PlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlusActionPerformed
         calc.add( Result.getText());
         Result.setText(calc.get());
     }//GEN-LAST:event_PlusActionPerformed
 
-    void MinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusActionPerformed
+    public void MinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusActionPerformed
         calc.sub( Result.getText());
         Result.setText(calc.get());
     }//GEN-LAST:event_MinusActionPerformed
 
-    void TimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimesActionPerformed
+    public void TimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimesActionPerformed
         calc.mul( Result.getText());
         Result.setText(calc.get());
     }//GEN-LAST:event_TimesActionPerformed
 
-    void DivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DivActionPerformed
+    public void DivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DivActionPerformed
         calc.div( Result.getText());
         Result.setText(calc.get());
     }//GEN-LAST:event_DivActionPerformed
