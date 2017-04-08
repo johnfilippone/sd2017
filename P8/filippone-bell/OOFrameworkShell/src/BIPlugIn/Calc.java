@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package BIPlugIn;
 
+
+import java.math.*;
 
 public class Calc extends Framework.Calc {
 
