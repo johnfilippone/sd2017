@@ -1,11 +1,10 @@
 package BIPlugIn;
 
-
 import java.math.*;
 
-public class Calc extends Framework.Calc {
+abstract class Calc extends Framework.Calc {
 
-    final static BigInteger zero = new  BigInteger("0");
+    static final BigInteger zero = new  BigInteger("0");
     BigInteger value = zero;
 
     void sub(String n) { value = value.subtract( new BigInteger(n)); }
@@ -15,5 +14,6 @@ public class Calc extends Framework.Calc {
     String get() { return value.toString(); }
     void set(String n) { value = new BigInteger(n); }
     void clear() { value = zero; }
+
 }
 
