@@ -1,17 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+package Framework;
+
+import javax.swing.JFrame;
 
 
-package D;
-
-/**
- *
- * @author dsb
- */
-public class Gui extends javax.swing.JFrame {
-    Calc calc;
+abstract public class Gui extends JFrame {
+    
+    Framework.Calc calc;
     /* Creates new form calcGui */
     public Gui(String name) {
         super(name);
@@ -160,8 +154,8 @@ public class Gui extends javax.swing.JFrame {
     javax.swing.JButton Times;
     // End of variables declaration//GEN-END:variables
 
-    public void display() {
-        Gui cg = this;
+    public void display( ) {
+        Framework.Gui cg = this;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 cg.setVisible(true);

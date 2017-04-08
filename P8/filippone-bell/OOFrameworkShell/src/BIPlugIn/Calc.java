@@ -3,15 +3,11 @@
  * and open the template in the editor.
  */
 
-package BI;
+package BIPlugIn;
 
-import java.math.*;
 
-/*
- *
- * @author dsb
- */
-public class Calc  {
+public class Calc extends Framework.Calc {
+
     final static BigInteger zero = new  BigInteger("0");
     BigInteger value = zero;
 

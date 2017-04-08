@@ -3,16 +3,11 @@
  * and open the template in the editor.
  */
 
-package D;
+package DPlugIn;
 
 
+public class Calc extends Framework.Calc {
 
-/*
- *
- * @author Don
- */
-public class Calc {
-    
     Double value = 0.0;
 
     void sub(String n) { value = value - Double.parseDouble(n); }
