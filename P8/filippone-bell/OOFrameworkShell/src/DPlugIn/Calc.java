@@ -10,12 +10,12 @@ public class Calc extends Framework.Calc {
 
     Double value = 0.0;
 
-    void sub(String n) { value = value - Double.parseDouble(n); }
-    void mul(String n) { value = value*Double.parseDouble(n); }
-    void add(String n) { value = value+Double.parseDouble(n); }
-    void div(String n) { value = value/Double.parseDouble(n); }
-    String get() { return value.toString(); }
-    void set(String n) { value = Double.parseDouble(n); }
-    void clear() { value =0.0; }
+    public void sub(String n) { value = value - Double.parseDouble(n); }
+    public void mul(String n) { value = value*Double.parseDouble(n); }
+    public void add(String n) { value = value+Double.parseDouble(n); }
+    public void div(String n) { value = value/Double.parseDouble(n); }
+    public String get() { return value.toString(); }
+    public void set(String n) { value = Double.parseDouble(n); }
+    public void clear() { value =0.0; }
 
 }
