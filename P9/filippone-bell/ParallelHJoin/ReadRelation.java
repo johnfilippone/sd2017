@@ -8,7 +8,7 @@ public class ReadRelation extends Thread {
     BufferedReader in;
     PrintStream out;
 
-    public Reader(String fileName, PrintStream out) {
+    public ReadRelation(String fileName, PrintStream out) {
         try {
             in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
         } catch (Exception e) {
