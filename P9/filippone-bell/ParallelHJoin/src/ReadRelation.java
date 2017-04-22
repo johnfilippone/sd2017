@@ -1,8 +1,6 @@
 import java.io.*;
 
-/**
-  * @author John Filippone and Jeff Bell
-  */
+
 public class ReadRelation extends Thread {
 
     BufferedReader in;
