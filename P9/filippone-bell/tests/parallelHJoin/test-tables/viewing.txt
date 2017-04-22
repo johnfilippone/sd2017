@@ -1,4 +1,4 @@
-LIENTNO PROPERTYNO VIEWDATE                  KOMMENT              
+CLIENTNO PROPERTYNO VIEWDATE                  KOMMENT              
 -------- ---------- ------------------------- -------------------- 
 CR56     PA14       24-MAY-04                 too_small            
 CR76     PG4        20-APR-04                 too_remote           

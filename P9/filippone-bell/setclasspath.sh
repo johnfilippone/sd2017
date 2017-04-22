@@ -1,8 +1,8 @@
 #!/bin/bash
 CLASSPATH=$PWD:
-CLASSPATH+=$PWD/basicConnector:
-CLASSPATH+=$PWD/gammaSupport:
-CLASSPATH+=$PWD/ParallelHJoin/src:
-CLASSPATH+=$PWD/ParallelHJoin/tests:
+CLASSPATH+=$PWD/lib/basicConnector:
+CLASSPATH+=$PWD/lib/gammaSupport:
+CLASSPATH+=$PWD/src/parallelHJoin:
+CLASSPATH+=$PWD/tests/parallelHJoin:
 export CLASSPATH
 echo "done"

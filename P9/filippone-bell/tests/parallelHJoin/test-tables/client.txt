@@ -1,4 +1,4 @@
-LIENTNO FNAME    LNAME      TELNO           PREFTYPE MAXRENT                
+CLIENTNO FNAME    LNAME      TELNO           PREFTYPE MAXRENT                
 -------- -------- ---------- --------------- -------- ---------------------- 
 CR76     John     Kay        0207-774-5632   Flat     425                    
 CR56     Aline    Stewart    0141-848-1825   Flat     350                    
