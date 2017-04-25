@@ -3,49 +3,49 @@ package gamma;
 
 import java.io.*;
 import java.util.StringTokenizer;
-import gammaSupport.Relation;
-import gammaSupport.ReportError;
+import gammaSupport.*;
+import basicConnector.*;
 
 
 public class ReadRelation extends Thread {
 
     BufferedReader in;
     Connector connector;
+    String relationName;
 
-    public ReadRelation(String fileName, Connector out) {
+    public ReadRelation(String filename, String relationName, Connector connector){
         try {
-            in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+            this.in = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+            this.connector = connector;
+            this.relationName = relationName;
         } catch (Exception e) {
             ReportError.msg(e.getMessage());
         }
-
-        this.connector = out;
-        readAndSetRelationFromFile();
-
     }
 
-    public static void readAndSetRelationFromFile(){
+    public void readAndSetRelationFromFile() throws IOException{
         String relationLine = in.readLine();
         StringTokenizer tokenizer = new StringTokenizer(relationLine);
         Relation relation = new Relation(relationName, tokenizer.countTokens());
+        while(tokenizer.hasMoreTokens())
+            relation.addField(tokenizer.nextToken());
+        connector.setRelation(relation);
 
         in.readLine();
     }
 
     public void run() {
         try {
+            readAndSetRelationFromFile();
             String input;
-            while (true) {
-                input = in.readLine();
-                if (input == null) {
-                    break;
-                }
-
-                Tuple newTuple = 
-                    Tuple.makeTupleFromFileData(connector.getRelation(), input);
-                connector.getWriteEnd().putNextTuple();
+            Tuple nextTuple;
+            WriteEnd writeEnd = connector.getWriteEnd();
+            while ((input = in.readLine()) != null) {
+                nextTuple = Tuple.makeTupleFromFileData(connector.getRelation(), input);
+                writeEnd.putNextTuple(nextTuple);
             }
-        } catch (IOException e) {
+            writeEnd.close();
+        } catch (Exception e) {
             ReportError.msg(this.getClass().getName() + e);
         }
     }

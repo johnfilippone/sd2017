@@ -63,7 +63,7 @@ public class Relation {
         database.add(r);
         return r;
     }
-    
+
     // compare 2 relation definitions
     public boolean equals(Relation r) {
         if (r.size != size) {

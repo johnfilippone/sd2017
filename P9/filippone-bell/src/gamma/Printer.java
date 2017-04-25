@@ -15,14 +15,9 @@ public class Printer extends Thread {
     public void run() {
         try {
             String input;
-            while (true) {
-                input = in.readLine();
-                if (input == null) {
-                    in.close();
-                    break;
-                }
+            while ((input = in.readLine()) != null)
                 System.out.println(input);
-            }
+            in.close();
             System.out.flush();
         } catch (IOException e) {
             ReportError.msg(this.getClass().getName() + e);
