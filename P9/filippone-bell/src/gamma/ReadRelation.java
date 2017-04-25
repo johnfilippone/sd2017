@@ -1,7 +1,8 @@
-package parallelHJoin;
+package gamma;
 
 
 import java.io.*;
+import gammaSupport.ReportError;
 
 
 public class ReadRelation extends Thread {

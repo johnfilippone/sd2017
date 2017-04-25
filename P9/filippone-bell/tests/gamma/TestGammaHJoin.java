@@ -1,30 +1,35 @@
-package parallelHJoin;
+package gamma;
 
+
+import org.junit.Test;
 import basicConnector.Connector;
 
 
-public class TestParallelHJoin {
+public class TestGammaHJoin {
 
     @Test
-    public static void testBasicHJoin() {
+    public static void testClientViewingHJoin() {
         // read --> hjoin --> print
         //           ^
         //           |
         // read -----+
         //
+
+		/*
         Connector read_join1 = new Connector();
         Connector read_join2 = new Connector();
         Connector join_print = new Connector();
 
         ReadRelation readRelation1 = new ReadRelation("client.txt", read_join1.out);
         ReadRelation readRelation2 = new ReadRelation("viewing.txt", read_join2.out);
-        ParallelHJoin parallelHJoin = new ParallelHJoin(read_join1.in, read_join2, join_print.out);
+        GammaHJoin gammaHJoin = new GammaHJoin(read_join1.in, read_join2, join_print.out);
         Printer printer = new Printer(join_print.in);
 
         readRelation1.start();
         readRelation2.start();
-        prallelHJoin.start();
+        gammaHJoin.start();
         printer.start();
+		*/
 
         //print result to file
         //RegTest.Utility.validate("results/clientXviewing.txt", "correct/clientXviewing.txt", false);
