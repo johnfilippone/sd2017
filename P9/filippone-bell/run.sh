@@ -13,7 +13,10 @@ javac tests/gamma/*.java
 echo ""
 echo "Running tests..."
 cd tests
-java org.junit.runner.JUnitCore gamma.TestPrinter
+test_files=("gamma.TestPrinter"
+            "gamma.TestReadRelation"
+            )
+java org.junit.runner.JUnitCore "${test_files[@]}"
 
 echo "Done."
 

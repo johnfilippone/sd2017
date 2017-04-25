@@ -2,6 +2,8 @@ package gamma;
 
 
 import java.io.*;
+import java.util.StringTokenizer;
+import gammaSupport.Relation;
 import gammaSupport.ReportError;
 
 
@@ -9,6 +11,7 @@ public class ReadRelation extends Thread {
 
     BufferedReader in;
     PrintStream out;
+    //String relationName;
 
     public ReadRelation(String fileName, PrintStream out) {
         try {
@@ -17,6 +20,16 @@ public class ReadRelation extends Thread {
             ReportError.msg(e.getMessage());
         }
         this.out = out;
+        //relationName = fileName;
+
+        //readAndSetRelationFromFile();
+    }
+
+    public static void readAndSetRelatoinFromFile(){
+        //String relationLine = in.readLine();
+        //StringTokenizer tokenizer = new StringTokenizer(relationLine);
+        //Relation relation = new Relation(relationName, tokenizer.countTokens());
+        //in.readLine();
     }
 
     public void run() {
