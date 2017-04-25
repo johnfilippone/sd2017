@@ -10,26 +10,26 @@ import gammaSupport.ReportError;
 public class ReadRelation extends Thread {
 
     BufferedReader in;
-    PrintStream out;
-    //String relationName;
+    Connector connector;
 
-    public ReadRelation(String fileName, PrintStream out) {
+    public ReadRelation(String fileName, Connector out) {
         try {
             in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
         } catch (Exception e) {
             ReportError.msg(e.getMessage());
         }
-        this.out = out;
-        //relationName = fileName;
 
-        //readAndSetRelationFromFile();
+        this.connector = out;
+        readAndSetRelationFromFile();
+
     }
 
-    public static void readAndSetRelatoinFromFile(){
-        //String relationLine = in.readLine();
-        //StringTokenizer tokenizer = new StringTokenizer(relationLine);
-        //Relation relation = new Relation(relationName, tokenizer.countTokens());
-        //in.readLine();
+    public static void readAndSetRelationFromFile(){
+        String relationLine = in.readLine();
+        StringTokenizer tokenizer = new StringTokenizer(relationLine);
+        Relation relation = new Relation(relationName, tokenizer.countTokens());
+
+        in.readLine();
     }
 
     public void run() {
@@ -40,11 +40,11 @@ public class ReadRelation extends Thread {
                 if (input == null) {
                     break;
                 }
-                out.println(input);
-                out.flush();
+
+                Tuple newTuple = 
+                    Tuple.makeTupleFromFileData(connector.getRelation(), input);
+                connector.getWriteEnd().putNextTuple();
             }
-            out.flush();
-            out.close();
         } catch (IOException e) {
             ReportError.msg(this.getClass().getName() + e);
         }
