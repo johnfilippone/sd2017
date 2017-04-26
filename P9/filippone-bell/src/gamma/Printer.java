@@ -13,15 +13,28 @@ public class Printer extends Thread {
     }
 
     public void run() {
+        String input;
+        while ((input = getNextString()) != null)
+            System.out.println(input);
+        closeBufferedReader();
+    }
+
+    public String getNextString(){
         try {
-            String input;
-            while ((input = in.readLine()) != null)
-                System.out.println(input);
+            return in.readLine();
+        } catch (IOException e) {
+            ReportError.msg(this.getClass().getName() + e);
+            return null;
+        }
+    }
+
+    public void closeBufferedReader(){
+        try {
             in.close();
-            System.out.flush();
         } catch (IOException e) {
             ReportError.msg(this.getClass().getName() + e);
         }
+        System.out.flush();
     }
 
 }

@@ -2,14 +2,16 @@ package gamma;
 
 
 import java.io.*;
+import java.util.*;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import basicConnector.Connector;
 
 
 public class TestPrinter {
 
     @Test
-    public void testPrintClientTable() throws FileNotFoundException, InterruptedException {
+    public void testPrintClientTable() throws Exception{
         RegTest.Utility.redirectStdOut("results/out.txt");
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("test-tables/client.txt")));
@@ -21,7 +23,7 @@ public class TestPrinter {
     }
 
     @Test
-    public void testPrintViewingTable() throws FileNotFoundException, InterruptedException {
+    public void testPrintViewingTable() throws Exception{
         RegTest.Utility.redirectStdOut("results/out.txt");
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("test-tables/viewing.txt")));
@@ -33,7 +35,7 @@ public class TestPrinter {
     }
 
     @Test
-    public void testPrintOrdersTable() throws FileNotFoundException, InterruptedException {
+    public void testPrintOrdersTable() throws Exception{
         RegTest.Utility.redirectStdOut("results/out.txt");
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("test-tables/orders.txt")));
@@ -45,7 +47,7 @@ public class TestPrinter {
     }
 
     @Test
-    public void testPrintPartsTable() throws FileNotFoundException, InterruptedException {
+    public void testPrintPartsTable() throws Exception{
         RegTest.Utility.redirectStdOut("results/out.txt");
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("test-tables/parts.txt")));
@@ -57,7 +59,7 @@ public class TestPrinter {
     }
 
     @Test
-    public void testPrintOdetailsTable() throws FileNotFoundException, InterruptedException {
+    public void testPrintOdetailsTable() throws Exception {
         RegTest.Utility.redirectStdOut("results/out.txt");
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("test-tables/odetails.txt")));
@@ -66,5 +68,20 @@ public class TestPrinter {
         printer.join();
 
         RegTest.Utility.validate("results/out.txt", "test-tables/odetails.txt", false);
+    }
+
+    @Test
+    public void testGetNextString() throws Exception {
+		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream("test-tables/client.txt")));
+        Printer printer = new Printer(in);
+        Scanner scan = new Scanner(new File("test-tables/client.txt"));
+
+        assertEquals(printer.getNextString(), scan.nextLine());
+        assertEquals(printer.getNextString(), scan.nextLine());
+        assertEquals(printer.getNextString(), scan.nextLine());
+        assertEquals(printer.getNextString(), scan.nextLine());
+        assertEquals(printer.getNextString(), scan.nextLine());
+        assertEquals(printer.getNextString(), scan.nextLine());
+        assertEquals(printer.getNextString(), null);
     }
 }
