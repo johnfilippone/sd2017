@@ -17,10 +17,11 @@ public class ReadRelation extends Thread {
         this.in = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         this.connector = connector;
         this.relationName = relationName;
+        sendRelation();
+        ThreadList.add(this);
     }
 
     public void run() {
-        sendRelation();
         sendTuples();
     }
 
@@ -29,7 +30,7 @@ public class ReadRelation extends Thread {
         this.connector.setRelation(relation);
     }
 
-    public Relation readRelationFromFile() {
+    private Relation readRelationFromFile() {
         String relationLine = getNextRow();
         String hyphenLine = getNextRow();
         StringTokenizer tokenizer = new StringTokenizer(relationLine);

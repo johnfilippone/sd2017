@@ -3,7 +3,7 @@ package gamma;
 
 import java.io.*;
 import basicConnector.*;
-import gammaSupport.ReportError;
+import gammaSupport.*;
 
 
 public class Printer extends Thread {
@@ -11,6 +11,7 @@ public class Printer extends Thread {
 
     public Printer(Connector in) {
         this.in = in;
+        ThreadList.add(this);
     }
 
     public void run() {
