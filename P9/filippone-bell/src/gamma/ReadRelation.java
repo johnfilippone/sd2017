@@ -18,7 +18,6 @@ public class ReadRelation extends Thread {
         this.connector = connector;
         this.relationName = relationName;
         sendRelation();
-        ThreadList.add(this);
     }
 
     public void run() {
@@ -30,11 +29,10 @@ public class ReadRelation extends Thread {
         this.connector.setRelation(relation);
     }
 
-    private Relation readRelationFromFile() {
-        String relationLine = getNextRow();
-        String hyphenLine = getNextRow();
-        StringTokenizer tokenizer = new StringTokenizer(relationLine);
+    public Relation readRelationFromFile() {
+        StringTokenizer tokenizer = new StringTokenizer(getNextRow());
         Relation relation = new Relation(relationName, tokenizer.countTokens());
+
         while(tokenizer.hasMoreTokens())
             relation.addField(tokenizer.nextToken());
         return relation;

@@ -7,21 +7,35 @@ import gammaSupport.*;
 
 
 public class Printer extends Thread {
-    Connector in;
+    Connector connector;
 
-    public Printer(Connector in) {
-        this.in = in;
-        ThreadList.add(this);
+    public Printer(Connector connector) {
+        this.connector = connector;
+        printRelation(connector.r);
     }
 
     public void run() {
+        printTuples();
+    }
+
+    public void printRelation(Relation relation){
+        String tableHeader = String.join(" ", relation.getFieldNames());
+        System.out.println(tableHeader);
+    }
+
+    public void printTuples(){
         String input;
         try {
-            while ((input = in.getReadEnd().getNextString()) != null)
-                System.out.println(input);
+            while ((input = connector.getReadEnd().getNextString()) != null)
+                printTuple(Tuple.makeTupleFromPipeData(input));
         } catch (Exception e) {
             ReportError.msg(this.getClass().getName() + e);
         }
+    }
+
+    public void printTuple(Tuple tuple){
+        String tableRow = String.join(" ", tuple.getFields());
+        System.out.println(tableRow);
     }
 
 }
