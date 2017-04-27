@@ -17,7 +17,7 @@ public class TestReadRelation {
 
         Connector read_print = new Connector("read_print");
         ReadRelation reader = new ReadRelation("test-tables/client.txt", "client", read_print);
-        Printer printer = new Printer(read_print.in);
+        Printer printer = new Printer(read_print);
         reader.start();
         printer.start();
         printer.join();
