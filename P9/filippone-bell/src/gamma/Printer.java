@@ -24,18 +24,13 @@ public class Printer extends Thread {
     }
 
     public void printTuples(){
-        String input;
+        Tuple tuple;
         try {
-            while ((input = connector.getReadEnd().getNextString()) != null)
-                printTuple(Tuple.makeTupleFromPipeData(input));
+            while ((tuple = connector.getReadEnd().getNextTuple()) != null)
+                System.out.println(tuple);
         } catch (Exception e) {
             ReportError.msg(this.getClass().getName() + e);
         }
-    }
-
-    public void printTuple(Tuple tuple){
-        String tableRow = String.join(" ", tuple.getFields());
-        System.out.println(tableRow);
     }
 
 }
