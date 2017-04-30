@@ -1,6 +1,54 @@
-CLIENTNO FNAME LNAME TELNO PREFTYPE MAXRENT
-6#--------#--------#----------#---------------#--------#----------------------#
-6#CR76#John#Kay#0207-774-5632#Flat#425#
-6#CR56#Aline#Stewart#0141-848-1825#Flat#350#
-6#CR74#Mike#Richie#01475-392178#House#750#
-6#CR62#Mary#Tregear#01224-196720#Flat#600#
+PNO = 10506
+PNAME = Land_Before_Time_I
+QOH = 200
+PRICE = 19.99
+OLEVEL = 20
+
+PNO = 10507
+PNAME = Land_Before_Time_II
+QOH = 156
+PRICE = 19.99
+OLEVEL = 20
+
+PNO = 10508
+PNAME = Land_Before_Time_III
+QOH = 190
+PRICE = 19.99
+OLEVEL = 20
+
+PNO = 10509
+PNAME = Land_Before_Time_IV
+QOH = 60
+PRICE = 19.99
+OLEVEL = 20
+
+PNO = 10601
+PNAME = Sleeping_Beauty
+QOH = 300
+PRICE = 24.99
+OLEVEL = 20
+
+PNO = 10701
+PNAME = When_Harry_Met_Sally
+QOH = 120
+PRICE = 19.99
+OLEVEL = 30
+
+PNO = 10800
+PNAME = Dirty_Harry
+QOH = 140
+PRICE = 14.99
+OLEVEL = 30
+
+PNO = 10900
+PNAME = Dr._Zhivago
+QOH = 100
+PRICE = 24.99
+OLEVEL = 30
+
+PNO = null
+PNAME = null
+QOH = null
+PRICE = null
+OLEVEL = null
+

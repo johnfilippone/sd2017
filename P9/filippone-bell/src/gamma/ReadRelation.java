@@ -18,6 +18,7 @@ public class ReadRelation extends Thread {
         this.connector = connector;
         this.relationName = relationName;
         sendRelation();
+        ThreadList.add(this);
     }
 
     public void run() {
@@ -27,6 +28,7 @@ public class ReadRelation extends Thread {
     public void sendRelation(){
         Relation relation = readRelationFromFile();
         this.connector.setRelation(relation);
+        getNextRow();
     }
 
     public Relation readRelationFromFile() {
