@@ -46,9 +46,3 @@ QOH = 100
 PRICE = 24.99
 OLEVEL = 30
 
-PNO = null
-PNAME = null
-QOH = null
-PRICE = null
-OLEVEL = null
-
