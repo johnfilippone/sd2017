@@ -1,36 +1,37 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package gamma;
 
-
-import java.io.*;
-import basicConnector.*;
+import basicConnector.Connector;
+import basicConnector.ReadEnd;
 import gammaSupport.*;
 
+/**
+ *
+ * @author dsb
+ */
+public class Print extends Thread {
+    ReadEnd re;
+    Relation r;
 
-public class Printer extends Thread {
-    Connector connector;
-
-    public Printer(Connector connector) {
-        this.connector = connector;
-        printRelation(connector.r);
+    public Print(Connector in ) {
+        this.re = in.getReadEnd();
+        this.r = re.getRelation();
+        ThreadList.add(this);
     }
 
+    @Override
     public void run() {
-        printTuples();
-    }
-
-    public void printRelation(Relation relation){
-        String tableHeader = String.join(" ", relation.getFieldNames());
-        System.out.println(tableHeader);
-    }
-
-    public void printTuples(){
-        Tuple tuple;
         try {
-            while ((tuple = connector.getReadEnd().getNextTuple()) != null)
-                System.out.println(tuple);
-        } catch (Exception e) {
-            ReportError.msg(this.getClass().getName() + e);
-        }
-    }
-
+            while(true) {
+                Tuple t = re.getNextTuple();
+                if (t==null) break;
+                t.println(r);
+            }
+        } catch(Exception e) {
+            ReportError.msg(this,e); }
+     }
 }
