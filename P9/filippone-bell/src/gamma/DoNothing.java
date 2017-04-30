@@ -15,6 +15,7 @@ public class DoNothing extends Thread {
     public DoNothing(Connector in, Connector out) {
         this.in = in;
         this.out = out;
+        this.out.setRelation(this.in.getRelation());
         ThreadList.add(this);
     }
 

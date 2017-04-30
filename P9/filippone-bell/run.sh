@@ -15,6 +15,7 @@ echo "Running tests..."
 cd tests
 test_files=(
             "gamma.TestReadRelation"
+            "gamma.TestDoNothing"
             )
 java org.junit.runner.JUnitCore "${test_files[@]}"
 cd ..
