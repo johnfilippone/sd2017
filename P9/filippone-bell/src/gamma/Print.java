@@ -13,11 +13,11 @@ import gammaSupport.*;
  *
  * @author dsb
  */
-public class Printer extends Thread {
+public class Print extends Thread {
     ReadEnd re;
     Relation r;
 
-    public Printer(Connector in ) {
+    public Print(Connector in) {
         this.re = in.getReadEnd();
         this.r = re.getRelation();
         ThreadList.add(this);

@@ -23,7 +23,7 @@ public class TestDoNothing {
 
             ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", c);
             DoNothing d = new DoNothing(c, c2);
-            Printer p = new Printer(c2);
+            Print p = new Print(c2);
             ThreadList.run(p);
 
             Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);

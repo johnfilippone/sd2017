@@ -10,7 +10,7 @@ import org.junit.Test;
 import RegTest.Utility;
 import static org.junit.Assert.*;
 
-public class TestReadRelation{
+public class TestReadRelation {
 
     @Test
     public void testReadRelation() {
@@ -20,7 +20,7 @@ public class TestReadRelation{
             ThreadList.init();
             Connector c = new Connector("singleton");
             ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", c);
-            Printer p = new Printer(c);
+            Print p = new Print(c);
             ThreadList.run(p);
 
             Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);
