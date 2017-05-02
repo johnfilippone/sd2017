@@ -14,7 +14,7 @@ public class TestBloom {
 
     @Test
     public void testBloom() throws Exception {
-        Utility.redirectStdOut("results/parts-bloom.txt");
+        Utility.redirectStdOut("results/out.txt");
 
         ThreadList.init();
         int joinKey = 0;
@@ -26,6 +26,6 @@ public class TestBloom {
         Print p = new Print(bloom_print);
         ThreadList.run(p);
 
-        Utility.validate("results/parts-bloom.txt", "correct/readNPrintParts.txt", false);
+        Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);
     }
 }
