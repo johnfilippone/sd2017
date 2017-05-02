@@ -22,6 +22,7 @@ test_files=(
             "gamma.TestBFilter"
             "gamma.TestHJoin"
             "gamma.TestBloomSimulator"
+            "gamma.TestGammaHJoin"
             )
 java org.junit.runner.JUnitCore "${test_files[@]}"
 cd ..
