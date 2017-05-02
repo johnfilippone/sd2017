@@ -43,7 +43,7 @@ public class HJoin extends Thread {
                 if (t == null) {
                     break;
                 }
-                writer.putNextTuple(Tuple.join(tHash[t.get(joinKey2)], t, joinKey1, joinKey2));
+                writer.putNextTuple(Tuple.join(tHash.get(t.get(joinKey2)), t, joinKey1, joinKey2));
             }
             writer.close();
         } catch (Exception e) {
