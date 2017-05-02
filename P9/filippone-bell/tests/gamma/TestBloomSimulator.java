@@ -18,11 +18,13 @@ public class TestBloomSimulator {
 
         ThreadList.init();
         int joinKey = 0;
-        Connector read_nothing = new Connector("read_nothing");
+        Connector read_sink = new Connector("read_sink");
         Connector sim_printmap = new Connector("sim_printmap");
 
-        ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", read_nothing);
-        Relation relation = read_nothing.getRelation();
+        ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", read_sink);
+        Sink s = new Sink(read_sink);
+        Relation relation = read_sink.getRelation();
+
 
         BloomSimulator bloomSimulator = new BloomSimulator(relation, sim_printmap);
         PrintMap p = new PrintMap(sim_printmap);
