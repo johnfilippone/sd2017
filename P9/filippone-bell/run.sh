@@ -21,6 +21,7 @@ test_files=(
             "gamma.TestPrintMap"
             "gamma.TestBFilter"
             "gamma.TestHJoin"
+            "gamma.TestBloomSimulator"
             )
 java org.junit.runner.JUnitCore "${test_files[@]}"
 cd ..
