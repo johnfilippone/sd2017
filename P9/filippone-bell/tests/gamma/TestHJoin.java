@@ -14,65 +14,20 @@ public class TestHJoin {
 
     @Test
     public void testHJoin0() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
+        Utility.redirectStdOut("results/hj.txt");
 
         ThreadList.init();
-        int joinKey = 0;
-        Connector read_join = new Connector("read_join");
-        ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", read_join);
-        Connector[] splits = ArrayConnectors.initConnectorArray("splits");
-        HSplit hsplit = new HSplit(read_join, splits, joinKey);
-        Print p0 = new Print(splits[0]);
-        ThreadList.run(p0);
+        int joinKey1 = 0;
+        int joinKey2 = 0;
+        Connector read_join1 = new Connector("read_join1");
+        Connector read_join2 = new Connector("read_join2");
+        Connector join_print = new Connector("join_print");
+        ReadRelation r1 = new ReadRelation("test-tables/client.txt", "client", read_join1);
+        ReadRelation r2 = new ReadRelation("test-tables/viewing.txt", "viewing", read_join2);
+        HJoin hjoin = new HJoin(read_join1, read_join2, join_print, joinKey1, joinKey2);
+        Print p = new Print(join_print);
+        ThreadList.run(p);
 
-        Utility.validate("results/out.txt", "correct/parts-split0.txt", false);
-    }
-
-    @Test
-    public void testHJoin1() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
-
-        ThreadList.init();
-        int joinKey = 0;
-        Connector read_join = new Connector("read_join");
-        ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", read_join);
-        Connector[] splits = ArrayConnectors.initConnectorArray("splits");
-        HSplit hsplit = new HSplit(read_join, splits, joinKey);
-        Print p1 = new Print(splits[1]);
-        ThreadList.run(p1);
-
-        Utility.validate("results/out.txt", "correct/parts-split1.txt", false);
-    }
-
-    @Test
-    public void testHJoin2() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
-
-        ThreadList.init();
-        int joinKey = 0;
-        Connector read_join = new Connector("read_join");
-        ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", read_join);
-        Connector[] splits = ArrayConnectors.initConnectorArray("splits");
-        HSplit hsplit = new HSplit(read_join, splits, joinKey);
-        Print p2 = new Print(splits[2]);
-        ThreadList.run(p2);
-
-        Utility.validate("results/out.txt", "correct/parts-split2.txt", false);
-    }
-
-    @Test
-    public void testHJoin3() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
-
-        ThreadList.init();
-        int joinKey = 0;
-        Connector read_join = new Connector("read_join");
-        ReadRelation r = new ReadRelation("test-tables/parts.txt", "parts", read_join);
-        Connector[] splits = ArrayConnectors.initConnectorArray("splits");
-        HSplit hsplit = new HSplit(read_join, splits, joinKey);
-        Print p3 = new Print(splits[3]);
-        ThreadList.run(p3);
-
-        Utility.validate("results/out.txt", "correct/parts-split3.txt", false);
+        Utility.validate("results/hj.txt", "correct/clientXviewing.txt", false);
     }
 }
