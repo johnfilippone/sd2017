@@ -26,21 +26,26 @@ public class HJoin extends Thread {
 
      public void run() {
         try {
-            Tuple t1;
-            Tuple t2;
+            Tuple t;
+            HashMap<String, Tuple> tHash = new HashMap<String, Tuple>();
             ReadEnd reader1 = this.in1.getReadEnd();
             ReadEnd reader2 = this.in2.getReadEnd();
+            WriteEnd writer = this.out.getWriteEnd();
             while (true) {
-                t1 = reader1.getNextTuple();
-                t2 = reader2.getNextTuple();
-                if (t1 == null || t2 == null) {
+                t = reader1.getNextTuple();
+                if (t == null) {
                     break;
                 }
-                int hash = BMap.myhash(t.get(joinKey));
-                this.outArray[hash].getWriteEnd().putNextTuple(t);
+                tHash.put(t.get(joinKey1), t);
             }
-            for(Connector connector : this.outArray)
-                connector.getWriteEnd().close();
+            while (true) {
+                t = reader2.getNextTuple();
+                if (t == null) {
+                    break;
+                }
+                writer.putNextTuple(Tuple.join(tHash[t.get(joinKey2)], t, joinKey1, joinKey2));
+            }
+            writer.close();
         } catch (Exception e) {
             ReportError.msg(this.getClass().getName() + e);
         }
