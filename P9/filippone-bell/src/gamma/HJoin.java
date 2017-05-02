@@ -20,7 +20,7 @@ public class HJoin extends Thread {
         this.out= out;
         this.joinKey1 = joinKey1;
         this.joinKey2 = joinKey2;
-        out.setRelation(Relation.join(in1.getRelation(), in2.getRelation(), joinKey1, joinKey2));
+        out.setRelation(Relation.join(in2.getRelation(), in1.getRelation(), joinKey2, joinKey1));
         ThreadList.add(this);
     }
 
@@ -43,7 +43,7 @@ public class HJoin extends Thread {
                 if (t == null) {
                     break;
                 }
-                writer.putNextTuple(Tuple.join(tHash.get(t.get(joinKey2)), t, joinKey1, joinKey2));
+                writer.putNextTuple(Tuple.join(t, tHash.get(t.get(joinKey2)), joinKey2, joinKey1));
             }
             writer.close();
         } catch (Exception e) {

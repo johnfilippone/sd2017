@@ -1,12 +1,72 @@
-ONO                    PNO                    QTY                    CNO                    ENO                    RECEIVED                  SHIPPED                   
----------------------- ---------------------- ---------------------- ---------------------- ---------------------- ------------------------- ------------------------- 
-1020                   10506                  1                      1111                   1000                   10-DEC-94                 12-DEC-94                 
-1020                   10507                  1                      1111                   1000                   10-DEC-94                 12-DEC-94                 
-1020                   10508                  2                      1111                   1000                   10-DEC-94                 12-DEC-94                 
-1020                   10509                  3                      1111                   1000                   10-DEC-94                 12-DEC-94                 
-1021                   10601                  4                      1111                   1000                   12-JAN-95                 15-JAN-95                 
-1022                   10601                  1                      2222                   1001                   13-FEB-95                 20-FEB-95                 
-1022                   10701                  1                      2222                   1001                   13-FEB-95                 20-FEB-95                 
-1023                   10800                  1                      3333                   1000                   20-JUN-97                 _                         
-1023                   10900                  1                      3333                   1000                   20-JUN-97                 _                         
+ONO = 1020
+PNO = 10506
+QTY = 1
+CNO = 1111
+ENO = 1000
+RECEIVED = 10-DEC-94
+SHIPPED = 12-DEC-94
+
+ONO = 1020
+PNO = 10507
+QTY = 1
+CNO = 1111
+ENO = 1000
+RECEIVED = 10-DEC-94
+SHIPPED = 12-DEC-94
+
+ONO = 1020
+PNO = 10508
+QTY = 2
+CNO = 1111
+ENO = 1000
+RECEIVED = 10-DEC-94
+SHIPPED = 12-DEC-94
+
+ONO = 1020
+PNO = 10509
+QTY = 3
+CNO = 1111
+ENO = 1000
+RECEIVED = 10-DEC-94
+SHIPPED = 12-DEC-94
+
+ONO = 1021
+PNO = 10601
+QTY = 4
+CNO = 1111
+ENO = 1000
+RECEIVED = 12-JAN-95
+SHIPPED = 15-JAN-95
+
+ONO = 1022
+PNO = 10601
+QTY = 1
+CNO = 2222
+ENO = 1001
+RECEIVED = 13-FEB-95
+SHIPPED = 20-FEB-95
+
+ONO = 1022
+PNO = 10701
+QTY = 1
+CNO = 2222
+ENO = 1001
+RECEIVED = 13-FEB-95
+SHIPPED = 20-FEB-95
+
+ONO = 1023
+PNO = 10800
+QTY = 1
+CNO = 3333
+ENO = 1000
+RECEIVED = 20-JUN-97
+SHIPPED = _
+
+ONO = 1023
+PNO = 10900
+QTY = 1
+CNO = 3333
+ENO = 1000
+RECEIVED = 20-JUN-97
+SHIPPED = _
 

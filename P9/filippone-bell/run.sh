@@ -19,6 +19,7 @@ test_files=(
             "gamma.TestHSplit"
             "gamma.TestBloom"
             "gamma.TestPrintMap"
+            "gamma.TestHJoin"
             )
 java org.junit.runner.JUnitCore "${test_files[@]}"
 cd ..
