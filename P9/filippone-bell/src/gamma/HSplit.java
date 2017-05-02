@@ -18,6 +18,7 @@ public class HSplit extends Thread {
         this.joinKey = joinKey;
         for(Connector connector : this.outArray)
             connector.setRelation(this.in.getRelation());
+        ThreadList.add(this);
     }
 
      public void run() {

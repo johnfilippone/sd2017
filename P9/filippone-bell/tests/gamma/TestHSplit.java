@@ -25,7 +25,7 @@ public class TestHSplit {
         Print p0 = new Print(splits[0]);
         ThreadList.run(p0);
 
-        Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);
+        Utility.validate("results/split0.txt", "correct/parts-split0.txt", false);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TestHSplit {
         Print p1 = new Print(splits[1]);
         ThreadList.run(p1);
 
-        Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);
+        Utility.validate("results/split1.txt", "correct/parts-split1.txt", false);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class TestHSplit {
         Print p2 = new Print(splits[2]);
         ThreadList.run(p2);
 
-        Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);
+        Utility.validate("results/split2.txt", "correct/parts-split2.txt", false);
     }
 
     @Test
@@ -73,6 +73,6 @@ public class TestHSplit {
         Print p3 = new Print(splits[3]);
         ThreadList.run(p3);
 
-        Utility.validate("results/out.txt", "correct/readNPrintParts.txt", false);
+        Utility.validate("results/split3.txt", "correct/parts-split3.txt", false);
     }
 }
