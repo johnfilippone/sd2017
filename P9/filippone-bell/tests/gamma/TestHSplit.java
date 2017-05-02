@@ -14,7 +14,7 @@ public class TestHSplit {
 
     @Test
     public void testHSplit0() throws Exception {
-        Utility.redirectStdOut("results/split0.txt");
+        Utility.redirectStdOut("results/out.txt");
 
         ThreadList.init();
         int joinKey = 0;
@@ -25,12 +25,12 @@ public class TestHSplit {
         Print p0 = new Print(splits[0]);
         ThreadList.run(p0);
 
-        Utility.validate("results/split0.txt", "correct/parts-split0.txt", false);
+        Utility.validate("results/out.txt", "correct/parts-split0.txt", false);
     }
 
     @Test
     public void testHSplit1() throws Exception {
-        Utility.redirectStdOut("results/split1.txt");
+        Utility.redirectStdOut("results/out.txt");
 
         ThreadList.init();
         int joinKey = 0;
@@ -41,12 +41,12 @@ public class TestHSplit {
         Print p1 = new Print(splits[1]);
         ThreadList.run(p1);
 
-        Utility.validate("results/split1.txt", "correct/parts-split1.txt", false);
+        Utility.validate("results/out.txt", "correct/parts-split1.txt", false);
     }
 
     @Test
     public void testHSplit2() throws Exception {
-        Utility.redirectStdOut("results/split2.txt");
+        Utility.redirectStdOut("results/out.txt");
 
         ThreadList.init();
         int joinKey = 0;
@@ -57,12 +57,12 @@ public class TestHSplit {
         Print p2 = new Print(splits[2]);
         ThreadList.run(p2);
 
-        Utility.validate("results/split2.txt", "correct/parts-split2.txt", false);
+        Utility.validate("results/out.txt", "correct/parts-split2.txt", false);
     }
 
     @Test
     public void testHSplit3() throws Exception {
-        Utility.redirectStdOut("results/split3.txt");
+        Utility.redirectStdOut("results/out.txt");
 
         ThreadList.init();
         int joinKey = 0;
@@ -73,6 +73,6 @@ public class TestHSplit {
         Print p3 = new Print(splits[3]);
         ThreadList.run(p3);
 
-        Utility.validate("results/split3.txt", "correct/parts-split3.txt", false);
+        Utility.validate("results/out.txt", "correct/parts-split3.txt", false);
     }
 }

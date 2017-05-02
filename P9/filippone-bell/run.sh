@@ -17,6 +17,8 @@ test_files=(
             "gamma.TestReadRelation"
             "gamma.TestDoNothing"
             "gamma.TestHSplit"
+            "gamma.TestBloom"
+            "gamma.TestPrintMap"
             )
 java org.junit.runner.JUnitCore "${test_files[@]}"
 cd ..
