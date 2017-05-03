@@ -6,12 +6,11 @@ import java.util.*;
 import gammaSupport.*;
 import basicConnector.*;
 
-
-public class Merge extends Thread {
+public class Merge extends Thread implements GammaConstants {
 
     Connector[] in;
     Connector out;
-    int roundRobbin = 0;
+    int roundRobin = 0;
 
     public Merge(Connector[] in, Connector out) {
         this.in = in;
@@ -40,14 +39,19 @@ public class Merge extends Thread {
     }
 
     public Tuple getNextTuple(){
-        int pipesToCheck = 4;
+        int pipesToCheck = splitLen;
+        roundRobin = 0;
         Tuple tuple = null;
         try {
-            while(tuple == null){
-                tuple = in[roundRobbin].getReadEnd().getNextTuple();
-                roundRobbin++;
-                pipesToCheck--;
-                if (pipesToCheck == 0) break;
+            while(pipesToCheck != 0) {
+                tuple = in[roundRobin].getReadEnd().getNextTuple();
+                roundRobin = (roundRobin + 1) % splitLen;
+
+                if (tuple == null) {
+                    pipesToCheck--;
+                } else {
+                    break;
+                }
             }
         } catch (Exception e) {
             ReportError.msg(this.getClass().getName() + e);
