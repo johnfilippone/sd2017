@@ -14,7 +14,7 @@ public class TestGammaHJoin {
 
     @Test
     public void testGammaHJoin0() throws Exception {
-        Utility.redirectStdOut("results/hj.txt");
+        Utility.redirectStdOut("results/out.txt");
 
         ThreadList.init();
         int joinKey1 = 0;
@@ -28,6 +28,6 @@ public class TestGammaHJoin {
         Print p = new Print(join_print);
         ThreadList.run(p);
 
-        Utility.validate("results/hj.txt", "correct/clientXviewing.txt", false);
+        Utility.validate("results/out.txt", "correct/clientXviewing.txt", true);
     }
 }

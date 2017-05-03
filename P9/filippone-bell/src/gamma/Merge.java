@@ -10,7 +10,7 @@ public class Merge extends Thread implements GammaConstants {
 
     Connector[] in;
     Connector out;
-    int roundRobin = 0;
+    private static int roundRobin = 0;
 
     public Merge(Connector[] in, Connector out) {
         this.in = in;
@@ -40,7 +40,6 @@ public class Merge extends Thread implements GammaConstants {
 
     public Tuple getNextTuple(){
         int pipesToCheck = splitLen;
-        roundRobin = 0;
         Tuple tuple = null;
         try {
             while(pipesToCheck != 0) {
