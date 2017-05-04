@@ -9,3 +9,5 @@ P3/filippone-bell/tests/toYuml.vm.vm
 *.swo
 P4/filippone-bell/output.txt
 P9/filippone-bell/tests/results/out.txt
+P9/filippone-bell/tests/sortedCor.txt
+P9/filippone-bell/tests/sortedOut.txt
