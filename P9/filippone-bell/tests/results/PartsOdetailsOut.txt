@@ -1,0 +1,72 @@
+ONO = 1020
+PNO = 10506
+QTY = 1
+PNAME = Land_Before_Time_I
+QOH = 200
+PRICE = 19.99
+OLEVEL = 20
+
+ONO = 1020
+PNO = 10507
+QTY = 1
+PNAME = Land_Before_Time_II
+QOH = 156
+PRICE = 19.99
+OLEVEL = 20
+
+ONO = 1020
+PNO = 10508
+QTY = 2
+PNAME = Land_Before_Time_III
+QOH = 190
+PRICE = 19.99
+OLEVEL = 20
+
+ONO = 1020
+PNO = 10509
+QTY = 3
+PNAME = Land_Before_Time_IV
+QOH = 60
+PRICE = 19.99
+OLEVEL = 20
+
+ONO = 1021
+PNO = 10601
+QTY = 4
+PNAME = Sleeping_Beauty
+QOH = 300
+PRICE = 24.99
+OLEVEL = 20
+
+ONO = 1022
+PNO = 10701
+QTY = 1
+PNAME = When_Harry_Met_Sally
+QOH = 120
+PRICE = 19.99
+OLEVEL = 30
+
+ONO = 1023
+PNO = 10900
+QTY = 1
+PNAME = Dr._Zhivago
+QOH = 100
+PRICE = 24.99
+OLEVEL = 30
+
+ONO = 1022
+PNO = 10601
+QTY = 1
+PNAME = Sleeping_Beauty
+QOH = 300
+PRICE = 24.99
+OLEVEL = 20
+
+ONO = 1023
+PNO = 10800
+QTY = 1
+PNAME = Dirty_Harry
+QOH = 140
+PRICE = 14.99
+OLEVEL = 30
+

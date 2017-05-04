@@ -14,7 +14,7 @@ public class TestGammaHJoin {
 
     @Test
     public void testGammaHJoinClientViewing() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
+        Utility.redirectStdOut("results/clientViewingOut.txt");
 
         ThreadList.init();
         int joinKey1 = 0;
@@ -28,11 +28,11 @@ public class TestGammaHJoin {
         Print p = new Print(join_print);
         ThreadList.run(p);
 
-        Utility.validate("results/out.txt", "correct/clientXviewing.txt", true);
+        Utility.validate("results/clientViewingOut.txt", "correct/clientXviewing.txt", true);
     }
     @Test
     public void testGammaHJoinOrdersOdetails() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
+        Utility.redirectStdOut("results/ordersOdetailsOut.txt");
 
         ThreadList.init();
         int joinKey1 = 0;
@@ -46,11 +46,11 @@ public class TestGammaHJoin {
         Print p = new Print(join_print);
         ThreadList.run(p);
 
-        Utility.validate("results/out.txt", "correct/ordersXodetails.txt", true);
+        Utility.validate("results/ordersOdetailsOut.txt", "correct/ordersXodetails.txt", true);
     }
     @Test
     public void testGammaHJoinPartsOdetails() throws Exception {
-        Utility.redirectStdOut("results/out.txt");
+        Utility.redirectStdOut("results/PartsOdetailsOut.txt");
 
         ThreadList.init();
         int joinKey1 = 0;
@@ -64,6 +64,6 @@ public class TestGammaHJoin {
         Print p = new Print(join_print);
         ThreadList.run(p);
 
-        Utility.validate("results/out.txt", "correct/partsXodetails.txt", true);
+        Utility.validate("results/PartsOdetailsOut.txt", "correct/partsXodetails.txt", true);
     }
 }
